@@ -1,0 +1,86 @@
+/**
+ * Engineering.module.css
+ */
+.section {
+  padding-block: var(--section-gap);
+  border-top: 1px solid var(--color-line);
+}
+
+.header {
+  margin-bottom: var(--space-16);
+}
+
+.label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  margin-bottom: var(--space-4);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* ── Groups grid ── */
+.groups {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-12) var(--space-8);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.groupLabel {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.techList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.techItem {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  padding-block: var(--space-1);
+  line-height: 1.4;
+  opacity: 0.85;
+  transition: opacity var(--duration-fast);
+}
+
+.techItem:hover {
+  opacity: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .groups { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .groups { grid-template-columns: repeat(2, 1fr); gap: var(--space-8) var(--space-6); }
+}
+
+@media (max-width: 480px) {
+  .groups { grid-template-columns: 1fr; }
+}

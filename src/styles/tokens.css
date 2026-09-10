@@ -1,60 +1,139 @@
 /**
  * Design Tokens Foundation
  * Governed by RULES.md and Master Plan v2
+ *
+ * Light mode: warm cream (#F5F0E8) — madeinuxstudio.com inspiration
+ * Dark mode:  near-black (#0D0D0D) — rich editorial dark
+ * Toggle: data-theme="light"|"dark" on <html> overrides prefers-color-scheme
  */
 
-:root {
+/* ─────────────────────────────────────────────
+   LIGHT MODE (default / data-theme="light")
+───────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
   /* Semantic Color Palette */
-  --color-paper: #090a0f;
-  --color-ink: #f1f5f9;
-  --color-muted: #94a3b8;
-  --color-line: rgba(255, 255, 255, 0.1);
-  --color-accent: #38bdf8;
-  --color-surface-light: #161922;
-  --color-surface-dark: #050608;
+  --color-paper:         #F5F0E8;
+  --color-ink:           #111111;
+  --color-muted:         #6B6560;
+  --color-line:          rgba(0, 0, 0, 0.08);
+  --color-accent:        #111111;
+  --color-surface-light: #EDE8DC;
+  --color-surface-dark:  #DAD4C5;
 
+  /* Accent RGB (for rgba usage) */
+  --color-accent-rgb:    17, 17, 17;
+
+  /* Contrast helpers */
+  --color-on-accent:     #F5F0E8;
+  --color-hover-bg:      rgba(0, 0, 0, 0.04);
+  --color-focus-bg:      rgba(0, 0, 0, 0.06);
+}
+
+/* ─────────────────────────────────────────────
+   DARK MODE (prefers-color-scheme OR data-theme="dark")
+───────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-paper:         #0D0D0D;
+    --color-ink:           #F0EBE0;
+    --color-muted:         #8A847C;
+    --color-line:          rgba(255, 255, 255, 0.08);
+    --color-accent:        #F0EBE0;
+    --color-surface-light: #161412;
+    --color-surface-dark:  #0A0907;
+
+    --color-accent-rgb:    240, 235, 224;
+    --color-on-accent:     #0D0D0D;
+    --color-hover-bg:      rgba(255, 255, 255, 0.04);
+    --color-focus-bg:      rgba(255, 255, 255, 0.06);
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-paper:         #0D0D0D;
+  --color-ink:           #F0EBE0;
+  --color-muted:         #8A847C;
+  --color-line:          rgba(255, 255, 255, 0.08);
+  --color-accent:        #F0EBE0;
+  --color-surface-light: #161412;
+  --color-surface-dark:  #0A0907;
+
+  --color-accent-rgb:    240, 235, 224;
+  --color-on-accent:     #0D0D0D;
+  --color-hover-bg:      rgba(255, 255, 255, 0.04);
+  --color-focus-bg:      rgba(255, 255, 255, 0.06);
+}
+
+/* ─────────────────────────────────────────────
+   SHARED TOKENS (mode-independent)
+───────────────────────────────────────────── */
+:root {
   /* Typography Stack */
-  --font-display: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-mono-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display:   var(--font-instrument-serif), "Georgia", "Times New Roman", serif;
+  --font-body:      var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:      var(--font-mono-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Type Scale */
-  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
-  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 0.9375rem);
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
-  --text-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
-  --text-3xl: clamp(1.875rem, 1.65rem + 1.1vw, 2.375rem);
-  --text-4xl: clamp(2.25rem, 1.95rem + 1.5vw, 3rem);
-  --text-display: clamp(2.75rem, 2.25rem + 2.5vw, 4.5rem);
+  /* Type Scale — fluid */
+  --text-xs:       clamp(0.6875rem, 0.65rem + 0.18vw, 0.75rem);
+  --text-sm:       clamp(0.8125rem, 0.78rem + 0.18vw, 0.875rem);
+  --text-base:     clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  --text-lg:       clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --text-xl:       clamp(1.1875rem, 1.1rem + 0.45vw, 1.375rem);
+  --text-2xl:      clamp(1.375rem, 1.25rem + 0.65vw, 1.75rem);
+  --text-3xl:      clamp(1.75rem, 1.55rem + 1vw, 2.25rem);
+  --text-4xl:      clamp(2.25rem, 1.9rem + 1.75vw, 3.25rem);
+  --text-display:  clamp(3rem, 2.2rem + 4vw, 6rem);
+  --text-hero:     clamp(3.5rem, 2rem + 7.5vw, 8rem);
 
   /* Spacing Scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  --space-32: 8rem;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
+  --space-40:  10rem;
+  --space-48:  12rem;
+
+  /* Section vertical rhythm */
+  --section-gap: clamp(5rem, 8vw, 10rem);
 
   /* Layout */
-  --container-max-width: 1240px;
-  --content-padding-x: clamp(1.25rem, 4vw, 2.5rem);
+  --container-max-width:  1200px;
+  --content-padding-x:    clamp(1.25rem, 5vw, 3rem);
 
   /* Timing & Easing */
-  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 150ms;
-  --duration-normal: 250ms;
-  --duration-slow: 400ms;
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:      cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-out:         cubic-bezier(0, 0, 0.2, 1);
+  --duration-fast:    150ms;
+  --duration-normal:  300ms;
+  --duration-slow:    500ms;
+  --duration-slower:  800ms;
 
   /* Focus Indicator */
-  --focus-ring: 2px solid var(--color-accent);
-  --focus-offset: 2px;
+  --focus-ring:    2px solid var(--color-ink);
+  --focus-offset:  3px;
+
+  /* Border radius (restrained — editorial) */
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+
+  /* Nav height */
+  --nav-height: 4rem;
 }

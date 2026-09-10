@@ -1,5 +1,5 @@
 /**
- * Typed Content Contracts
+ * Content Types
  * Governed by RULES.md and Master Plan v2
  */
 
@@ -18,6 +18,12 @@ export interface SiteConfig {
     label: string;
   };
   navigation: NavItem[];
+  social: {
+    github: string;
+    linkedin: string;
+    email: string;
+  };
+  location: string;
 }
 
 export interface ProjectCaseStudySection {
@@ -36,6 +42,8 @@ export interface Project {
   coverImage?: string;
   technologies: string[];
   href?: string;
+  githubUrl?: string;
+  liveUrl?: string;
   role?: string;
   sections?: ProjectCaseStudySection[];
 }
@@ -51,6 +59,7 @@ export interface ExperienceItem {
 
 export interface CapabilityItem {
   id: string;
+  number: string;
   title: string;
   description: string;
   technologies: string[];
@@ -62,5 +71,8 @@ export interface LabItem {
   date: string;
   description: string;
   type: string;
+  status: "experimental" | "prototype" | "active" | "archived";
+  technologies: string[];
+  githubUrl?: string;
   href?: string;
 }

@@ -1,10 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Nav } from "@/components/nav/Nav";
+import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
+import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
+import { siteConfig } from "@/content/site";
 
-const inter = Inter({
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -15,14 +26,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#090a0f",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: "Suyash — Digital Engineer",
-  description: "Digital Engineer building products where engineering, design, and intelligence meet.",
+  title: {
+    default: siteConfig.title,
+    template: `%s — Suyash Sharma`,
+  },
+  description: siteConfig.description,
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName: "Suyash Sharma",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -31,15 +60,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      {/* suppressHydrationWarning silences attribute mismatches caused by browser
-          extensions that inject attributes (e.g. cz-shortcut-listen, data-gr-*)
-          onto <body> before React hydrates. This does not suppress child mismatches. */}
+    <html
+      lang="en"
+      className={`${instrumentSerif.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Inline script prevents flash of wrong theme before hydration */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <div id="root-container">{children}</div>
+        <ThemeProvider>
+          <Nav />
+          <ScrollRevealProvider>
+            <div id="root-container">
+              <main id="main-content" tabIndex={-1}>
+                {children}
+              </main>
+            </div>
+          </ScrollRevealProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

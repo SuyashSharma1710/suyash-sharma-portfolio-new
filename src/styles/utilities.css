@@ -1,18 +1,64 @@
 /**
- * Base Utilities & Accessibility Helpers
+ * Utility Classes
+ * Governed by RULES.md and Master Plan v2
  */
 
-/* Container */
+/* ── Container ── */
 .container {
   width: 100%;
   max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--content-padding-x);
-  padding-right: var(--content-padding-x);
+  margin-inline: auto;
+  padding-inline: var(--content-padding-x);
 }
 
-/* Visually Hidden / Screen Reader Only */
+/* ── Section spacing ── */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.section-sm {
+  padding-block: calc(var(--section-gap) * 0.6);
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  z-index: 9999;
+  text-decoration: none;
+  transition: top var(--duration-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ── Focus visible (global override) ── */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--color-line);
+  border: none;
+  margin: 0;
+}
+
+/* ── Visually hidden (accessible) ── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -25,25 +71,49 @@
   border-width: 0;
 }
 
-/* Skip link */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: var(--space-4);
-  background: var(--color-paper);
-  color: var(--color-ink);
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-line);
-  z-index: 1000;
-  transition: top var(--duration-fast) var(--ease-standard);
+/* ── Flex helpers ── */
+.flex        { display: flex; }
+.flex-col    { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2  { gap: var(--space-2); }
+.gap-4  { gap: var(--space-4); }
+.gap-6  { gap: var(--space-6); }
+.gap-8  { gap: var(--space-8); }
+
+/* ── Text alignment ── */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+
+/* ── Overflow ── */
+.overflow-hidden { overflow: hidden; }
+
+/* ── Link base reset ── */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.skip-link:focus {
-  top: var(--space-4);
+/* ── Button reset ── */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
 }
 
-/* Focus visible baseline */
-:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
+/* ── Availability dot ── */
+.availability-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
 }
+
+[data-status="available"]   .availability-dot { background: #22c55e; }
+[data-status="limited"]     .availability-dot { background: #f59e0b; }
+[data-status="unavailable"] .availability-dot { background: #ef4444; }
