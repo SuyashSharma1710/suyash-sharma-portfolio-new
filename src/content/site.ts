@@ -15,10 +15,10 @@ export const siteConfig: SiteConfig = {
     label: "Available for selected projects",
   },
   navigation: [
-    { label: "Work",    href: "/work" },
-    { label: "Lab",     href: "/lab" },
-    { label: "About",   href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Work",    href: "/#work" },
+    { label: "Lab",     href: "/#lab" },
+    { label: "About",   href: "/#about" },
+    { label: "Contact", href: "/#contact-cta" },
   ],
   social: {
     github:   "https://github.com/SuyashSharma1710",

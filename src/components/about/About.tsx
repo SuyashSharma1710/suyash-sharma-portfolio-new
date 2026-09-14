@@ -3,7 +3,6 @@
  * Editorial portrait & personal narrative — full story on /about page.
  */
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./About.module.css";
 
 export function About() {
@@ -65,10 +64,16 @@ export function About() {
               </div>
             </div>
 
-            <Link href="/about" className={styles.link} id="about-read-more">
+            <a
+              href="https://www.linkedin.com/in/suyash-sharma-756375196"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+              id="about-read-more"
+            >
               Read more about my journey
               <span className={styles.arrow} aria-hidden="true">→</span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
