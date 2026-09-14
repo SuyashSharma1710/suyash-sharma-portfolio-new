@@ -29,7 +29,7 @@ export function Engineering() {
     <section id="engineering" className={styles.section} aria-label="Engineering stack">
       <div className="container">
         <div className={styles.header}>
-          <p className={styles.label}>05 — Depth · Engineering</p>
+          <p className={styles.label}>Depth · Engineering Stack</p>
           <h2 className={styles.heading}>Engineering Stack</h2>
         </div>
 

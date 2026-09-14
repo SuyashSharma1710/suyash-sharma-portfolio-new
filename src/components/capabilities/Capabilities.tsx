@@ -9,7 +9,7 @@ export function Capabilities() {
     <section id="capabilities" className={styles.section} aria-label="What I build">
       <div className="container">
         <div className={styles.header}>
-          <p className={styles.label}>04 — Capability · What I Build</p>
+          <p className={styles.label}>Capability · What I Build</p>
           <h2 className={styles.heading}>What I Build</h2>
         </div>
 

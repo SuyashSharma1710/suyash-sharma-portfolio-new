@@ -11,7 +11,7 @@ export function Lab() {
       <div className="container">
         <div className={styles.header}>
           <div>
-            <p className={styles.label}>07 — Curiosity · Lab</p>
+            <p className={styles.label}>Curiosity · Lab</p>
             <h2 className={styles.heading}>Lab</h2>
           </div>
           <Link href="/lab" className={styles.viewAll} id="view-all-lab">

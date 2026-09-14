@@ -1,0 +1,236 @@
+/**
+ * ArchiveIndex.module.css
+ * Swiss Architectural Interactive Project Table
+ * Modeled on Grigoletti / Made in UX Studio interaction patterns
+ */
+
+.archiveSection {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-top: 1px solid var(--color-line);
+  background: var(--color-paper);
+}
+
+.archiveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.archiveLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.archiveTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-ink);
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.countBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  padding: 4px 10px;
+  background: var(--color-hover-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Table & Rows
+───────────────────────────────────────────────────────────── */
+.table {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-line);
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr 60px;
+  align-items: center;
+  padding: clamp(1.25rem, 2.2vw, 2rem) clamp(0.75rem, 1.5vw, 1.5rem);
+  border-bottom: 1px solid var(--color-line);
+  text-decoration: none;
+  color: var(--color-ink);
+  position: relative;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  transform-origin: center center;
+  will-change: background-color, padding, transform, opacity;
+}
+
+/* ── Left Column: Metadata ── */
+.metaCol {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 0.65rem + 0.15vw, 0.8125rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metaYear {
+  font-weight: 600;
+}
+
+.metaDot {
+  opacity: 0.5;
+}
+
+.metaCategory {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Center Column: Title & Animated Hover Assets ── */
+.titleCol {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  overflow: hidden;
+}
+
+/* Inline Preview Image Container (Controlled via GSAP) */
+.previewWrapper {
+  width: 0px;
+  height: clamp(64px, 7vw, 96px);
+  opacity: 0;
+  transform: scale(0.85);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  will-change: width, opacity, transform;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Project Title Typography (Bold Condensed Grotesque) */
+.projectTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 1.4rem + 2vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
+  color: var(--color-ink);
+  will-change: color, transform;
+}
+
+/* Status Badge Pill (Controlled via GSAP) */
+.badgeWrapper {
+  opacity: 0;
+  transform: translateX(-12px);
+  display: inline-flex;
+  will-change: opacity, transform;
+}
+
+.badgePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.12);
+  color: #f5f0e8;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.badgeArrow {
+  font-size: 0.75rem;
+}
+
+/* ── Right Column: External Arrow ── */
+.arrowCol {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.rowArrow {
+  font-size: clamp(1.25rem, 1.6vw, 1.75rem);
+  color: var(--color-muted);
+  will-change: transform, color;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive Design
+───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: minmax(130px, 160px) 1fr 40px;
+    padding: 1.25rem 0.75rem;
+  }
+
+  .previewVisible {
+    width: 100px;
+    height: 60px;
+  }
+
+  .badgeWrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr 40px;
+    row-gap: 0.5rem;
+    padding: 1.25rem 0.5rem;
+  }
+
+  .metaCol {
+    grid-column: 1 / -1;
+  }
+
+  .titleCol {
+    grid-column: 1;
+  }
+
+  .arrowCol {
+    grid-column: 2;
+  }
+
+  .previewWrapper {
+    display: none;
+  }
+}

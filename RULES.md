@@ -689,6 +689,26 @@ Avoid:
 - skill proficiency bars
 - generic stock imagery
 
+---
+
+# 10.1 ZERO-BOX POLICY / OPEN EDITORIAL CANVAS (MANDATORY)
+
+Inspired by the Swiss architectural aesthetic of **grigoletti.ch** and **madeinuxstudio.com**:
+
+The portfolio MUST NEVER trap content inside rounded card containers, grey widget boxes, or SaaS-style dashboard panels.
+
+### Strict Prohibitions:
+1. **NO Trapped Boxes / Dashboard Widgets**: Never wrap UI components, diagrams, or content blocks in rounded grey cards with top header bars and bottom grey footer containers (e.g. mock dashboard widgets).
+2. **NO Box-Inside-A-Box**: Never place a boxed graphic inside a boxed card.
+3. **NO Arbitrary Card Wrappers**: Avoid wrapping content in floating pill cards with heavy borders and thick backgrounds.
+
+### Mandatory Open Canvas Principles:
+1. **Open Canvas Placement**: All typography, SVG diagrams, media, and data must breathe directly on the unified page canvas (`var(--color-paper)`).
+2. **Architectural Separation via Hairlines & Whitespace**: Sections, columns, and data points must be organized using generous whitespace and crisp, single 1px hairlines (`border-top: 1px solid var(--color-line)`, column dividers) modeled on high-end Swiss print and editorial broadsheets.
+3. **Open Specification Ledgers**: Metadata and telemetry must be rendered as open editorial ledgers or clean borderless tables directly on the canvas, never as isolated floating cards.
+
+---
+
 The reference websites are inspiration only.
 
 NEVER clone:
@@ -1339,7 +1359,14 @@ This rule has no exceptions unless the user explicitly requests fictional/demo c
 
 # 36. REFERENCE SITE RULE
 
-The four reference websites may inform:
+The four reference websites:
+
+1. https://grigoletti.ch/en/
+2. https://huyml.co/
+3. https://khanhnguyen.design/
+4. https://madeinuxstudio.com/
+
+These four reference websites may inform:
 
 - pacing
 - typography

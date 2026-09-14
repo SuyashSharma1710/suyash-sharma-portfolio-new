@@ -1,17 +1,77 @@
 /**
  * SelectedWork.module.css
+ * Horizontal pinned scroll on desktop (inspired by madeinuxstudio.com)
+ * Native touch-friendly scroll-snap on mobile/tablet & reduced-motion
  */
+
 .section {
-  padding-block: var(--section-gap);
+  position: relative;
   border-top: 1px solid var(--color-line);
 }
 
-.header {
+/* ─────────────────────────────────────────────────────────────
+   Desktop Pinned Container (>= 1024px)
+───────────────────────────────────────────────────────────── */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .pinContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-top: calc(var(--nav-height) + var(--space-3));
+    padding-bottom: var(--space-4);
+    box-sizing: border-box;
+  }
+
+  .trackWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    min-height: 0; /* allows flex item to shrink properly */
+  }
+
+  .projectTrack {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--content-padding-x);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    will-change: transform;
+    align-items: stretch;
+  }
+
+  .cardItem {
+    flex: 0 0 clamp(480px, 45vw, 640px);
+    max-width: 660px;
+    display: flex;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Header & Top Bar
+───────────────────────────────────────────────────────────── */
+.topHeader {
+  width: 100%;
+  margin-bottom: var(--space-6);
+}
+
+.headerInner {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-16);
+  gap: var(--space-4);
   flex-wrap: wrap;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
   gap: var(--space-4);
 }
 
@@ -24,6 +84,40 @@
   font-family: var(--font-body);
 }
 
+.counter {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink);
+  letter-spacing: 0.08em;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.scrollHint {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.arrowIcon {
+  display: inline-block;
+  animation: pulseX 2s infinite ease-in-out;
+}
+
+@keyframes pulseX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
 .viewAll {
   font-size: var(--text-xs);
   font-weight: 600;
@@ -31,9 +125,9 @@
   text-transform: uppercase;
   color: var(--color-muted);
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1);
   transition: color var(--duration-fast);
   position: relative;
 }
@@ -60,81 +154,69 @@
 }
 
 .viewAllArrow {
+  font-size: var(--text-sm);
   transition: transform var(--duration-fast) var(--ease-out-expo);
 }
 
 .viewAll:hover .viewAllArrow {
-  transform: translateX(4px);
+  transform: translate(2px, -2px);
 }
 
-/* ── Project list ── */
-.projectList {
-  list-style: none;
+/* ─────────────────────────────────────────────────────────────
+   Open Architectural Exhibition Slide (Zero-Box Policy)
+   No trapped cards, no grey container wrappers
+───────────────────────────────────────────────────────────── */
+.card {
+  height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-/* ── Project item ── */
-.project {
-  position: relative;
+  justify-content: space-between;
+  background: transparent;
   border-top: 1px solid var(--color-line);
-}
-
-.project:last-child {
   border-bottom: 1px solid var(--color-line);
-}
-
-.projectLink {
-  display: grid;
-  grid-template-columns: 5rem 1fr auto;
-  align-items: center;
-  gap: var(--space-8);
-  padding-block: var(--space-8);
-  text-decoration: none;
-  color: var(--color-ink);
+  border-right: 1px solid var(--color-line);
+  border-left: 1px solid var(--color-line);
+  border-radius: 0;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  box-sizing: border-box;
   transition: background-color var(--duration-fast);
-  border-radius: var(--radius-md);
 }
 
-.projectLink:hover {
-  background-color: var(--color-hover-bg);
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+[data-theme="dark"] .card:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .projectNumber {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-muted);
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-  padding-left: var(--space-2);
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
-.projectInfo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.projectTitle {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: var(--color-ink);
-  line-height: 1.2;
-  transition: color var(--duration-fast);
-}
-
-.projectMeta {
+.badges {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 .projectCategory {
   font-size: var(--text-xs);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
@@ -143,28 +225,108 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-muted);
+  border-left: 1px solid var(--color-line);
+  padding-left: var(--space-2);
+}
+
+.projectRole {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+  background: transparent;
+  border: 1px solid var(--color-line);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.cardBody {
+  margin-bottom: var(--space-4);
+}
+
+.projectTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 var(--space-2) 0;
+  letter-spacing: -0.02em;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: color var(--duration-fast);
+}
+
+.titleLink:hover {
+  color: var(--color-muted);
+}
+
+.titleArrow {
+  font-size: var(--text-base);
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.titleLink:hover .titleArrow {
+  transform: translate(3px, -3px);
 }
 
 .projectSummary {
   font-size: var(--text-sm);
   color: var(--color-muted);
   line-height: 1.6;
-  max-width: 52ch;
-  margin-top: var(--space-2);
+  margin: 0;
+  max-width: 58ch;
 }
 
-.projectTags {
+/* ─────────────────────────────────────────────────────────────
+   Technical Schematics (Open Canvas Graphic — No trapped box)
+───────────────────────────────────────────────────────────── */
+.schematicBox {
+  width: 100%;
+  max-height: 160px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid var(--color-line);
+}
+
+.schematicSvg {
+  width: 100%;
+  max-height: 160px;
+  height: auto;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Card Footer & Actions
+───────────────────────────────────────────────────────────── */
+.cardFooter {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-line);
+}
+
+.techTags {
+  display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
-  margin-top: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .tag {
   font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
   color: var(--color-muted);
   background: var(--color-hover-bg);
   border: 1px solid var(--color-line);
@@ -172,26 +334,124 @@
   border-radius: var(--radius-sm);
 }
 
-.projectArrow {
-  font-size: var(--text-xl);
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.actionBtn {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--color-muted);
-  flex-shrink: 0;
-  transition: transform var(--duration-normal) var(--ease-out-expo), color var(--duration-fast);
-  padding-right: var(--space-2);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast);
 }
 
-.projectLink:hover .projectArrow {
-  transform: translate(4px, -4px);
+.actionBtn:hover {
   color: var(--color-ink);
+  background: var(--color-hover-bg);
+  border-color: var(--color-ink);
 }
 
-/* ── Responsive ── */
-@media (max-width: 767px) {
-  .projectLink {
-    grid-template-columns: 3rem 1fr;
-    gap: var(--space-4);
-    padding-block: var(--space-6);
+.actionBtnPrimary {
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: opacity var(--duration-fast);
+}
+
+.actionBtnPrimary:hover {
+  opacity: 0.85;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Progress Bar Track
+───────────────────────────────────────────────────────────── */
+.bottomBar {
+  width: 100%;
+  padding-block: var(--space-2);
+  flex-shrink: 0;
+}
+
+.progressTrack {
+  height: 2px;
+  width: 100%;
+  background: var(--color-line);
+  position: relative;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  width: 100%;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 120ms linear;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile & Tablet (< 1024px) / Reduced-Motion Fallback
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .section {
+    padding-block: var(--section-gap);
   }
-  .projectArrow { display: none; }
-  .projectTitle  { font-size: var(--text-xl); }
+
+  .pinContainer {
+    height: auto;
+    overflow: visible;
+  }
+
+  .scrollHint {
+    display: none;
+  }
+
+  .trackWrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-6);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+
+  .projectTrack {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--content-padding-x);
+    gap: var(--space-6);
+    width: max-content;
+  }
+
+  .cardItem {
+    scroll-snap-align: start;
+    flex: 0 0 min(85vw, 440px);
+    width: min(85vw, 440px);
+  }
+
+  .schematicBox {
+    max-height: 180px;
+  }
+
+  .bottomBar {
+    display: none;
+  }
 }

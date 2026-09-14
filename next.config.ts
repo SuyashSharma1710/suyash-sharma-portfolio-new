@@ -4,6 +4,7 @@ import path from "path";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  transpilePackages: ["gsap"],
   // Silence false-positive workspace root detection caused by a parent
   // package-lock.json at C:\Users\priya\
   outputFileTracingRoot: path.join(__dirname),

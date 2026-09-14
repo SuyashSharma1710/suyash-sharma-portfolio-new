@@ -208,6 +208,13 @@ HUMAN
 
 # 2. Reference-Site Learning Framework
 
+The four reference sites:
+
+1. https://grigoletti.ch/en/
+2. https://huyml.co/
+3. https://khanhnguyen.design/
+4. https://madeinuxstudio.com/
+
 The reference sites are inspiration sources, not implementation
 templates.
 
@@ -236,6 +243,16 @@ Do not reproduce:
 -   proprietary assets
 
 The final design must have its own visual language.
+
+### Core Architectural Directive: Zero-Box Policy / Open Editorial Canvas
+As analyzed directly from **grigoletti.ch** and **madeinuxstudio.com**:
+- **Neither reference site utilizes trapped cards or dashboard-style boxes**.
+- Everything breathes in **open editorial layout** directly on the unified paper canvas.
+- Absolute ban on:
+  - Mock widget boxes with header pills, inner grid boxes, and grey footer containers.
+  - Box-inside-a-box layouts.
+  - Floating grey cards that fragment the page into isolated islands.
+- All separation must rely on generous whitespace and architectural 1px hairlines.
 
 ------------------------------------------------------------------------
 

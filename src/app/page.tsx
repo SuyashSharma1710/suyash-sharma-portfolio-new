@@ -5,8 +5,8 @@
  * 05 Engineering → 06 Experience → 07 Lab → 08 About → 09 FinalCTA → 10 Footer
  */
 import type { Metadata } from "next";
-import { Hero }          from "@/components/hero/Hero";
-import { Positioning }   from "@/components/positioning/Positioning";
+import { HeroSequence }           from "@/components/hero/HeroSequence";
+import { Positioning }            from "@/components/positioning/Positioning";
 import { SelectedWork }  from "@/components/work/SelectedWork";
 import { Capabilities }  from "@/components/capabilities/Capabilities";
 import { Engineering }   from "@/components/engineering/Engineering";
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <HeroSequence />
       <Positioning />
       <SelectedWork />
       <Capabilities />

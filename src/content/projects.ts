@@ -20,6 +20,7 @@ export const projects: Project[] = [
     featured: true,
     technologies: ["TypeScript", "Rust", "Tauri", "ONNX", "React", "RAG", "Vector Search", "BM25"],
     githubUrl: "https://github.com/SuyashSharma1710/glint",
+    coverImage: "/images/previews/glint.jpg",
     role: "Solo engineer",
   },
   {
@@ -34,6 +35,7 @@ export const projects: Project[] = [
     featured: true,
     technologies: ["Electron", "React", "JavaScript", "C++", "Sharp", "WebP", "AVIF"],
     githubUrl: "https://github.com/SuyashSharma1710/PixelSpace",
+    coverImage: "/images/previews/pixelspace.jpg",
     role: "Solo engineer",
   },
   {
@@ -47,17 +49,19 @@ export const projects: Project[] = [
     technologies: ["Next.js 15", "React 19", "TypeScript", "Neon PostgreSQL", "Drizzle ORM", "Zod", "Tailwind CSS"],
     githubUrl: "https://github.com/SuyashSharma1710/pitchery",
     liveUrl: "https://pitchery.vercel.app",
+    coverImage: "/images/previews/pitchery.jpg",
   },
   {
     slug: "fanout",
     title: "Fanout",
     category: "Web App",
     year: "2026",
-    summary: "[PROJECT DESCRIPTION REQUIRED — describe what Fanout does in 1-2 sentences]",
+    summary: "Real-time event routing gateway and websocket fanout notification system for distributed web clients.",
     featured: false,
     technologies: ["JavaScript"],
     githubUrl: "https://github.com/SuyashSharma1710/fanout",
     liveUrl: "https://fanout-nu.vercel.app",
+    coverImage: "/images/previews/fanout.jpg",
   },
   {
     slug: "syncflow",

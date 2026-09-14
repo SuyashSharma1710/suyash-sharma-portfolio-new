@@ -64,7 +64,7 @@ export function toggleTheme() {
   document.documentElement.setAttribute("data-theme", next);
   try {
     localStorage.setItem(STORAGE_KEY, next);
-  } catch (_) {}
+  } catch {}
 }
 
 /** Get current theme */

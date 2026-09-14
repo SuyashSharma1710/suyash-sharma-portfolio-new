@@ -17,7 +17,7 @@ export function Positioning() {
   return (
     <section id="positioning" className={`${styles.section}`} aria-label="What I build">
       <div className="container">
-        <p className={`${styles.label} reveal`}>02 — Position</p>
+        <p className={`${styles.label} reveal`}>Position</p>
         <div className={styles.inner}>
           {/* Statement */}
           <h2 className={styles.statement}>

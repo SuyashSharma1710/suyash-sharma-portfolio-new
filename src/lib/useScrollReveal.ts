@@ -6,37 +6,51 @@
  * Respects prefers-reduced-motion (skips animation, shows content immediately)
  */
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function useScrollReveal() {
-  useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  const pathname = usePathname();
 
-    if (prefersReduced) {
-      // Show all immediately
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+
+    // Defer slightly to ensure React hydration has fully completed across all trees
+    const timer = setTimeout(() => {
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReduced) {
+        document
+          .querySelectorAll<HTMLElement>(".reveal, .reveal-fade")
+          .forEach((el) => el.setAttribute("data-visible", "true"));
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.setAttribute("data-visible", "true");
+              observer?.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+
       document
         .querySelectorAll<HTMLElement>(".reveal, .reveal-fade")
-        .forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+        .forEach((el) => {
+          if (el.getAttribute("data-visible") !== "true") {
+            observer?.observe(el);
           }
         });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
+    }, 20);
 
-    document
-      .querySelectorAll<HTMLElement>(".reveal, .reveal-fade")
-      .forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      observer?.disconnect();
+    };
+  }, [pathname]);
 }

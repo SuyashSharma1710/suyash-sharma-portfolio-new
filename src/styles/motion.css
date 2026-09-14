@@ -32,6 +32,7 @@
     transform var(--duration-slow) var(--ease-out-expo);
 }
 
+.reveal[data-visible="true"],
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -42,6 +43,7 @@
   transition: opacity var(--duration-slow) var(--ease-out);
 }
 
+.reveal-fade[data-visible="true"],
 .reveal-fade.is-visible {
   opacity: 1;
 }

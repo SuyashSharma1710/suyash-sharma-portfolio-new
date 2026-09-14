@@ -12,7 +12,7 @@ export function Experience() {
     <section id="experience" className={styles.section} aria-label="Work experience">
       <div className="container">
         <div className={styles.header}>
-          <p className={styles.label}>06 — Experience</p>
+          <p className={styles.label}>Experience</p>
           <h2 className={styles.heading}>Selected Experience</h2>
         </div>
 

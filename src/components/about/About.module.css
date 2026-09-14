@@ -1,5 +1,6 @@
 /**
  * About.module.css
+ * Editorial portrait layout with typography and metadata cards
  */
 .section {
   padding-block: var(--section-gap);
@@ -8,9 +9,21 @@
 
 .inner {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: var(--space-20);
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(2rem, 5vw, var(--space-20));
   align-items: start;
+}
+
+/* ── Left Column ── */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
@@ -20,30 +33,134 @@
   text-transform: uppercase;
   color: var(--color-muted);
   font-family: var(--font-body);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .heading {
   font-family: var(--font-display);
-  font-size: var(--text-4xl);
+  font-size: clamp(2rem, 3.5vw, var(--text-4xl));
   font-weight: 400;
   letter-spacing: -0.02em;
   color: var(--color-ink);
   line-height: 1.05;
+  margin: 0;
 }
 
+.imageFrame {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  max-width: 420px;
+  width: 100%;
+}
+
+.portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.03);
+  transition: transform var(--duration-slower) var(--ease-out-expo);
+}
+
+.imageFrame:hover .portrait {
+  transform: scale(1.02);
+}
+
+.imageCaption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border-top: 1px solid var(--color-line);
+}
+
+.captionDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  opacity: 0.6;
+}
+
+.captionText {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Right Column: Narrative ── */
 .body {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  padding-top: var(--space-12);
+}
+
+.lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--color-ink);
+  margin: 0;
 }
 
 .bio {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--color-muted);
-  line-height: 1.7;
+  line-height: 1.75;
+  margin: 0;
 }
 
+/* ── Open Meta Ledger (Zero-Box Policy) ── */
+.metaLedger {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-4);
+  background: transparent;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .metaRow {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.metaRow:last-child {
+  border-bottom: none;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metaValue {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* ── Read More Link ── */
 .link {
   display: inline-flex;
   align-items: center;
@@ -58,6 +175,7 @@
   padding-bottom: var(--space-1);
   transition: border-color var(--duration-fast), color var(--duration-fast);
   width: fit-content;
+  margin-top: var(--space-4);
 }
 
 .link:hover {
@@ -74,9 +192,17 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   .inner {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+
+  .body {
+    padding-top: 0;
+  }
+
+  .imageFrame {
+    max-width: 360px;
   }
 }
