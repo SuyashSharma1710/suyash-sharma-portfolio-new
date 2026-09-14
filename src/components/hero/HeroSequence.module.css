@@ -300,22 +300,28 @@
 /* ─────────────────────────────────────────────────────────────
    Panel 2: 4 Widened Full-Height Columns (Image 3 & 4)
 ───────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────
+   Panel 2: 4 Widened Full-Height Columns (Image 3 & 4)
+───────────────────────────────────────────────────────────── */
 .columnsWrapper {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(340px, 26vw, 440px);
+  grid-template-rows: 1fr auto auto;
   height: 100%;
   flex-shrink: 0;
 }
 
 .column {
   position: relative;
-  width: clamp(340px, 26vw, 440px);
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: 1fr minmax(5.5rem, auto) minmax(6.5rem, auto);
+  width: 100%;
   height: 100%;
   border-right: 1px solid var(--color-line);
   padding: clamp(2.5rem, 4vw, 4.5rem) clamp(1.75rem, 2.5vw, 2.75rem);
   padding-top: calc(var(--nav-height) + clamp(1.5rem, 2.5vw, 3rem));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   text-decoration: none;
   color: var(--color-ink);
   overflow: hidden;
@@ -325,6 +331,12 @@
   outline: none;
   flex-shrink: 0;
   transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports (grid-template-rows: subgrid) {
+  .column {
+    grid-template-rows: subgrid;
+  }
 }
 
 /* Background Image Container (Fades in on Hover) */
@@ -370,24 +382,32 @@
 .colContent {
   position: relative;
   z-index: 2;
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: 1fr minmax(5.5rem, auto) minmax(6.5rem, auto);
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   pointer-events: none;
 }
 
-/* Top: Giant Numbers in Modern Bold Grotesque */
+@supports (grid-template-rows: subgrid) {
+  .colContent {
+    grid-template-rows: subgrid;
+  }
+}
+
+/* Top: Giant Numbers in Hero Display Serif (Instrument Serif) */
 .colTop {
+  grid-row: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: var(--space-3);
 }
 
 .giantNumber {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: clamp(5.5rem, 8.5vw, 8.5rem);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 0.85;
   letter-spacing: -0.04em;
   color: var(--color-ink);
@@ -415,10 +435,13 @@
   color: #d1cbc4;
 }
 
-/* Middle: Large Title */
+/* Middle: Large Title (aligned across all columns via subgrid) */
 .colMiddle {
-  margin-top: auto;
-  margin-bottom: var(--space-6);
+  grid-row: 2;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: var(--space-5);
+  margin: 0;
 }
 
 .colTitle {
@@ -428,7 +451,7 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-ink);
-  margin: 0 0 var(--space-3) 0;
+  margin: 0;
   transition: color 0.35s ease;
 }
 
@@ -437,15 +460,17 @@
   color: #ffffff;
 }
 
-/* Bottom: Description & Circular Action Arrow */
+/* Bottom: Description & Circular Action Arrow (aligned across all columns via subgrid) */
 .colBottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
   gap: var(--space-4);
   padding-top: var(--space-5);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   transition: border-color 0.35s ease;
+  margin: 0;
 }
 
 [data-theme="dark"] .colBottom {
