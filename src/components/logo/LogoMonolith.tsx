@@ -6,12 +6,15 @@ import { LogoProps } from "./LogoConvergence";
  * Modernist Solid Faceted Mark.
  * Symbolizes structural stability, full-stack architectural depth, and Swiss typographic heritage.
  */
-export function LogoMonolith({
-  size = 28,
-  className = "",
-  showTelemetry = true,
-  ...props
-}: LogoProps) {
+export function LogoMonolith(props: LogoProps) {
+  const {
+    size = 28,
+    className = "",
+    showTelemetry = true,
+    strokeWidth,
+    ...rest
+  } = props;
+  void strokeWidth;
   return (
     <svg
       width={size}
@@ -22,7 +25,7 @@ export function LogoMonolith({
       className={className}
       role="img"
       aria-label="Suyash Sharma Monogram — Architectural Monolith"
-      {...props}
+      {...rest}
     >
       {/* Upper Faceted Cantilever */}
       <path

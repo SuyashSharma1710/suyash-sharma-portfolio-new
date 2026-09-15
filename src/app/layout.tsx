@@ -4,6 +4,8 @@ import "./globals.css";
 import { Nav } from "@/components/nav/Nav";
 import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { CursorTracker } from "@/lib/motion/components/CursorTracker";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -74,14 +76,17 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider>
+          <CursorTracker />
           <Nav />
-          <ScrollRevealProvider>
-            <div id="root-container">
-              <main id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-            </div>
-          </ScrollRevealProvider>
+          <SmoothScrollProvider>
+            <ScrollRevealProvider>
+              <div id="root-container">
+                <main id="main-content" tabIndex={-1}>
+                  {children}
+                </main>
+              </div>
+            </ScrollRevealProvider>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
