@@ -79,3 +79,26 @@ export interface LabItem {
   githubUrl?: string;
   href?: string;
 }
+
+export interface TechItem {
+  id: string;
+  name: string;
+  glyph: string;
+  category: "Frontend" | "Backend" | "AI & Search" | "Infrastructure";
+  role: string;
+  connectedIds: string[];
+  project?: {
+    title: string;
+    slug?: string;
+    url?: string;
+  };
+  specs?: string[];
+}
+
+export interface TechSubsystem {
+  number: string;
+  label: "Frontend" | "Backend" | "AI & Search" | "Infrastructure";
+  title: string;
+  description: string;
+  items: TechItem[];
+}

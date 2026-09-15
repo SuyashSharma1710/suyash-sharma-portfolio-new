@@ -195,7 +195,7 @@ export function HeroHUD() {
         transferToNode(nextNode);
         return nextNode;
       });
-    }, 4500);
+    }, 8500);
 
     return () => clearInterval(interval);
   }, [isHovered, transferToNode]);

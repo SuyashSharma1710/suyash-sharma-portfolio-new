@@ -15,6 +15,7 @@ export interface DecryptedTextProps {
   speed?: number; // ms per step
   charactersPerStep?: number;
   animateOn?: "view" | "hover";
+  repeatInterval?: number; // ms pause before repeating
   className?: string;
   parentClassName?: string;
   encryptedClassName?: string;
@@ -25,6 +26,7 @@ export function DecryptedText({
   speed = 65,
   charactersPerStep = 1,
   animateOn = "hover",
+  repeatInterval,
   className = "",
   parentClassName = "",
   encryptedClassName = "",
@@ -32,6 +34,7 @@ export function DecryptedText({
   const [displayText, setDisplayText] = useState(text);
   const [isScrambling, setIsScrambling] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const repeatTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLSpanElement>(null);
 
   const startScramble = useCallback(() => {
@@ -43,6 +46,7 @@ export function DecryptedText({
     const totalSteps = length + 4; // allow smooth tail-end resolution
 
     if (intervalRef.current) clearInterval(intervalRef.current);
+    if (repeatTimeoutRef.current) clearTimeout(repeatTimeoutRef.current);
 
     intervalRef.current = setInterval(() => {
       setDisplayText(() => {
@@ -74,9 +78,15 @@ export function DecryptedText({
         if (intervalRef.current) clearInterval(intervalRef.current);
         setDisplayText(text);
         setIsScrambling(false);
+
+        if (repeatInterval && repeatInterval > 0) {
+          repeatTimeoutRef.current = setTimeout(() => {
+            startScramble();
+          }, repeatInterval);
+        }
       }
     }, speed);
-  }, [text, speed, charactersPerStep, isScrambling]);
+  }, [text, speed, charactersPerStep, isScrambling, repeatInterval]);
 
   useEffect(() => {
     if (animateOn === "view") {
@@ -102,6 +112,7 @@ export function DecryptedText({
   useEffect(() => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (repeatTimeoutRef.current) clearTimeout(repeatTimeoutRef.current);
     };
   }, []);
 
