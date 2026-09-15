@@ -3,7 +3,7 @@
 /**
  * Capabilities — Section 04
  * Interactive Full-Section Mask Clipping Architecture & Bespoke 3D Editorial Renders
- * Governed strictly by RULES.md Rule 10.1 (Zero-Box Policy / Open Editorial Canvas)
+ * Governed strictly by RULES.md Rule 10.1 (Zero-Box Policy) & Centralized Motion System
  */
 import { useRef } from "react";
 import Image from "next/image";
@@ -40,7 +40,7 @@ export function Capabilities() {
       y = Math.round(cardRect.top + cardRect.height / 2 - secRect.top);
     }
 
-    // Generously calculate radius to guarantee 100% edge-to-edge coverage across all screen sizes
+    // Generously calculate radius to guarantee 100% edge-to-edge coverage across all viewports
     const secHypot = Math.ceil(Math.hypot(secRect.width, secRect.height));
     const maxRadius = Math.max(secHypot * 1.5, 2400);
 
@@ -55,6 +55,7 @@ export function Capabilities() {
         (e?.currentTarget as HTMLElement) ||
         sectionRef.current.querySelector<HTMLElement>(`[data-card-id="${id}"]`);
       const targetBg = sectionRef.current.querySelector<HTMLElement>(`[data-bg-id="${id}"]`);
+      const targetImg = targetBg?.querySelector<HTMLElement>(`.${styles.bgImage}`);
       const allCards = sectionRef.current.querySelectorAll<HTMLElement>("[data-card-id]");
       const allBgs = sectionRef.current.querySelectorAll<HTMLElement>("[data-bg-id]");
 
@@ -68,59 +69,92 @@ export function Capabilities() {
       activeBgIdRef.current = id;
       sectionRef.current.setAttribute("data-has-active", "true");
 
-      // 1. Dim sibling cards, highlight active card
+      // 1. Apple-level sibling dimming and typographic highlight
       allCards.forEach((card) => {
         if (card === currentCard) {
           card.setAttribute("data-active", "true");
-          gsap.to(card, { opacity: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+          gsap.to(card, {
+            opacity: 1,
+            duration: 0.45,
+            ease: "expo.out",
+            overwrite: "auto",
+          });
         } else {
           card.removeAttribute("data-active");
-          gsap.to(card, { opacity: 0.28, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+          gsap.to(card, {
+            opacity: 0.28,
+            duration: 0.45,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
         }
       });
 
-      // 2. Kill all existing background tweens to prevent race conditions or old onComplete resets
-      gsap.killTweensOf(allBgs);
+      // 2. Kill active tweens on the target background to prevent race conditions
+      gsap.killTweensOf(targetBg);
+      if (targetImg) gsap.killTweensOf(targetImg);
 
       const { x, y, maxRadius } = getCoords(e, currentCard);
       zIndexCounter.current += 1;
 
-      // Bring target background to top layer
+      // Bring target background to topmost layer and enable visibility for GPU compositing
       gsap.set(targetBg, {
         zIndex: zIndexCounter.current,
         opacity: 1,
+        visibility: "visible",
       });
 
-      // Reveal target background using radial clip-path originating from cursor
+      // 3. Cinematic, slow radial circular wave expansion (clearly observable)
       gsap.fromTo(
         targetBg,
         {
           clipPath: `circle(0px at ${x}px ${y}px)`,
           webkitClipPath: `circle(0px at ${x}px ${y}px)`,
-          scale: 1.03,
         },
         {
           clipPath: `circle(${maxRadius}px at ${x}px ${y}px)`,
           webkitClipPath: `circle(${maxRadius}px at ${x}px ${y}px)`,
-          scale: 1,
-          duration: 0.52,
+          duration: 1.85,
           ease: "power2.out",
           overwrite: "auto",
         }
       );
 
-      // Cleanly fade out inactive background layers underneath
+      // 4. Majestic optical camera zoom settle in sync with slow mask
+      if (targetImg) {
+        gsap.fromTo(
+          targetImg,
+          {
+            scale: 1.08,
+          },
+          {
+            scale: 1.01,
+            duration: 2.2,
+            ease: "power2.out",
+            overwrite: "auto",
+          }
+        );
+      }
+
+      // 5. Silky cross-fade for inactive background layers underneath
       const inactiveBgs = Array.from(allBgs).filter((bg) => bg !== targetBg);
       if (inactiveBgs.length > 0) {
         gsap.to(inactiveBgs, {
           opacity: 0,
-          duration: 0.45,
-          ease: "power2.out",
+          duration: 1.35,
+          ease: "power1.out",
           overwrite: "auto",
           onComplete: () => {
             inactiveBgs.forEach((bg) => {
               if (bg !== sectionRef.current?.querySelector(`[data-bg-id="${activeBgIdRef.current}"]`)) {
-                gsap.set(bg, { zIndex: 1, clipPath: "circle(0px at 50% 50%)", webkitClipPath: "circle(0px at 50% 50%)" });
+                gsap.set(bg, {
+                  zIndex: 1,
+                  visibility: "hidden",
+                  clipPath: "circle(0px at 50% 50%)",
+                  webkitClipPath: "circle(0px at 50% 50%)",
+                });
+                const img = bg.querySelector<HTMLElement>(`.${styles.bgImage}`);
+                if (img) gsap.set(img, { x: 0, y: 0, scale: 1 });
               }
             });
           },
@@ -138,25 +172,35 @@ export function Capabilities() {
     const allCards = sectionRef.current.querySelectorAll<HTMLElement>("[data-card-id]");
     const allBgs = sectionRef.current.querySelectorAll<HTMLElement>("[data-bg-id]");
 
-    // Restore all cards to resting opacity
+    // Restore all cards to resting state with smooth easing
     allCards.forEach((card) => {
       card.removeAttribute("data-active");
-      gsap.to(card, { opacity: 1, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+      gsap.to(card, {
+        opacity: 1,
+        duration: 0.85,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
     });
 
-    // Kill any in-flight enter tweens on bgs and fade out smoothly
+    // Clean, elegant fade-out of all background layers
     gsap.killTweensOf(allBgs);
     gsap.to(allBgs, {
       opacity: 0,
-      duration: 0.45,
+      duration: 1.05,
       ease: "power2.out",
       overwrite: "auto",
       onComplete: () => {
-        if (!activeBgIdRef.current) {
+        if (!activeBgIdRef.current && sectionRef.current) {
           gsap.set(allBgs, {
             zIndex: 1,
+            visibility: "hidden",
             clipPath: "circle(0px at 50% 50%)",
             webkitClipPath: "circle(0px at 50% 50%)",
+          });
+          allBgs.forEach((bg) => {
+            const img = bg.querySelector<HTMLElement>(`.${styles.bgImage}`);
+            if (img) gsap.set(img, { x: 0, y: 0, scale: 1 });
           });
           zIndexCounter.current = 10;
         }
