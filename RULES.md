@@ -709,6 +709,17 @@ The portfolio MUST NEVER trap content inside rounded card containers, grey widge
 
 ---
 
+# 10.2 NO NUMBERED SECTION PREFIXES (MANDATORY)
+
+The portfolio MUST NEVER use numbered section prefixes (e.g., `01 /`, `02 /`, `03 /`, `07 /`, `08 /`, `09 /`, `01 —`, `02 ·`) in UI section headers, subheadings, eyebrows, or page headers.
+
+### Strict Prohibitions:
+1. **NO Numbered Prefixes**: Never prepend headings, eyebrows, or header indicators with arbitrary index numbers like `09 / DIRECT INQUIRIES`, `03 / PROJECT ARCHIVE`, `07 / LABORATORY & EXPERIMENTS`, or `01 / HERO`.
+2. **Use Clean Semantic Labels**: Use clean, descriptive labels directly without numbers (e.g., `DIRECT INQUIRIES`, `PROJECT ARCHIVE`, `LABORATORY & EXPERIMENTS`, `BACKGROUND & PHILOSOPHY`).
+3. **No Artificial Enumeration**: Do not number site sections in public UI copy. Editorial typography must rely on semantic clarity, whitespace, and typographic contrast rather than artificial sequential counting tags.
+
+---
+
 The reference websites are inspiration only.
 
 NEVER clone:

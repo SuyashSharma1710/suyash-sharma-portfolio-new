@@ -21,6 +21,7 @@ export interface SiteConfig {
   social: {
     github: string;
     linkedin: string;
+    instagram?: string;
     email: string;
   };
   location: string;

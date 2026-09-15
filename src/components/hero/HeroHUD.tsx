@@ -1,16 +1,31 @@
 "use client";
 
-import { useState } from "react";
+/**
+ * HeroHUD — System Architecture & Capabilities Schematic
+ * Features:
+ * - True vector beam shifting / transferring animation between subsystems
+ * - Gliding targeting reticle & orbital telemetry rings
+ * - Animated data packet dispatch along active connection vector
+ * - Decrypted data transfer transition on the specification ledger
+ * - Plain, accessible language with zero obscure jargon
+ * - Full reduced-motion & mobile touch safety
+ */
+
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import styles from "./Hero.module.css";
+
+gsap.registerPlugin(useGSAP);
 
 interface SystemNode {
   id: string;
+  badge: string;
   name: string;
   label: string;
   category: string;
   metric: string;
   stack: string;
-  coord: string;
   x: number;
   y: number;
 }
@@ -18,67 +33,207 @@ interface SystemNode {
 const NODES: SystemNode[] = [
   {
     id: "ai",
-    name: "Glint AI Engine",
-    label: "AI & RAG PIPELINE",
-    category: "Vector & Lexical Search",
-    metric: "Latency: <18ms · Local ONNX",
-    stack: "Rust · ONNX · BM25 Search",
-    coord: "LOC · 38.2°N 0x1A",
+    badge: "AI",
+    name: "Glint AI Search Engine",
+    label: "AI & SMART SEARCH",
+    category: "Smart Search & AI Workflows",
+    metric: "Instant Search (<18ms) · Local AI",
+    stack: "Rust · Local AI · Fast Search",
     x: 140,
     y: 95,
   },
   {
-    id: "perf",
-    name: "PixelSpace Engine",
-    label: "C++ HIGH-PERFORMANCE",
-    category: "High-Throughput SIMD",
-    metric: "-94.2% Compression Ratio",
-    stack: "C++ · Electron · Sharp SIMD",
-    coord: "LOC · 72.5°E 0x2B",
+    id: "speed",
+    badge: "SPEED",
+    name: "PixelSpace Desktop App",
+    label: "HIGH-SPEED DESKTOP APPS",
+    category: "High-Performance Desktop Software",
+    metric: "94% Smaller File Sizes · Zero Lag",
+    stack: "C++ · Electron · Image Processing",
     x: 620,
     y: 95,
   },
   {
-    id: "fullstack",
-    name: "Pitchery Platform",
-    label: "FULL-STACK CLOUD",
-    category: "Distributed Web Architecture",
-    metric: "Edge-Rendered · Zero Cold Start",
-    stack: "Next.js 15 · Neon · React 19",
-    coord: "LOC · 14.8°S 0x3C",
+    id: "web",
+    badge: "WEB",
+    name: "Pitchery Web Platform",
+    label: "FULL-STACK WEB APPS",
+    category: "Modern Scalable Web Applications",
+    metric: "Sub-Second Load · Global Cloud",
+    stack: "Next.js · React · PostgreSQL Database",
     x: 140,
     y: 345,
   },
   {
-    id: "infra",
-    name: "System Reliability",
-    label: "CORE INFRASTRUCTURE",
-    category: "Reliable Production Systems",
-    metric: "99.9% Pipeline Uptime",
-    stack: "TypeScript · Python · Docker",
-    coord: "LOC · 91.0°W 0x4D",
+    id: "cloud",
+    badge: "CLOUD",
+    name: "Cloud Infrastructure & DevOps",
+    label: "CLOUD INFRASTRUCTURE",
+    category: "High-Availability Production Systems",
+    metric: "99.9% Uptime · Automated Deployments",
+    stack: "TypeScript · Python · Docker · Cloud",
     x: 620,
     y: 345,
   },
 ];
 
+const HUB = { x: 380, y: 220 };
+
 export function HeroHUD() {
   const [activeNode, setActiveNode] = useState<SystemNode>(NODES[0]!);
+  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // SVG refs for continuous transferring animation
+  const beamRef = useRef<SVGLineElement>(null);
+  const pulsePacketRef = useRef<SVGCircleElement>(null);
+  const reticleRef = useRef<SVGGElement>(null);
+  const hubRingRef = useRef<SVGCircleElement>(null);
+  const ledgerRef = useRef<HTMLDivElement>(null);
+
+  // Position vector tracking
+  const currentPos = useRef({ x: NODES[0]!.x, y: NODES[0]!.y });
+
+  // GSAP Context Safe Actions
+  const { contextSafe } = useGSAP({ scope: containerRef });
+
+  const transferToNode = contextSafe((targetNode: SystemNode) => {
+    setActiveNode(targetNode);
+
+    // Check reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      if (beamRef.current) {
+        beamRef.current.setAttribute("x2", String(targetNode.x));
+        beamRef.current.setAttribute("y2", String(targetNode.y));
+      }
+      if (reticleRef.current) {
+        gsap.set(reticleRef.current, { x: targetNode.x, y: targetNode.y });
+      }
+      currentPos.current = { x: targetNode.x, y: targetNode.y };
+      return;
+    }
+
+    // 1. Smoothly shift & transfer the active beam endpoint
+    if (beamRef.current) {
+      gsap.to(currentPos.current, {
+        x: targetNode.x,
+        y: targetNode.y,
+        duration: 0.5,
+        ease: "power3.inOut",
+        onUpdate: () => {
+          if (beamRef.current) {
+            beamRef.current.setAttribute("x2", String(currentPos.current.x));
+            beamRef.current.setAttribute("y2", String(currentPos.current.y));
+          }
+        },
+      });
+    }
+
+    // 2. Glide the targeting reticle across orbital space
+    if (reticleRef.current) {
+      gsap.to(reticleRef.current, {
+        x: targetNode.x,
+        y: targetNode.y,
+        duration: 0.55,
+        ease: "expo.out",
+        overwrite: "auto",
+      });
+    }
+
+    // 3. Dispatch an energy pulse packet shooting from Hub to Target Node
+    if (pulsePacketRef.current) {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        pulsePacketRef.current,
+        {
+          attr: { cx: HUB.x, cy: HUB.y, r: 4.5 },
+          opacity: 1,
+        },
+        {
+          attr: { cx: targetNode.x, cy: targetNode.y, r: 3 },
+          opacity: 0.9,
+          duration: 0.42,
+          ease: "power2.inOut",
+        }
+      ).to(pulsePacketRef.current, {
+        opacity: 0,
+        duration: 0.15,
+        ease: "power1.out",
+      });
+    }
+
+    // 4. Hub pulse effect on dispatch
+    if (hubRingRef.current) {
+      gsap.fromTo(
+        hubRingRef.current,
+        { attr: { r: 54 }, opacity: 0.9 },
+        { attr: { r: 68 }, opacity: 0, duration: 0.45, ease: "power2.out" }
+      );
+    }
+
+    // 5. Shift transition on the ledger readouts
+    if (ledgerRef.current) {
+      const readoutEls = ledgerRef.current.querySelectorAll("[data-telemetry-readout]");
+      gsap.fromTo(
+        readoutEls,
+        { y: 6, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35, stagger: 0.03, ease: "power2.out" }
+      );
+    }
+  });
+
+  // Auto-transfer cycle (every 4.5s unless hovered)
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      setActiveNode((prev) => {
+        const currentIndex = NODES.findIndex((n) => n.id === prev.id);
+        const nextIndex = (currentIndex + 1) % NODES.length;
+        const nextNode = NODES[nextIndex]!;
+        transferToNode(nextNode);
+        return nextNode;
+      });
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [isHovered, transferToNode]);
+
+  // Initial positioning of reticle and beam on mount
+  useGSAP(
+    () => {
+      if (reticleRef.current) {
+        gsap.set(reticleRef.current, { x: NODES[0]!.x, y: NODES[0]!.y });
+      }
+      if (beamRef.current) {
+        beamRef.current.setAttribute("x2", String(NODES[0]!.x));
+        beamRef.current.setAttribute("y2", String(NODES[0]!.y));
+      }
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <div className={styles.openArchCanvas} aria-label="Interactive architecture telemetry schematic">
+    <div
+      ref={containerRef}
+      className={styles.openArchCanvas}
+      aria-label="Interactive architecture capabilities schematic"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Top Header Bar */}
       <div className={styles.archHeader}>
         <div className={styles.archHeaderLeft}>
           <span className={styles.archDot} aria-hidden="true" />
-          <span className={styles.archTitle}>SYSTEM ARCHITECTURE · TELEMETRY</span>
+          <span className={styles.archTitle}>SYSTEM ARCHITECTURE · CAPABILITIES</span>
         </div>
         <div className={styles.archStatus}>
-          <span className={styles.archStatusText}>[ ACTIVE 2026 · ALL SUBSYSTEMS NOMINAL ]</span>
+          <span className={styles.archStatusText}>[ ACTIVE 2026 · ALL SYSTEMS LIVE ]</span>
         </div>
       </div>
 
-      {/* Expanded Proportional SVG Architecture Schematic (760x440 viewBox) */}
+      {/* Interactive SVG Schematic */}
       <div className={styles.archSvgWrapper}>
         <svg
           viewBox="0 0 760 440"
@@ -87,8 +242,26 @@ export function HeroHUD() {
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Subtle Technical Grid Hairlines */}
-          <line x1="40" y1="220" x2="720" y2="220" stroke="var(--color-line)" strokeWidth="1" strokeDasharray="2 6" strokeOpacity="0.6" />
-          <line x1="380" y1="30" x2="380" y2="410" stroke="var(--color-line)" strokeWidth="1" strokeDasharray="2 6" strokeOpacity="0.6" />
+          <line
+            x1="40"
+            y1="220"
+            x2="720"
+            y2="220"
+            stroke="var(--color-line)"
+            strokeWidth="1"
+            strokeDasharray="2 6"
+            strokeOpacity="0.6"
+          />
+          <line
+            x1="380"
+            y1="30"
+            x2="380"
+            y2="410"
+            stroke="var(--color-line)"
+            strokeWidth="1"
+            strokeDasharray="2 6"
+            strokeOpacity="0.6"
+          />
 
           {/* Corner Precision Calipers */}
           <path d="M 20 40 L 20 20 L 40 20" stroke="var(--color-line)" strokeWidth="1.5" />
@@ -108,7 +281,7 @@ export function HeroHUD() {
             <line x1="680" y1="340" x2="680" y2="350" />
           </g>
 
-          {/* Large Outer Radar / Orbital Guide Ring */}
+          {/* Large Outer Radar Guide Ring */}
           <circle
             cx="380"
             cy="220"
@@ -120,60 +293,76 @@ export function HeroHUD() {
             strokeOpacity="0.6"
           />
 
-          {/* Connection Lines from Hub to Satellites */}
-          {NODES.map((node) => {
-            const isActive = activeNode.id === node.id;
-            return (
-              <g key={`connection-${node.id}`}>
-                {/* Background dashed line */}
-                <line
-                  x1="380"
-                  y1="220"
-                  x2={node.x}
-                  y2={node.y}
-                  stroke="var(--color-line)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 5"
-                />
-                {/* Active connecting vector line */}
-                {isActive && (
-                  <line
-                    x1="380"
-                    y1="220"
-                    x2={node.x}
-                    y2={node.y}
-                    stroke="var(--color-ink)"
-                    strokeWidth="2.5"
-                    className={styles.svgLine}
-                  />
-                )}
-              </g>
-            );
-          })}
+          {/* 4 Passive Dashed Connection Lines */}
+          {NODES.map((node) => (
+            <line
+              key={`passive-${node.id}`}
+              x1={HUB.x}
+              y1={HUB.y}
+              x2={node.x}
+              y2={node.y}
+              stroke="var(--color-line)"
+              strokeWidth="1.5"
+              strokeDasharray="4 5"
+            />
+          ))}
+
+          {/* Dynamic Active Vector Beam (Smoothly Shifts Endpoint) */}
+          <line
+            ref={beamRef}
+            x1={HUB.x}
+            y1={HUB.y}
+            x2={NODES[0]!.x}
+            y2={NODES[0]!.y}
+            stroke="var(--color-ink)"
+            strokeWidth="2.5"
+            className={styles.dynamicBeam}
+          />
+
+          {/* Animated Transfer Pulse Packet along the Beam */}
+          <circle
+            ref={pulsePacketRef}
+            cx={HUB.x}
+            cy={HUB.y}
+            r="0"
+            fill="var(--color-ink)"
+            opacity="0"
+            className={styles.pulsePacket}
+          />
 
           {/* Center Hub Architecture */}
-          {/* Orbital dashed ring with degree ticks */}
           <circle
-            cx="380"
-            cy="220"
+            cx={HUB.x}
+            cy={HUB.y}
             r="78"
             fill="none"
             stroke="var(--color-line)"
             strokeWidth="1"
             strokeDasharray="3 4"
           />
+          {/* Dispatch Ripple Ring */}
+          <circle
+            ref={hubRingRef}
+            cx={HUB.x}
+            cy={HUB.y}
+            r="54"
+            fill="none"
+            stroke="var(--color-ink)"
+            strokeWidth="1.5"
+            opacity="0"
+          />
           {/* Solid Center Hub Circle */}
           <circle
-            cx="380"
-            cy="220"
+            cx={HUB.x}
+            cy={HUB.y}
             r="54"
             fill="var(--color-paper)"
             stroke="var(--color-ink)"
             strokeWidth="2.25"
           />
           <text
-            x="380"
-            y="214"
+            x={HUB.x}
+            y={HUB.y - 6}
             textAnchor="middle"
             fill="var(--color-ink)"
             fontSize="12"
@@ -184,19 +373,50 @@ export function HeroHUD() {
             SUYASH.DEV
           </text>
           <text
-            x="380"
-            y="232"
+            x={HUB.x}
+            y={HUB.y + 12}
             textAnchor="middle"
             fill="var(--color-muted)"
-            fontSize="8"
+            fontSize="8.5"
             fontWeight="700"
             fontFamily="var(--font-mono)"
             letterSpacing="0.1em"
           >
-            CORE SYSTEM
+            CORE STACK
           </text>
 
-          {/* 4 Interactive Satellite Nodes */}
+          {/* Gliding Target Reticle Group */}
+          <g ref={reticleRef} className={styles.glidingReticle}>
+            {/* Dotted Radar Orbit Ring */}
+            <circle
+              cx="0"
+              cy="0"
+              r="40"
+              fill="none"
+              stroke="var(--color-ink)"
+              strokeWidth="1.5"
+              strokeDasharray="3 4"
+              className={styles.reticleOrbitRing}
+            />
+            {/* Ambient Aura Ring */}
+            <circle
+              cx="0"
+              cy="0"
+              r="46"
+              fill="none"
+              stroke="var(--color-line)"
+              strokeWidth="1"
+              strokeDasharray="1 6"
+              opacity="0.7"
+            />
+            {/* Corner Caliper Ticks */}
+            <path d="M -36 -28 L -36 -36 L -28 -36" stroke="var(--color-ink)" strokeWidth="1.5" />
+            <path d="M 36 -28 L 36 -36 L 28 -36" stroke="var(--color-ink)" strokeWidth="1.5" />
+            <path d="M -36 28 L -36 36 L -28 36" stroke="var(--color-ink)" strokeWidth="1.5" />
+            <path d="M 36 28 L 36 36 L 28 36" stroke="var(--color-ink)" strokeWidth="1.5" />
+          </g>
+
+          {/* 4 Satellite Nodes */}
           {NODES.map((node) => {
             const isActive = activeNode.id === node.id;
             const isTop = node.y < 220;
@@ -204,8 +424,8 @@ export function HeroHUD() {
               <g
                 key={node.id}
                 className={styles.nodeGroup}
-                onMouseEnter={() => setActiveNode(node)}
-                onClick={() => setActiveNode(node)}
+                onMouseEnter={() => transferToNode(node)}
+                onClick={() => transferToNode(node)}
                 role="button"
                 tabIndex={0}
                 aria-label={`Inspect ${node.name}`}
@@ -213,20 +433,7 @@ export function HeroHUD() {
                 {/* Generous Click / Hover Hit Target */}
                 <circle cx={node.x} cy={node.y} r="48" fill="transparent" />
 
-                {/* Active Outer Pulsing Orbit Ring */}
-                {isActive && (
-                  <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r="40"
-                    fill="none"
-                    stroke="var(--color-ink)"
-                    strokeWidth="1.5"
-                    strokeDasharray="3 4"
-                  />
-                )}
-
-                {/* Main Satellite Badge */}
+                {/* Satellite Circle */}
                 <circle
                   cx={node.x}
                   cy={node.y}
@@ -235,9 +442,13 @@ export function HeroHUD() {
                   stroke={isActive ? "var(--color-ink)" : "var(--color-line)"}
                   strokeWidth="2"
                   className={styles.nodeCircle}
+                  style={{
+                    transform: isActive ? "scale(1.05)" : "scale(1)",
+                    transformOrigin: `${node.x}px ${node.y}px`,
+                  }}
                 />
 
-                {/* Node Acronym */}
+                {/* Node Badge */}
                 <text
                   x={node.x}
                   y={node.y + 4.5}
@@ -247,37 +458,24 @@ export function HeroHUD() {
                   fontWeight="800"
                   fontFamily="var(--font-mono)"
                   letterSpacing="0.08em"
+                  className={styles.nodeText}
                 >
-                  {node.id.toUpperCase()}
+                  {node.badge}
                 </text>
 
-                {/* Satellite Category Title Label */}
+                {/* Category Title Label */}
                 <text
                   x={node.x}
-                  y={isTop ? node.y - 42 : node.y + 50}
+                  y={isTop ? node.y - 44 : node.y + 52}
                   textAnchor="middle"
                   fill={isActive ? "var(--color-ink)" : "var(--color-muted)"}
-                  fontSize="9"
+                  fontSize="9.5"
                   fontWeight={isActive ? "800" : "600"}
                   fontFamily="var(--font-mono)"
                   letterSpacing="0.1em"
+                  className={styles.nodeLabelText}
                 >
                   {node.label}
-                </text>
-
-                {/* Subsystem Coordinate Identifier */}
-                <text
-                  x={node.x}
-                  y={isTop ? node.y - 56 : node.y + 64}
-                  textAnchor="middle"
-                  fill="var(--color-muted)"
-                  fontSize="7"
-                  fontWeight="500"
-                  fontFamily="var(--font-mono)"
-                  letterSpacing="0.08em"
-                  opacity={isActive ? "0.9" : "0.5"}
-                >
-                  {node.coord}
                 </text>
               </g>
             );
@@ -285,20 +483,26 @@ export function HeroHUD() {
         </svg>
       </div>
 
-      {/* Specification Ledger — Unified full-width architectural telemetry display */}
-      <div className={styles.archLedger}>
+      {/* Specification Ledger with Clear Readouts */}
+      <div ref={ledgerRef} className={styles.archLedger}>
         <div className={styles.ledgerColumnsGrid}>
           <div className={styles.ledgerGridCol}>
-            <span className={styles.telemetryLabel}>INSPECTED SUBSYSTEM</span>
-            <span className={styles.telemetryValue}>{activeNode.name}</span>
+            <span className={styles.telemetryLabel}>SELECTED FOCUS</span>
+            <span data-telemetry-readout className={styles.telemetryValue}>
+              {activeNode.name}
+            </span>
           </div>
           <div className={styles.ledgerGridCol}>
-            <span className={styles.telemetryLabel}>DOMAIN / METRIC</span>
-            <span className={styles.telemetryHighlight}>{activeNode.metric}</span>
+            <span className={styles.telemetryLabel}>KEY RESULT / METRIC</span>
+            <span data-telemetry-readout className={styles.telemetryHighlight}>
+              {activeNode.metric}
+            </span>
           </div>
           <div className={styles.ledgerGridCol}>
-            <span className={styles.telemetryLabel}>TECH ARCHITECTURE</span>
-            <span className={styles.telemetryValue}>{activeNode.stack}</span>
+            <span className={styles.telemetryLabel}>CORE TECH STACK</span>
+            <span data-telemetry-readout className={styles.telemetryValue}>
+              {activeNode.stack}
+            </span>
           </div>
         </div>
       </div>

@@ -113,8 +113,8 @@
   --section-gap: clamp(5rem, 8vw, 10rem);
 
   /* Layout */
-  --container-max-width:  1200px;
-  --content-padding-x:    clamp(1.25rem, 5vw, 3rem);
+  --container-max-width:  1400px;
+  --content-padding-x:    clamp(1.25rem, 4vw, 3.5rem);
 
   /* Timing & Easing */
   --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);

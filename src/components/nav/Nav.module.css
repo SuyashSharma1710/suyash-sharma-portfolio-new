@@ -1,50 +1,94 @@
 /**
  * Nav.module.css
- * Navigation styles — editorial, restrained
+ * Dynamic Square-ish Floating Dock & Editorial Navigation
+ * Styled with Apple-grade fluid, generous animation curves & lingering deceleration.
  */
 
-/* ── Nav shell ── */
-.nav {
+/* ── Outer Fixed Header Wrapper ── */
+.navWrapper {
+  --apple-fluid-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --apple-morph-duration: 750ms;
+  --apple-slide-duration: 600ms;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  transition:
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.navWrapper.hidden {
+  transform: translateY(-130%);
+}
+
+.navWrapper.docked {
+  padding-top: var(--space-3);
+}
+
+/* ── Dynamic Nav Container (Square-ish Dock) ── */
+.nav {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   height: var(--nav-height);
   display: flex;
   align-items: center;
+  pointer-events: auto;
   transition:
-    background-color var(--duration-normal) var(--ease-out),
-    border-color var(--duration-normal) var(--ease-out),
-    backdrop-filter var(--duration-normal) var(--ease-out);
+    max-width 750ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 550ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 550ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
 }
 
-.nav.scrolled {
+/* Scrolled / Floating Square-ish Dock State */
+.nav.docked {
+  max-width: min(calc(100% - 2.5rem), 1100px);
+  height: 3.5rem;
   background-color: rgba(var(--nav-bg-rgb), 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-line);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm); /* Strict square-ish architectural geometry */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  padding-inline: var(--space-4);
 }
 
-/* CSS vars for rgba() usage. Theme attributes live on the document root, so
-   scope their overrides through this module's local nav class. */
-:global([data-theme="light"]) .nav { --nav-bg-rgb: 245, 240, 232; }
-:global([data-theme="dark"]) .nav  { --nav-bg-rgb: 13, 13, 13; }
+/* CSS variables for rgba() scoping */
+:global([data-theme="light"]) .navWrapper { --nav-bg-rgb: 245, 240, 232; }
+:global([data-theme="dark"]) .navWrapper  { --nav-bg-rgb: 13, 13, 13; }
 @media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .nav { --nav-bg-rgb: 13, 13, 13; }
+  :global(:root:not([data-theme="light"])) .navWrapper { --nav-bg-rgb: 13, 13, 13; }
 }
 @media (prefers-color-scheme: light) {
-  :global(:root:not([data-theme="dark"])) .nav { --nav-bg-rgb: 245, 240, 232; }
+  :global(:root:not([data-theme="dark"])) .navWrapper { --nav-bg-rgb: 245, 240, 232; }
 }
 
 .navInner {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-/* ── Wordmark ── */
+.nav.docked .navInner {
+  padding-inline: 0;
+}
+
+/* ── Wordmark & Brand Lockup ── */
 .wordmark {
   font-family: var(--font-body);
   font-size: var(--text-sm);
@@ -55,12 +99,13 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
   flex-shrink: 0;
+  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .wordmark:hover {
-  color: var(--color-ink);
+  opacity: 0.75;
 }
 
 .wordmarkSup {
@@ -69,7 +114,7 @@
   opacity: 0.6;
 }
 
-/* ── Desktop nav links ── */
+/* ── Desktop Navigation Links with Sliding Square Indicator ── */
 .desktopNav {
   display: flex;
   align-items: center;
@@ -77,69 +122,101 @@
 }
 
 .navLinks {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-2);
   list-style: none;
+  padding: var(--space-1);
+}
+
+/* Sliding active/hover indicator — Apple spring tracking */
+.slidingIndicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.875rem;
+  background: var(--color-hover-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  pointer-events: none;
+  transition:
+    left 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 280ms ease-out;
+  z-index: 1;
+}
+
+.navItem {
+  position: relative;
+  z-index: 2;
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-muted);
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--radius-sm);
   position: relative;
-}
-
-.navLink::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-ink);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration-normal) var(--ease-out-expo);
 }
 
 .navLink:hover {
   color: var(--color-ink);
 }
 
-.navLink:hover::after {
-  transform: scaleX(1);
+.navLink.active {
+  color: var(--color-ink);
 }
 
-/* ── Nav actions (theme toggle + mobile trigger) ── */
+/* Active indicator dot for extra clarity */
+.activeDot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: var(--color-ink);
+  margin-left: var(--space-1);
+  opacity: 0.8;
+}
+
+/* ── Nav Actions (Theme Toggle + Mobile Trigger) ── */
 .navActions {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
-/* ── Theme toggle ── */
+/* ── Theme Toggle ── */
 .themeToggle {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   color: var(--color-muted);
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   background: none;
-  transition: color var(--duration-fast), background-color var(--duration-fast);
+  transition:
+    color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .themeToggle:hover {
   color: var(--color-ink);
   background: var(--color-hover-bg);
+  border-color: var(--color-line);
 }
 
 .themeToggle:focus-visible {
@@ -147,7 +224,7 @@
   outline-offset: var(--focus-offset);
 }
 
-/* ── Mobile menu trigger ── */
+/* ── Mobile Menu Trigger ── */
 .menuTrigger {
   display: none;
   flex-direction: column;
@@ -157,9 +234,15 @@
   width: 2rem;
   height: 2rem;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   background: none;
   padding: 0;
+  border-radius: var(--radius-sm);
+  transition: background-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menuTrigger:hover {
+  background: var(--color-hover-bg);
 }
 
 .menuTrigger:focus-visible {
@@ -171,9 +254,10 @@
   display: block;
   height: 1.5px;
   background: var(--color-ink);
-  transition: width var(--duration-normal) var(--ease-out-expo),
-              transform var(--duration-normal) var(--ease-out-expo),
-              opacity var(--duration-fast);
+  transition:
+    width 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 300ms ease-out;
 }
 
 .menuLine:nth-child(1) { width: 20px; }
@@ -188,7 +272,7 @@
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* ── Mobile overlay menu ── */
+/* ── Mobile Overlay Menu ── */
 .mobileMenu {
   position: fixed;
   inset: 0;
@@ -198,7 +282,7 @@
   flex-direction: column;
   padding: var(--nav-height) var(--content-padding-x) var(--space-12);
   transform: translateX(100%);
-  transition: transform var(--duration-slow) var(--ease-out-expo);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   visibility: hidden;
 }
 
@@ -208,8 +292,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mobileMenu {
-    transition: none;
+  .mobileMenu,
+  .navWrapper,
+  .nav,
+  .slidingIndicator {
+    transition: none !important;
   }
 }
 
@@ -231,7 +318,7 @@
   line-height: 1.3;
   padding-block: var(--space-2);
   border-bottom: 1px solid var(--color-line);
-  transition: color var(--duration-fast);
+  transition: color 250ms ease-out;
 }
 
 .mobileNavLink:hover {
@@ -259,6 +346,10 @@
   }
   .menuTrigger {
     display: flex;
+  }
+  .nav.docked {
+    max-width: calc(100% - 1.5rem);
+    padding-inline: var(--space-3);
   }
 }
 

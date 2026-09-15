@@ -1,0 +1,94 @@
+import React from "react";
+import { LogoProps } from "./LogoConvergence";
+
+/**
+ * Concept 03: The Monolith / Architectural S-Glyph
+ * Modernist Solid Faceted Mark.
+ * Symbolizes structural stability, full-stack architectural depth, and Swiss typographic heritage.
+ */
+export function LogoMonolith({
+  size = 28,
+  className = "",
+  showTelemetry = true,
+  ...props
+}: LogoProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      role="img"
+      aria-label="Suyash Sharma Monogram — Architectural Monolith"
+      {...props}
+    >
+      {/* Upper Faceted Cantilever */}
+      <path
+        d="M 6.5 6.5 H 25.5 V 12.5 H 14.5 L 10.5 16.5 H 6.5 Z"
+        fill="currentColor"
+      />
+
+      {/* Lower Faceted Cantilever (Point-Symmetric) */}
+      <path
+        d="M 25.5 25.5 H 6.5 V 19.5 H 17.5 L 21.5 15.5 H 25.5 Z"
+        fill="currentColor"
+      />
+
+      {showTelemetry && (
+        <>
+          {/* Central Precision Optical Diagonal Guide Line */}
+          <line
+            x1="10.5"
+            y1="16.5"
+            x2="21.5"
+            y2="15.5"
+            stroke="currentColor"
+            strokeWidth="0.75"
+            strokeDasharray="1.5 1.5"
+            opacity="0.35"
+          />
+
+          {/* Micro CAD Dimension Crosshair / Reference Marks */}
+          <line
+            x1="16"
+            y1="2.5"
+            x2="16"
+            y2="4.5"
+            stroke="currentColor"
+            strokeWidth="1"
+            opacity="0.5"
+          />
+          <line
+            x1="16"
+            y1="27.5"
+            x2="16"
+            y2="29.5"
+            stroke="currentColor"
+            strokeWidth="1"
+            opacity="0.5"
+          />
+          <line
+            x1="2.5"
+            y1="6.5"
+            x2="4.5"
+            y2="6.5"
+            stroke="currentColor"
+            strokeWidth="1"
+            opacity="0.5"
+          />
+          <line
+            x1="27.5"
+            y1="25.5"
+            x2="29.5"
+            y2="25.5"
+            stroke="currentColor"
+            strokeWidth="1"
+            opacity="0.5"
+          />
+        </>
+      )}
+    </svg>
+  );
+}

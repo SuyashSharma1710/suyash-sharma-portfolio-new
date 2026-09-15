@@ -26,7 +26,7 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   min-height: 100dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition:
     background-color var(--duration-normal) var(--ease-out),
     color var(--duration-normal) var(--ease-out);

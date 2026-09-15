@@ -333,8 +333,33 @@
   display: block;
 }
 
-.svgLine {
-  transition: stroke 0.25s ease, stroke-width 0.25s ease;
+.dynamicBeam {
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 1px rgba(var(--color-accent-rgb), 0.3));
+}
+
+.glidingReticle {
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+
+.reticleOrbitRing {
+  transform-origin: 0 0;
+  animation: reticleSpin 24s linear infinite;
+}
+
+@keyframes reticleSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pulsePacket {
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px var(--color-ink));
 }
 
 .nodeGroup {
@@ -343,8 +368,14 @@
 }
 
 .nodeCircle {
-  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
-  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              fill 0.35s ease,
+              stroke 0.35s ease;
+}
+
+.nodeText,
+.nodeLabelText {
+  transition: fill 0.3s ease;
 }
 
 .nodeGroup:hover .nodeCircle,

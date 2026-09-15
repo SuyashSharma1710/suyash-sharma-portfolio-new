@@ -4,13 +4,15 @@
  */
 import Link from "next/link";
 import { siteConfig } from "@/content/site";
+import { LogoPrimary } from "../logo/LogoPrimary";
 import { FooterTime } from "./FooterTime";
 import styles from "./Footer.module.css";
 
 const socials = [
-  { label: "GitHub",   href: siteConfig.social.github,   external: true },
-  { label: "LinkedIn", href: siteConfig.social.linkedin,  external: true },
-  { label: "Email",    href: `mailto:${siteConfig.social.email}`, external: false },
+  { label: "GitHub",    href: siteConfig.social.github,    external: true },
+  { label: "LinkedIn",  href: siteConfig.social.linkedin,  external: true },
+  ...(siteConfig.social.instagram ? [{ label: "Instagram", href: siteConfig.social.instagram, external: true }] : []),
+  { label: "Email",     href: `mailto:${siteConfig.social.email}`, external: false },
 ] as const;
 
 export function Footer() {
@@ -21,7 +23,8 @@ export function Footer() {
         {/* Left */}
         <div className={styles.left}>
           <Link href="/" className={styles.wordmark} aria-label="Suyash Sharma">
-            SUYASH<sup className={styles.wordmarkSup}>®</sup>
+            <LogoPrimary size={20} aria-hidden="true" />
+            <span>SUYASH<sup className={styles.wordmarkSup}>®</sup></span>
           </Link>
           <span className={styles.descriptor}>
             Full-Stack Engineer · AI · Product

@@ -15,15 +15,16 @@ export const siteConfig: SiteConfig = {
     label: "Available for selected projects",
   },
   navigation: [
-    { label: "Work",    href: "/#work" },
-    { label: "Lab",     href: "/#lab" },
-    { label: "About",   href: "/#about" },
-    { label: "Contact", href: "/#contact-cta" },
+    { label: "Work",    href: "/work" },
+    { label: "Lab",     href: "/lab" },
+    { label: "About",   href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   social: {
-    github:   "https://github.com/SuyashSharma1710",
-    linkedin: "https://www.linkedin.com/in/suyash-sharma-756375196",
-    email:    "suyashsharma171001@gmail.com",
+    github:    "https://github.com/SuyashSharma1710",
+    linkedin:  "https://www.linkedin.com/in/suyash-sharma-756375196",
+    instagram: "https://www.instagram.com/yashbhardwaj56/",
+    email:     "suyashsharma171001@gmail.com",
   },
   location: "Delhi, India",
 };

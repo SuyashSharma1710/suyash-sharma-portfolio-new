@@ -1,64 +1,24 @@
 /**
  * SelectedWork.module.css
- * Horizontal pinned scroll on desktop (inspired by madeinuxstudio.com)
- * Native touch-friendly scroll-snap on mobile/tablet & reduced-motion
+ * Vertical Layered Scroll Stack — Option 2
+ * Governed by RULES.md Rule 10.1 (Zero-Box Policy) & Rule 10.2 (No Numbered Prefixes)
  */
 
 .section {
   position: relative;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  width: 100%;
+  padding-bottom: var(--space-16);
   border-top: 1px solid var(--color-line);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Desktop Pinned Container (>= 1024px)
-───────────────────────────────────────────────────────────── */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  .pinContainer {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    padding-top: calc(var(--nav-height) + var(--space-3));
-    padding-bottom: var(--space-4);
-    box-sizing: border-box;
-  }
-
-  .trackWrapper {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-    min-height: 0; /* allows flex item to shrink properly */
-  }
-
-  .projectTrack {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 0;
-    padding: 0 var(--content-padding-x);
-    gap: clamp(1.5rem, 2.5vw, 2.5rem);
-    will-change: transform;
-    align-items: stretch;
-  }
-
-  .cardItem {
-    flex: 0 0 clamp(480px, 45vw, 640px);
-    max-width: 660px;
-    display: flex;
-  }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Header & Top Bar
-───────────────────────────────────────────────────────────── */
+/* ── Section Top Header ── */
 .topHeader {
   width: 100%;
-  margin-bottom: var(--space-6);
+  padding: 1.25rem 0 1rem 0;
+  border-bottom: 1px solid var(--color-line);
+  margin-bottom: var(--space-8);
 }
 
 .headerInner {
@@ -71,59 +31,40 @@
 
 .headerLeft {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-4);
 }
 
 .label {
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-muted);
-  font-family: var(--font-body);
+  font-weight: 600;
+  margin: 0;
 }
 
 .counter {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-ink);
   letter-spacing: 0.08em;
+  color: var(--color-ink);
+  font-weight: 700;
 }
 
 .headerRight {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
-}
-
-.scrollHint {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.arrowIcon {
-  display: inline-block;
-  animation: pulseX 2s infinite ease-in-out;
-}
-
-@keyframes pulseX {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(4px); }
+  gap: var(--space-4);
 }
 
 .viewAll {
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-ink);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -145,10 +86,6 @@
   transition: transform var(--duration-normal) var(--ease-out-expo);
 }
 
-.viewAll:hover {
-  color: var(--color-ink);
-}
-
 .viewAll:hover::after {
   transform: scaleX(1);
 }
@@ -162,101 +99,123 @@
   transform: translate(2px, -2px);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Open Architectural Exhibition Slide (Zero-Box Policy)
-   No trapped cards, no grey container wrappers
-───────────────────────────────────────────────────────────── */
-.card {
-  height: 100%;
+/* ─────────────────────────────────────────────
+   VERTICAL LAYERED SCROLL STACK
+───────────────────────────────────────────── */
+
+.stackContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: transparent;
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
-  border-right: 1px solid var(--color-line);
-  border-left: 1px solid var(--color-line);
-  border-radius: 0;
-  padding: clamp(1.25rem, 2vw, 2rem);
+  gap: var(--space-8);
+  width: 100%;
+  position: relative;
+}
+
+.stackCard {
+  position: sticky;
+  width: 100%;
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-sm);
+  padding: clamp(1.75rem, 3.5vw, 3.25rem);
   box-sizing: border-box;
-  transition: background-color var(--duration-fast);
+  will-change: transform, opacity, filter;
+  transition: box-shadow var(--duration-normal) ease, border-color var(--duration-normal) ease;
 }
 
-.card:hover {
-  background-color: rgba(0, 0, 0, 0.015);
+[data-theme="dark"] .stackCard {
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
 }
 
-[data-theme="dark"] .card:hover {
-  background-color: rgba(255, 255, 255, 0.02);
-}
-
+/* Top Meta Bar within Card */
 .cardHeader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-4);
-  padding-bottom: var(--space-2);
+  justify-content: space-between;
+  padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--color-line);
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.headerBadges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.categoryBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.yearBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  border-left: 1px solid var(--color-line);
+  padding-left: var(--space-3);
+}
+
+.roleBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  border-left: 1px solid var(--color-line);
+  padding-left: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .projectNumber {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
+  font-weight: 700;
   color: var(--color-muted);
-  font-weight: 600;
   letter-spacing: 0.08em;
 }
 
-.badges {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.projectCategory {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.projectYear {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-  border-left: 1px solid var(--color-line);
-  padding-left: var(--space-2);
-}
-
-.projectRole {
-  font-size: var(--text-xs);
-  font-family: var(--font-mono);
-  color: var(--color-muted);
-  background: transparent;
-  border: 1px solid var(--color-line);
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-sm);
-}
-
+/* 2-Column Broadside Content */
 .cardBody {
-  margin-bottom: var(--space-4);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+/* Left: Narrative & Metadata */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .projectTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2vw, 2.25rem);
+  font-size: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
   font-weight: 400;
-  line-height: 1.15;
-  margin: 0 0 var(--space-2) 0;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin: 0;
 }
 
 .titleLink {
+  color: inherit;
   text-decoration: none;
-  color: var(--color-ink);
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-2);
   transition: color var(--duration-fast);
 }
@@ -266,192 +225,224 @@
 }
 
 .titleArrow {
-  font-size: var(--text-base);
+  font-size: 0.7em;
+  color: var(--color-muted);
   transition: transform var(--duration-fast) var(--ease-out-expo);
 }
 
 .titleLink:hover .titleArrow {
   transform: translate(3px, -3px);
+  color: var(--color-ink);
 }
 
 .projectSummary {
-  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.68;
   color: var(--color-muted);
-  line-height: 1.6;
+  max-width: 48ch;
   margin: 0;
-  max-width: 58ch;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Technical Schematics (Open Canvas Graphic — No trapped box)
-───────────────────────────────────────────────────────────── */
-.schematicBox {
-  width: 100%;
-  max-height: 160px;
-  margin-bottom: var(--space-4);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: transparent;
-  border: 1px solid var(--color-line);
-}
-
-.schematicSvg {
-  width: 100%;
-  max-height: 160px;
-  height: auto;
-  display: block;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Card Footer & Actions
-───────────────────────────────────────────────────────────── */
-.cardFooter {
+/* Tech Spec Row */
+.techWrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  flex-direction: column;
+  gap: var(--space-2);
   padding-top: var(--space-3);
   border-top: 1px solid var(--color-line);
 }
 
-.techTags {
+.specLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.techList {
   display: flex;
-  gap: var(--space-2);
   flex-wrap: wrap;
+  gap: var(--space-2);
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.tag {
-  font-size: var(--text-xs);
+.techTag {
   font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: var(--color-muted);
-  background: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
 }
 
+/* Action Buttons */
 .actions {
   display: flex;
-  gap: var(--space-2);
   align-items: center;
-}
-
-.actionBtn {
-  font-size: var(--text-xs);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
-  text-decoration: none;
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
-  transition: all var(--duration-fast);
-}
-
-.actionBtn:hover {
-  color: var(--color-ink);
-  background: var(--color-hover-bg);
-  border-color: var(--color-ink);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-top: var(--space-2);
 }
 
 .actionBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-  text-decoration: none;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-sm);
   font-weight: 600;
-  transition: opacity var(--duration-fast);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
 }
 
 .actionBtnPrimary:hover {
-  opacity: 0.85;
+  background-color: transparent;
+  color: var(--color-ink);
+  transform: translateY(-1px);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Progress Bar Track
-───────────────────────────────────────────────────────────── */
-.bottomBar {
-  width: 100%;
-  padding-block: var(--space-2);
-  flex-shrink: 0;
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast), transform var(--duration-fast);
 }
 
-.progressTrack {
-  height: 2px;
+.actionBtn:hover {
+  border-color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+/* Right: Real Photographic Preview */
+.mediaCol {
   width: 100%;
-  background: var(--color-line);
+}
+
+.mediaLink {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.mediaFrame {
   position: relative;
-  border-radius: 1px;
-  overflow: hidden;
-}
-
-.progressBar {
-  height: 100%;
   width: 100%;
-  background: var(--color-ink);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 120ms linear;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: var(--color-surface-light);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Mobile & Tablet (< 1024px) / Reduced-Motion Fallback
-───────────────────────────────────────────────────────────── */
-@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
-  .section {
-    padding-block: var(--section-gap);
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: contrast(1.02) brightness(0.98);
+  transition: transform 0.6s var(--ease-out-expo), filter 0.6s ease;
+}
+
+.mediaFrame:hover .previewImage {
+  transform: scale(1.03);
+  filter: contrast(1.05) brightness(1.01);
+}
+
+.mediaBadge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.35rem 0.65rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f5f0e8;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #22c55e;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE DESIGN
+───────────────────────────────────────────── */
+
+@media (max-width: 959px) {
+  .stackContainer {
+    gap: var(--space-12);
   }
 
-  .pinContainer {
-    height: auto;
-    overflow: visible;
+  .stackCard {
+    position: relative !important;
+    top: auto !important;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    scale: 1 !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
 
-  .scrollHint {
+  .cardBody {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .projectNumber {
     display: none;
   }
 
-  .trackWrapper {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: var(--space-6);
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-line) transparent;
+  .projectTitle {
+    font-size: 2rem;
   }
 
-  .projectTrack {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 0;
-    padding: 0 var(--content-padding-x);
-    gap: var(--space-6);
-    width: max-content;
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .cardItem {
-    scroll-snap-align: start;
-    flex: 0 0 min(85vw, 440px);
-    width: min(85vw, 440px);
-  }
-
-  .schematicBox {
-    max-height: 180px;
-  }
-
-  .bottomBar {
-    display: none;
+  .actionBtnPrimary,
+  .actionBtn {
+    justify-content: center;
   }
 }

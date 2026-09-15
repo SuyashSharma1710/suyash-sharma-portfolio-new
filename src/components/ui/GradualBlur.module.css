@@ -1,0 +1,73 @@
+/**
+ * GradualBlur.module.css
+ * Multi-layer progressive optical blur gradient
+ */
+
+.blurWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  overflow: hidden;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Layer 1: Base tint + micro-blur across entire height */
+.layer1 {
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--nav-bg-rgb), 0.92) 0%,
+    rgba(var(--nav-bg-rgb), 0.8) 55%,
+    rgba(var(--nav-bg-rgb), 0.35) 80%,
+    rgba(var(--nav-bg-rgb), 0) 100%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
+}
+
+/* Layer 2: Medium depth blur in the upper two-thirds */
+.layer2 {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 90%);
+}
+
+/* Layer 3: Deep optical blur focused at the top */
+.layer3 {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 75%);
+}
+
+/* Layer 4: Maximum focal blur at the top navigation zone */
+.layer4 {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 55%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 55%);
+}
+
+/* Subtle hairline division aligned with nav-height */
+.hairline {
+  position: absolute;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-line);
+  opacity: 0.8;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
