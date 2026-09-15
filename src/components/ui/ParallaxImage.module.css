@@ -1,0 +1,27 @@
+/**
+ * ParallaxImage.module.css
+ * Precision CSS module for GSAP scroll-driven parallax imagery.
+ * Keeps image inside an overflow: hidden bounding box while smoothly translating.
+ */
+
+.parallaxContainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

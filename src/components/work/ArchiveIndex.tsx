@@ -25,9 +25,25 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     const allRows = containerRef.current.querySelectorAll<HTMLElement>("[data-archive-row]");
     const siblingRows = Array.from(allRows).filter((r) => r !== rowEl);
 
-    // Dim sibling rows
+    // Detect dark theme
+    const isDark =
+      typeof document !== "undefined" &&
+      document.documentElement.getAttribute("data-theme") !== "light" &&
+      (document.documentElement.getAttribute("data-theme") === "dark" ||
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    // In light mode: old black capsule (#0d0c0a) with white text
+    // In dark mode: opposite cream capsule (#F5F0E8) with dark text
+    const activeBg = isDark ? "#F5F0E8" : "#0d0c0a";
+    const activeText = isDark ? "#0D0D0D" : "#ffffff";
+    const activeMeta = isDark ? "#5C5650" : "#9d968e";
+    const activeBadgeBg = isDark ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.15)";
+    const activeBadgeBorder = isDark ? "rgba(0, 0, 0, 0.18)" : "rgba(255, 255, 255, 0.25)";
+    const activeShadow = isDark ? "0 12px 32px rgba(0, 0, 0, 0.65)" : "0 12px 32px rgba(0, 0, 0, 0.2)";
+
+    // Dim sibling rows smoothly
     gsap.to(siblingRows, {
-      opacity: 0.32,
+      opacity: 0.28,
       duration: 0.35,
       ease: "power2.out",
       overwrite: "auto",
@@ -35,13 +51,14 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
 
     // Animate active row container
     gsap.to(rowEl, {
-      backgroundColor: "#0d0c0a",
+      backgroundColor: activeBg,
+      boxShadow: activeShadow,
       paddingLeft: "clamp(1.25rem, 2.4vw, 2.5rem)",
       paddingRight: "clamp(1.25rem, 2.4vw, 2.5rem)",
       borderRadius: "6px",
       opacity: 1,
       zIndex: 2,
-      duration: 0.4,
+      duration: 0.38,
       ease: "power3.out",
       overwrite: "auto",
     });
@@ -50,7 +67,6 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     const previewWrapper = rowEl.querySelector<HTMLElement>("[data-preview]");
     const previewImg = rowEl.querySelector<HTMLElement>("[data-preview-img]");
     if (previewWrapper) {
-      // Responsive expansion width
       const targetWidth = window.innerWidth <= 900 ? 110 : 170;
       gsap.to(previewWrapper, {
         width: targetWidth,
@@ -74,11 +90,11 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
       );
     }
 
-    // Shift and colorize project title
+    // Shift and illuminate project title
     const title = rowEl.querySelector<HTMLElement>("[data-title]");
     if (title) {
       gsap.to(title, {
-        color: "#ffffff",
+        color: activeText,
         x: 6,
         duration: 0.35,
         ease: "power3.out",
@@ -89,6 +105,16 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     // Slide in status badge pill
     const badge = rowEl.querySelector<HTMLElement>("[data-badge]");
     if (badge) {
+      const badgePill = badge.querySelector<HTMLElement>("[data-badge-pill]");
+      if (badgePill) {
+        gsap.to(badgePill, {
+          backgroundColor: activeBadgeBg,
+          color: activeText,
+          borderColor: activeBadgeBorder,
+          duration: 0.3,
+          overwrite: "auto",
+        });
+      }
       gsap.to(badge, {
         opacity: 1,
         x: 0,
@@ -102,7 +128,7 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     const arrow = rowEl.querySelector<HTMLElement>("[data-arrow]");
     if (arrow) {
       gsap.to(arrow, {
-        color: "#ffffff",
+        color: activeText,
         x: 4,
         y: -4,
         duration: 0.3,
@@ -111,11 +137,11 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
       });
     }
 
-    // Soften meta column text color
+    // Illuminate meta column text color
     const meta = rowEl.querySelector<HTMLElement>("[data-meta]");
     if (meta) {
       gsap.to(meta, {
-        color: "#9d968e",
+        color: activeMeta,
         duration: 0.3,
         overwrite: "auto",
       });
@@ -137,8 +163,9 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     // Reset row container
     gsap.to(rowEl, {
       backgroundColor: "transparent",
-      paddingLeft: "clamp(0.75rem, 1.5vw, 1.5rem)",
-      paddingRight: "clamp(0.75rem, 1.5vw, 1.5rem)",
+      boxShadow: "none",
+      paddingLeft: "clamp(0.5rem, 1.2vw, 1.25rem)",
+      paddingRight: "clamp(0.5rem, 1.2vw, 1.25rem)",
       borderRadius: "0px",
       zIndex: 1,
       duration: 0.35,
@@ -288,7 +315,7 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
 
                   {/* Status Badge (Slides in on Hover via GSAP) */}
                   <div className={styles.badgeWrapper} data-badge>
-                    <span className={styles.badgePill}>
+                    <span className={styles.badgePill} data-badge-pill>
                       <span className={styles.badgeArrow}>↗</span>
                       <span>{badgeLabel}</span>
                     </span>

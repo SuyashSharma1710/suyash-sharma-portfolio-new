@@ -1,0 +1,42 @@
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  text-align: center;
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.flex {
+  justify-content: space-between;
+}
+
+.char {
+  display: inline-block;
+  will-change: font-variation-settings, opacity;
+  transition: font-variation-settings 0.08s ease-out, opacity 0.08s ease-out;
+}
+
+.stroke {
+  color: transparent !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char {
+    transition: none !important;
+  }
+}

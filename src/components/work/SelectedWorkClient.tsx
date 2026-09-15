@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * SelectedWorkClient — Vertical Layered Scroll Stack
+ * SelectedWorkClient — Open Editorial Stacking Broadside Sheets
  * Strictly adheres to RULES.md Rule 10.1 (Zero-Box Policy) & Rule 10.2 (No Numbered Prefixes)
- * Layered broadside panels that pin, scale, and stack sequentially as the user scrolls.
+ * Open canvas broadside sheets that pin, stack, and scale smoothly on scroll without card boxes.
  */
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -25,8 +25,7 @@ interface SelectedWorkClientProps {
 
 export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const panelRefs = useRef<(HTMLElement | null)[]>([]);
 
   useGSAP(
     () => {
@@ -41,32 +40,22 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
           const { isDesktop } = (context.conditions || {}) as { isDesktop?: boolean };
 
           if (isDesktop) {
-            const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
-            if (cards.length === 0) return;
+            const panels = panelRefs.current.filter(Boolean) as HTMLElement[];
+            if (panels.length === 0) return;
 
-            cards.forEach((card, index) => {
-              // Update active index counter as each card comes into view
-              ScrollTrigger.create({
-                trigger: card,
-                start: "top center",
-                end: "bottom center",
-                onEnter: () => setActiveIndex(index + 1),
-                onEnterBack: () => setActiveIndex(index + 1),
-              });
-
-              // Apply progressive depth scaling and dimming to previous cards
-              if (index < cards.length - 1) {
-                const nextCard = cards[index + 1]!;
-                gsap.to(card, {
-                  scale: 0.94 - index * 0.02,
-                  opacity: 0.5,
-                  filter: "blur(1.5px)",
+            panels.forEach((panel, index) => {
+              if (index < panels.length - 1) {
+                const nextPanel = panels[index + 1]!;
+                gsap.to(panel, {
+                  scale: 0.96 - index * 0.015,
+                  opacity: 0.35,
+                  filter: "blur(1px)",
                   transformOrigin: "top center",
                   ease: "none",
                   scrollTrigger: {
-                    trigger: nextCard,
+                    trigger: nextPanel,
                     start: "top 75%",
-                    end: "top 25%",
+                    end: "top 20%",
                     scrub: true,
                   },
                 });
@@ -91,21 +80,18 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
         <div className={styles.topHeader}>
           <div className={styles.headerInner}>
             <div className={styles.headerLeft}>
-              <h2 className={styles.label}>Selected Work & Systems</h2>
-              <span className={styles.counter} aria-live="polite">
-                [ {String(activeIndex).padStart(2, "0")} / {String(projects.length).padStart(2, "0")} ]
-              </span>
+              <h2 className={styles.label}>Selected Work &amp; Systems</h2>
             </div>
             <div className={styles.headerRight}>
               <Link href="/work" className={styles.viewAll} id="view-all-work">
-                Complete Archive
+                <span>Complete Archive</span>
                 <span className={styles.viewAllArrow} aria-hidden="true">↗</span>
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Vertical Layered Scroll Stack */}
+        {/* Stacking Open Broadside Panels */}
         <div className={styles.stackContainer}>
           {projects.map((project, index) => {
             const dest = project.liveUrl ?? project.githubUrl ?? `/work/${project.slug}`;
@@ -117,33 +103,32 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
               <article
                 key={project.slug}
                 ref={(el) => {
-                  cardRefs.current[index] = el;
+                  panelRefs.current[index] = el;
                 }}
-                className={styles.stackCard}
+                className={styles.stackPanel}
                 style={{
-                  top: `calc(var(--nav-height) + 1.25rem + ${stackOffset}px)`,
+                  top: `calc(var(--nav-height) + 1rem + ${stackOffset}px)`,
                   zIndex: index + 1,
                 }}
                 aria-label={`Featured Project: ${project.title}`}
               >
-                {/* Top Meta Bar */}
-                <div className={styles.cardHeader}>
-                  <div className={styles.headerBadges}>
-                    <span className={styles.categoryBadge}>{project.category}</span>
-                    <span className={styles.yearBadge}>{project.year}</span>
-                    {project.role && (
-                      <span className={styles.roleBadge}>{project.role}</span>
-                    )}
-                  </div>
-                  <span className={styles.projectNumber} aria-hidden="true">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                {/* 2-Column Broadside Content */}
-                <div className={styles.cardBody}>
+                {/* Open Broadside Content Grid */}
+                <div className={styles.rowGrid}>
                   {/* Left Column: Narrative & Metadata */}
                   <div className={styles.infoCol}>
+                    {/* Open Meta Bar */}
+                    <div className={styles.metaBar}>
+                      <span className={styles.metaCategory}>{project.category}</span>
+                      <span className={styles.metaDivider}>/</span>
+                      <span className={styles.metaYear}>{project.year}</span>
+                      {project.role && (
+                        <>
+                          <span className={styles.metaDivider}>/</span>
+                          <span className={styles.metaRole}>{project.role}</span>
+                        </>
+                      )}
+                    </div>
+
                     <div className={styles.titleGroup}>
                       <h3 className={styles.projectTitle}>
                         <Link
@@ -160,16 +145,12 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
                       <p className={styles.projectSummary}>{project.summary}</p>
                     </div>
 
-                    {/* Technology Spec Row */}
+                    {/* Engineering Specification Ledger */}
                     <div className={styles.techWrapper}>
                       <span className={styles.specLabel}>ENGINEERING STACK</span>
-                      <ul className={styles.techList} aria-label="Technologies used">
-                        {project.technologies.slice(0, 6).map((tech) => (
-                          <li key={tech} className={styles.techTag}>
-                            [{tech}]
-                          </li>
-                        ))}
-                      </ul>
+                      <div className={styles.techSpecs}>
+                        {project.technologies.slice(0, 6).join("  ·  ")}
+                      </div>
                     </div>
 
                     {/* Action Links */}
@@ -179,10 +160,11 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={styles.actionBtnPrimary}
+                          className={styles.actionLinkPrimary}
                           aria-label={`Launch live app for ${project.title}`}
                         >
-                          Live Application ↗
+                          <span>Live Application</span>
+                          <span className={styles.actionArrow} aria-hidden="true">↗</span>
                         </a>
                       )}
                       {project.githubUrl && (
@@ -190,10 +172,11 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={styles.actionBtn}
+                          className={styles.actionLink}
                           aria-label={`View source code for ${project.title}`}
                         >
-                          Source Code ↗
+                          <span>Source Code</span>
+                          <span className={styles.actionArrow} aria-hidden="true">↗</span>
                         </a>
                       )}
                     </div>
@@ -210,14 +193,16 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
                       aria-hidden="true"
                     >
                       <div className={styles.mediaFrame}>
-                        <Image
+                        <ParallaxImage
                           src={coverImg}
                           alt={`${project.title} interface architecture`}
                           width={760}
                           height={475}
-                          className={styles.previewImage}
+                          imageClassName={styles.previewImage}
                           sizes="(max-width: 959px) 100vw, 680px"
                           priority={index === 0}
+                          speed={0.12}
+                          scale={1.12}
                         />
                         <div className={styles.mediaBadge}>
                           <span className={styles.badgeDot} aria-hidden="true" />

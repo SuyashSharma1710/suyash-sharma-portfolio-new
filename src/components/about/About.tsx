@@ -2,7 +2,7 @@
  * About — Section 08
  * Editorial portrait & personal narrative — full story on /about page.
  */
-import Image from "next/image";
+import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import styles from "./About.module.css";
 
 export function About() {
@@ -20,13 +20,15 @@ export function About() {
             </div>
 
             <div className={styles.imageFrame}>
-              <Image
+              <ParallaxImage
                 src="/images/suyash-editorial.jpg"
                 alt="Suyash Sharma — Full Stack Developer"
                 width={420}
                 height={560}
-                className={styles.portrait}
+                imageClassName={styles.portrait}
                 sizes="(max-width: 768px) 90vw, 420px"
+                speed={0.16}
+                scale={1.14}
               />
               <div className={styles.imageCaption}>
                 <span className={styles.captionDot} aria-hidden="true" />

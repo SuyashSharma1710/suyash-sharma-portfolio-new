@@ -1,0 +1,12 @@
+.container {
+  display: inline-block;
+  cursor: inherit;
+}
+
+.text {
+  display: inline-block;
+  font-family: inherit;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  transition: color var(--duration-fast);
+}

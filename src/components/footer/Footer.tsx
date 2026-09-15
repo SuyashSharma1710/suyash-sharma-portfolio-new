@@ -1,11 +1,15 @@
 /**
  * Footer — Section 10
  * SUYASH® / Digital Engineer / Delhi, India / GitHub / LinkedIn / Email
+ * Enhanced with DecryptedText telemetry and Magnetic social links.
  */
+
 import Link from "next/link";
 import { siteConfig } from "@/content/site";
 import { LogoPrimary } from "../logo/LogoPrimary";
 import { FooterTime } from "./FooterTime";
+import { DecryptedText } from "../ui/DecryptedText";
+import { Magnetic } from "@/lib/motion/components/Magnetic";
 import styles from "./Footer.module.css";
 
 const socials = [
@@ -22,15 +26,17 @@ export function Footer() {
       <div className={`container ${styles.inner}`}>
         {/* Left */}
         <div className={styles.left}>
-          <Link href="/" className={styles.wordmark} aria-label="Suyash Sharma">
-            <LogoPrimary size={20} aria-hidden="true" />
-            <span>SUYASH<sup className={styles.wordmarkSup}>®</sup></span>
-          </Link>
+          <Magnetic strength={0.15}>
+            <Link href="/" className={styles.wordmark} aria-label="Suyash Sharma">
+              <LogoPrimary size={20} aria-hidden="true" />
+              <span>SUYASH<sup className={styles.wordmarkSup}>®</sup></span>
+            </Link>
+          </Magnetic>
           <span className={styles.descriptor}>
-            Full-Stack Engineer · AI · Product
+            <DecryptedText text="Full-Stack Engineer · AI · Product" speed={60} animateOn="hover" />
           </span>
           <span className={styles.location}>
-            {siteConfig.location} · {year}
+            <DecryptedText text={`${siteConfig.location} · ${year}`} speed={55} animateOn="hover" />
           </span>
         </div>
 
@@ -39,17 +45,19 @@ export function Footer() {
           <ul className={styles.socialLinks} role="list">
             {socials.map(({ label, href, external }) => (
               <li key={label}>
-                <a
-                  href={href}
-                  className={styles.socialLink}
-                  id={`footer-${label.toLowerCase()}`}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noopener noreferrer" : undefined}
-                  aria-label={external ? `${label} (opens in new tab)` : label}
-                >
-                  {label}
-                  {external && <span className={styles.externalIcon} aria-hidden="true">↗</span>}
-                </a>
+                <Magnetic strength={0.22}>
+                  <a
+                    href={href}
+                    className={styles.socialLink}
+                    id={`footer-${label.toLowerCase()}`}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    aria-label={external ? `${label} (opens in new tab)` : label}
+                  >
+                    <span>{label}</span>
+                    {external && <span className={styles.externalIcon} aria-hidden="true">↗</span>}
+                  </a>
+                </Magnetic>
               </li>
             ))}
           </ul>

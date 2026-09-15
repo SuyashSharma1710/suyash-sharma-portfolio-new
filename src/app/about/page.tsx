@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { siteConfig } from "@/content/site";
 import { experience } from "@/content/experience";
 import { LogoShowcase } from "@/components/logo/LogoShowcase";
@@ -39,14 +39,16 @@ export default function AboutPage() {
           <aside className={styles.leftCol} aria-label="Portrait and Quick Facts">
             <div className={styles.imageFrame}>
               <div className={styles.portraitWrapper}>
-                <Image
+                <ParallaxImage
                   src="/images/suyash-editorial.jpg"
                   alt="Suyash Sharma — Full-Stack Engineer"
                   width={480}
                   height={640}
                   priority
-                  className={styles.portrait}
+                  imageClassName={styles.portrait}
                   sizes="(max-width: 900px) 100vw, 380px"
+                  speed={0.15}
+                  scale={1.14}
                 />
               </div>
               <div className={styles.imageCaption}>

@@ -8,7 +8,7 @@
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
-  background-color: var(--color-ink, #ffffff);
+  background-color: #ffffff;
   opacity: 0;
   will-change: transform, opacity;
   transform-origin: center center;
@@ -16,7 +16,7 @@
 }
 
 .cursorVisible {
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .cursorHidden {

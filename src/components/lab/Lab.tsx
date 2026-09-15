@@ -1,14 +1,19 @@
 /**
  * Lab — Section 07
+ * Enhanced with PixelBlast interactive canvas particle shockwaves
  */
 import Link from "next/link";
 import { labItems } from "@/content/lab";
+import { PixelBlast } from "@/components/ui/PixelBlast";
 import styles from "./Lab.module.css";
 
 export function Lab() {
   return (
     <section id="lab" className={styles.section} aria-label="Lab — experimental work">
-      <div className="container">
+      {/* Interactive retro pixel shockwave canvas */}
+      <PixelBlast trigger="click" particleCount={22} pixelSize={3} speed={3.2} />
+
+      <div className="container" style={{ position: "relative", zIndex: 2 }}>
         <div className={styles.header}>
           <div>
             <p className={styles.label}>Curiosity · Lab</p>
@@ -21,7 +26,8 @@ export function Lab() {
             className={styles.viewAll}
             id="view-all-lab"
           >
-            View all experiments →
+            <span>View all experiments</span>
+            <span aria-hidden="true">→</span>
           </a>
         </div>
 

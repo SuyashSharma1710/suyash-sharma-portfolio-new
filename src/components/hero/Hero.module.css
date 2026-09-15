@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: calc(var(--nav-height) + clamp(2rem, 4vw, 3.5rem));
+  padding-top: clamp(2rem, 4vw, 3.5rem);
   box-sizing: border-box;
   overflow: hidden;
 }

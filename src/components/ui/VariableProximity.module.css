@@ -1,0 +1,38 @@
+.container {
+  display: inline-block;
+  will-change: transform;
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  transition: font-weight 0.12s ease-out, transform 0.12s ease-out;
+  will-change: transform, font-weight, font-variation-settings;
+}
+
+.space {
+  display: inline-block;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char {
+    transition: none !important;
+    transform: none !important;
+  }
+}

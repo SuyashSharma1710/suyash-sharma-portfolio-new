@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: calc(var(--nav-height) + var(--space-4));
+  padding-top: var(--space-4);
   padding-bottom: var(--space-8);
   box-sizing: border-box;
 }

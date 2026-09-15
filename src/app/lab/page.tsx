@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { labItems } from "@/content/lab";
+import { PixelBlast } from "@/components/ui/PixelBlast";
 import styles from "./LabPage.module.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function LabPage() {
   return (
     <div className={styles.pageWrapper}>
-      <div className="container">
+      {/* Interactive Pixel Blast particle effect */}
+      <PixelBlast trigger="click" particleCount={24} pixelSize={3} speed={3.5} />
+
+      <div className="container" style={{ position: "relative", zIndex: 2 }}>
         <div className={styles.topBar}>
           <Link href="/" className={styles.backLink}>
             <span aria-hidden="true">←</span>

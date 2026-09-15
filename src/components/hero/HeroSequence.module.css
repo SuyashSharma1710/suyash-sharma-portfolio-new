@@ -38,7 +38,7 @@
 .heroPanel {
   width: 100vw;
   height: 100%;
-  padding-top: var(--nav-height);
+  padding-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +236,7 @@
 .heroPortrait {
   width: 100%;
   height: auto;
-  max-height: calc(100vh - var(--nav-height) - clamp(3.5rem, 5vw, 5.5rem));
+  max-height: calc(100vh - clamp(3.5rem, 5vw, 5.5rem));
   aspect-ratio: 3.6 / 4.6;
   object-fit: cover;
   display: block;
@@ -276,7 +276,6 @@
   width: clamp(750px, 56vw, 1040px);
   height: 100%;
   padding: clamp(2rem, 3.5vw, 4rem) clamp(2.5rem, 4vw, 4.5rem);
-  padding-top: calc(var(--nav-height) + clamp(1.25rem, 2.5vw, 2.75rem));
   border-left: 1px solid var(--color-line);
   border-right: 1px solid var(--color-line);
   display: flex;
@@ -300,9 +299,6 @@
 /* ─────────────────────────────────────────────────────────────
    Panel 2: 4 Widened Full-Height Columns (Image 3 & 4)
 ───────────────────────────────────────────────────────────── */
-/* ─────────────────────────────────────────────────────────────
-   Panel 2: 4 Widened Full-Height Columns (Image 3 & 4)
-───────────────────────────────────────────────────────────── */
 .columnsWrapper {
   display: grid;
   grid-auto-flow: column;
@@ -321,7 +317,6 @@
   height: 100%;
   border-right: 1px solid var(--color-line);
   padding: clamp(2.5rem, 4vw, 4.5rem) clamp(1.75rem, 2.5vw, 2.75rem);
-  padding-top: calc(var(--nav-height) + clamp(1.5rem, 2.5vw, 3rem));
   text-decoration: none;
   color: var(--color-ink);
   overflow: hidden;
@@ -546,7 +541,7 @@
     width: 100vw;
     height: auto;
     min-height: 90vh;
-    padding: calc(var(--nav-height) + 2rem) 1.5rem 3rem 1.5rem;
+    padding: 2rem 1.5rem 3rem 1.5rem;
     scroll-snap-align: start;
   }
 

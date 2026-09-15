@@ -2,37 +2,87 @@
  * FinalCTA.module.css
  */
 .section {
+  position: relative;
   padding-block: var(--section-gap);
   border-top: 1px solid var(--color-line);
   background: var(--color-paper);
+  overflow: hidden;
+}
+
+.containerRel {
+  position: relative;
+  z-index: 1;
 }
 
 .inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-10);
+  gap: var(--space-8);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-ink);
+  opacity: 0.7;
+}
+
+.eyebrowText {
+  font-weight: 600;
 }
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 2rem + 5vw, 7rem);
+  font-size: clamp(3.25rem, 2.5rem + 5vw, 7.5rem);
   font-weight: 400;
   letter-spacing: -0.04em;
-  line-height: 0.9;
+  line-height: 0.92;
   color: var(--color-ink);
-  max-width: 12ch;
+  max-width: 14ch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin: 0;
 }
 
-.headingMuted {
-  color: var(--color-muted);
+.headingLine {
+  display: block;
+}
+
+.headingLineMuted {
+  display: block;
+  color: var(--color-ink);
+}
+
+[data-theme="light"] .headingLineMuted,
+:root:not([data-theme="dark"]) .headingLineMuted {
+  color: #111111;
+}
+
+[data-theme="dark"] .headingLineMuted {
+  color: #ffffff;
 }
 
 .sub {
+  font-family: var(--font-body);
   font-size: var(--text-lg);
   color: var(--color-muted);
   line-height: 1.6;
   max-width: 48ch;
+  margin: 0;
 }
 
 .actions {
@@ -40,50 +90,65 @@
   align-items: center;
   gap: var(--space-6);
   flex-wrap: wrap;
+  padding-top: var(--space-2);
 }
 
 .ctaPrimary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-paper);
   background: var(--color-ink);
-  padding: var(--space-4) var(--space-8);
+  padding: 1.1rem 2rem;
   text-decoration: none;
   border-radius: var(--radius-sm);
+  border: 1px solid var(--color-ink);
   transition:
     background-color var(--duration-fast),
     color var(--duration-fast),
-    transform var(--duration-fast);
+    border-color var(--duration-fast);
 }
 
 .ctaPrimary:hover {
-  background: var(--color-muted);
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
-.ctaPrimary:active {
-  transform: scale(0.98);
+.arrowIcon {
+  font-size: 0.9em;
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.ctaPrimary:hover .arrowIcon {
+  transform: translate(2px, -2px);
 }
 
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-muted);
   text-decoration: none;
-  transition: color var(--duration-fast);
+  position: relative;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--color-line);
+  transition: color var(--duration-fast), border-color var(--duration-fast);
 }
 
 .ctaSecondary:hover {
   color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
 .arrow {
@@ -92,4 +157,21 @@
 
 .ctaSecondary:hover .arrow {
   transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 2.75rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    justify-content: center;
+  }
 }

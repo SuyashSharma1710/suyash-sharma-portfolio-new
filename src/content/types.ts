@@ -64,6 +64,8 @@ export interface CapabilityItem {
   title: string;
   description: string;
   technologies: string[];
+  image?: string;
+  tagline?: string;
 }
 
 export interface LabItem {
