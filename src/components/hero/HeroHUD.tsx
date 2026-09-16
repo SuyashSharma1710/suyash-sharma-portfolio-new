@@ -135,7 +135,7 @@ export function HeroHUD() {
       gsap.to(reticleRef.current, {
         x: targetNode.x,
         y: targetNode.y,
-        duration: 0.55,
+        duration: 0.6,
         ease: "expo.out",
         overwrite: "auto",
       });
@@ -195,7 +195,7 @@ export function HeroHUD() {
         transferToNode(nextNode);
         return nextNode;
       });
-    }, 8500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isHovered, transferToNode]);

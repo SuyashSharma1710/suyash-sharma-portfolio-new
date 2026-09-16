@@ -50,6 +50,7 @@
     box-shadow 650ms cubic-bezier(0.16, 1, 0.3, 1),
     padding 650ms cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
+  border-bottom: 1px solid var(--color-nav-border, var(--color-line));
 }
 
 /* Scrolled / Floating Square-ish Dock State */
@@ -59,20 +60,43 @@
   background-color: rgba(var(--nav-bg-rgb), 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--color-nav-dock-border, var(--color-line));
   border-radius: var(--radius-sm); /* Strict square-ish architectural geometry */
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--nav-dock-shadow);
   padding-inline: var(--space-4);
 }
 
 /* CSS variables for rgba() scoping */
-:global([data-theme="light"]) .navWrapper { --nav-bg-rgb: 245, 240, 232; }
-:global([data-theme="dark"]) .navWrapper  { --nav-bg-rgb: 13, 13, 13; }
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .navWrapper { --nav-bg-rgb: 13, 13, 13; }
+:global([data-theme="light"]) .navWrapper {
+  --nav-bg-rgb: 245, 240, 232;
+  --color-nav-border: rgba(0, 0, 0, 0.08);
+  --color-nav-dock-border: rgba(0, 0, 0, 0.1);
+  --nav-dock-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 }
+
+:global([data-theme="dark"]) .navWrapper {
+  --nav-bg-rgb: 13, 13, 13;
+  --color-nav-border: rgba(255, 255, 255, 0.14);
+  --color-nav-dock-border: rgba(255, 255, 255, 0.18);
+  --nav-dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .navWrapper {
+    --nav-bg-rgb: 13, 13, 13;
+    --color-nav-border: rgba(255, 255, 255, 0.14);
+    --color-nav-dock-border: rgba(255, 255, 255, 0.18);
+    --nav-dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+}
+
 @media (prefers-color-scheme: light) {
-  :global(:root:not([data-theme="dark"])) .navWrapper { --nav-bg-rgb: 245, 240, 232; }
+  :global(:root:not([data-theme="dark"])) .navWrapper {
+    --nav-bg-rgb: 245, 240, 232;
+    --color-nav-border: rgba(0, 0, 0, 0.08);
+    --color-nav-dock-border: rgba(0, 0, 0, 0.1);
+    --nav-dock-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  }
 }
 
 .navInner {
@@ -138,7 +162,7 @@
   height: 1.875rem;
   background: var(--color-hover-bg);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--color-nav-dock-border, var(--color-line));
   pointer-events: none;
   transition:
     left 420ms cubic-bezier(0.16, 1, 0.3, 1),

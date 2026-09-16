@@ -42,7 +42,7 @@
     --color-paper:         #0D0D0D;
     --color-ink:           #F0EBE0;
     --color-muted:         #8A847C;
-    --color-line:          rgba(255, 255, 255, 0.08);
+    --color-line:          rgba(255, 255, 255, 0.12);
     --color-accent:        #F0EBE0;
     --color-surface-light: #161412;
     --color-surface-dark:  #0A0907;
@@ -60,7 +60,7 @@
   --color-paper:         #0D0D0D;
   --color-ink:           #F0EBE0;
   --color-muted:         #8A847C;
-  --color-line:          rgba(255, 255, 255, 0.08);
+  --color-line:          rgba(255, 255, 255, 0.12);
   --color-accent:        #F0EBE0;
   --color-surface-light: #161412;
   --color-surface-dark:  #0A0907;

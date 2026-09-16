@@ -1,16 +1,10 @@
-/**
- * Experience Content
- * Governed by RULES.md Rule 2 — Zero-Invention Policy
- *
- * Source: Suyash Sharma resume, dated 2026-09-09.
- */
 import type { ExperienceItem } from "./types";
 
 export const experience: ExperienceItem[] = [
   {
     period: "March 2025 – Present",
     role: "Senior Web Developer",
-    company: "Cliq Media",
+    company: "Cliqk Media",
     summary:
       "Developed, deployed, and maintained production full-stack applications using React.js, Next.js, Node.js, and Supabase.",
     highlights: [

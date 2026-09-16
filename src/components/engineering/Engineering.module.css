@@ -62,13 +62,12 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   color: var(--color-muted);
-  padding: 6px 12px;
-  background-color: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .liveDot {
@@ -168,10 +167,11 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  padding: 0 12px;
-  background-color: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0;
   color: var(--color-ink);
   cursor: pointer;
   outline: none;
@@ -183,8 +183,7 @@
     border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.3s ease,
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s ease;
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pillLeft {
@@ -230,7 +229,7 @@
   background-color: var(--color-line);
   flex-shrink: 0;
   align-self: center;
-  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
 /* ── 1. Active Hovered Tech Item (Dark Inverted Contrast) ── */
@@ -242,7 +241,6 @@
   border-color: var(--color-ink) !important;
   transform: translateX(4px);
   opacity: 1 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .techPill:hover .glyph,
@@ -266,7 +264,6 @@
   color: var(--color-ink) !important;
   opacity: 1 !important;
   transform: translateX(2px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .techPill[data-connected="true"] .glyph {
@@ -291,30 +288,18 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Engineering Inspector HUD (Option 1)
+   Engineering Inspector (Open Editorial Canvas)
 ───────────────────────────────────────────────────────────── */
 .inspectorDock {
-  background-color: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
-  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid var(--color-line);
+  border-radius: 0;
+  padding: clamp(2rem, 3.5vw, 3rem) 0 0 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
   position: relative;
-  overflow: hidden;
-  transition: border-color 0.35s ease, background-color 0.35s ease;
-}
-
-.inspectorDock::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background-color: var(--color-ink);
-  opacity: 0.8;
 }
 
 .inspectorTopRow {
@@ -350,17 +335,16 @@
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--color-ink);
-  background-color: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .inspectorBody {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(1.5rem, 3vw, 3.5rem);
   align-items: start;
 }
 
@@ -417,7 +401,8 @@
 .specTags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 8px 16px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -425,14 +410,27 @@
 
 .specTag {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--color-muted);
-  background-color: var(--color-surface-light);
-  border: 1px solid var(--color-line);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.specTag::before {
+  content: "·";
+  color: var(--color-muted);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.specTag:first-child::before {
+  display: none;
 }
 
 .projectChip {
@@ -440,30 +438,28 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: var(--color-ink);
-  background-color: var(--color-hover-bg);
-  border: 1px solid var(--color-line);
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--color-line);
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
 }
 
 .projectChip:hover {
-  background-color: var(--color-ink);
-  color: var(--color-paper);
-  border-color: var(--color-ink);
+  text-decoration-color: var(--color-ink);
+  color: var(--color-ink);
+  background: transparent;
 }
 
 .projectChipLabel {
   color: var(--color-muted);
-}
-
-.projectChip:hover .projectChipLabel {
-  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
 }
 
 /* ─────────────────────────────────────────────────────────────
