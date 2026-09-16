@@ -10,6 +10,7 @@ export const siteConfig: SiteConfig = {
   title: "Suyash — Full-Stack Engineer",
   description:
     "Full-Stack Engineer building products where engineering, design, and intelligence meet. Based in Delhi, India.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://suyashsharma.dev",
   availability: {
     status: "available",
     label: "Available for selected projects",

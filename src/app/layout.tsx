@@ -33,17 +33,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
     template: `%s — Suyash Sharma`,
   },
   description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
     siteName: "Suyash Sharma",
     title: siteConfig.title,
     description: siteConfig.description,
+    url: siteConfig.url,
   },
   twitter: {
     card: "summary_large_image",

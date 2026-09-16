@@ -13,6 +13,7 @@ export interface SiteConfig {
   name: string;
   title: string;
   description: string;
+  url: string;
   availability: {
     status: "available" | "limited" | "unavailable";
     label: string;
