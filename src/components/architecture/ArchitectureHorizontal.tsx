@@ -170,7 +170,7 @@ export function ArchitectureHorizontal() {
 
                   {/* Middle: Title */}
                   <div className={styles.colMiddle}>
-                    <h3 className={styles.colTitle}>{discipline.title}</h3>
+                    <h2 className={styles.colTitle}>{discipline.title}</h2>
                   </div>
 
                   {/* Bottom: Description & Circle Action Arrow */}
