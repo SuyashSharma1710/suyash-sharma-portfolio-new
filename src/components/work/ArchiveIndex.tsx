@@ -22,6 +22,15 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
 
   const handleMouseEnter = contextSafe((rowEl: HTMLElement) => {
     if (!containerRef.current) return;
+
+    // Check reduced motion
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
     const allRows = containerRef.current.querySelectorAll<HTMLElement>("[data-archive-row]");
     const siblingRows = Array.from(allRows).filter((r) => r !== rowEl);
 
@@ -146,6 +155,15 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
 
   const handleMouseLeave = contextSafe((rowEl: HTMLElement) => {
     if (!containerRef.current) return;
+
+    // Check reduced motion
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
     const allRows = containerRef.current.querySelectorAll<HTMLElement>("[data-archive-row]");
 
     // Restore sibling rows opacity

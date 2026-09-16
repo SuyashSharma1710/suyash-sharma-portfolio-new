@@ -87,7 +87,7 @@
 .headline {
   font-family: var(--font-display);
   font-size: clamp(4rem, 3.2rem + 5vw, 7.75rem);
-  line-height: 1.06;
+  line-height: 1.12;
   font-weight: 400;
   letter-spacing: -0.035em;
   color: var(--color-ink);
@@ -97,8 +97,8 @@
 
 .headlineWord {
   display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
+  overflow: visible;
+  padding-bottom: 0.15em;
 }
 
 .headlineInner {

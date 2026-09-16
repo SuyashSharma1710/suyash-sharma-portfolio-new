@@ -113,7 +113,7 @@
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--color-ink);
-  line-height: 1.02;
+  line-height: 1.18;
   margin: 0;
   transition: color var(--duration-fast);
 }
@@ -322,7 +322,7 @@
   font-size: clamp(2.25rem, 1.8rem + 1.5vw, 3.25rem);
   font-weight: 400;
   letter-spacing: -0.025em;
-  line-height: 1.05;
+  line-height: 1.2;
   color: var(--color-ink);
   margin: 0;
   transition:

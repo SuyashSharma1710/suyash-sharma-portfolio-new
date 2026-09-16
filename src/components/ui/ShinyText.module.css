@@ -16,6 +16,7 @@
   color: transparent;
   animation: shine 4s linear infinite;
   will-change: background-position;
+  padding-bottom: 0.08em;
 }
 
 :global([data-theme="dark"]) .shinyText {

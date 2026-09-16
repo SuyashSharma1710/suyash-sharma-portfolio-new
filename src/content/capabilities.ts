@@ -32,7 +32,7 @@ export const capabilities: CapabilityItem[] = [
     tagline: "Cloud & Data Topologies",
     description:
       "End-to-end system design from database schema to deployment pipeline. APIs, authentication, background jobs, cloud infrastructure — the complete engineering layer.",
-    technologies: ["Node.js", "APIs", "PostgreSQL", "Prisma", "Docker", "CI/CD"],
+    technologies: ["Node.js", "Laravel", "Django", "APIs", "PostgreSQL", "Prisma", "Docker", "CI/CD"],
     image: "/images/capabilities/fullstack.jpg",
   },
   {

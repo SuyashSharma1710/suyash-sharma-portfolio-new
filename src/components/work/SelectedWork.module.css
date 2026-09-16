@@ -170,10 +170,11 @@
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 2rem + 2.5vw, 4.25rem);
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   color: var(--color-ink);
   margin: 0;
+  padding-bottom: 0.05em;
 }
 
 .titleLink {

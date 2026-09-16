@@ -120,7 +120,7 @@
   display: flex;
   align-items: center;
   gap: clamp(1.25rem, 2vw, 2.25rem);
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Inline Preview Image Container (Controlled via GSAP) */
@@ -153,7 +153,8 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.25;
+  padding-bottom: 0.05em;
   margin: 0;
   white-space: nowrap;
   color: var(--color-ink);
@@ -171,7 +172,7 @@
   font-size: clamp(2rem, 1.6rem + 2.5vw, 3.85rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 0.95;
+  line-height: 1.15;
   transform: translateX(6px);
 }
 
@@ -306,5 +307,16 @@
 
   .previewWrapper {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .projectTitle,
+  .previewWrapper,
+  .badgeWrapper,
+  .rowArrow {
+    transition: none !important;
+    transform: none !important;
   }
 }

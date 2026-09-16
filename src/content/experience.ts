@@ -6,25 +6,26 @@ export const experience: ExperienceItem[] = [
     role: "Senior Web Developer",
     company: "Cliqk Media",
     summary:
-      "Developed, deployed, and maintained production full-stack applications using React.js, Next.js, Node.js, and Supabase.",
+      "Engineered and delivered 25+ client web projects, developing responsive web applications and landing pages with React, Next.js, and Node.js, alongside custom WordPress and Shopify platforms.",
     highlights: [
-      "Designed and integrated REST APIs, web services, authentication, third-party integrations, and database-driven workflows using PostgreSQL/Supabase and Row-Level Security (RLS).",
-      "Managed Vercel/Railway deployments, Git-based CI/CD, debugging, issue resolution, and performance optimization.",
-      "Collaborated with clients and stakeholders to translate requirements into technical solutions and deliver customized production websites.",
+      "Built high-conversion, responsive landing pages and web applications leveraging React, Next.js, and Node.js.",
+      "Delivered 25+ production client projects across WordPress and Shopify with custom theme development, integrations, and speed optimization.",
+      "Managed client requirements, deployment workflows, cross-device testing, and post-launch technical support.",
     ],
-    technologies: ["React.js", "Next.js", "Node.js", "Supabase", "PostgreSQL", "REST APIs", "Vercel", "Railway", "CI/CD"],
+    technologies: ["React", "Node.js", "Next.js", "WordPress", "Shopify", "JavaScript", "Vercel", "Performance Tuning"],
   },
   {
     period: "2024 – Present",
     role: "Freelance & Contract Full-Stack Developer",
     company: "Freelance, agency, and contract engagements",
     summary:
-      "Delivered 10+ paid web projects across freelance, agency, and contract engagements, developing web applications and digital solutions using React.js, Next.js, Node.js, Django, and TypeScript.",
+      "Delivered 10+ paid full-stack web applications and custom systems across diverse client engagements, utilizing React, Next.js, Node.js, Laravel, Django, Python, Supabase, PostgreSQL, and TypeScript.",
     highlights: [
-      "Integrated REST APIs, authentication, RBAC, and database-driven workflows.",
-      "Managed requirements, deployment, debugging, maintenance, and post-launch technical support.",
+      "Architected full-stack web applications with React, Next.js, Node.js, and Supabase/PostgreSQL featuring Row-Level Security (RLS) and authentication.",
+      "Engineered robust backend systems, RESTful APIs, and relational data models with Laravel and Django.",
+      "Handled end-to-end technical lifecycles: architecture design, database modeling, Git-based CI/CD deployments (Vercel, Railway), and performance optimization.",
     ],
-    technologies: ["React.js", "Next.js", "Node.js", "Django", "TypeScript", "REST APIs", "RBAC"],
+    technologies: ["React", "Next.js", "Node.js", "Laravel", "Django", "Python", "TypeScript", "Supabase", "PostgreSQL", "REST APIs", "CI/CD"],
   },
   {
     period: "December 2024 – February 2025",

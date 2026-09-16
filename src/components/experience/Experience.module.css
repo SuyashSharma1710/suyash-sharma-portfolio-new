@@ -1,97 +1,431 @@
 /**
  * Experience.module.css
+ * Interactive Swiss Architectural Chronology & Deliverables Ledger
+ * Strictly adheres to RULES.md Rule 10.1 (Zero-Box Policy) & Centralized Motion System
  */
+
 .section {
+  position: relative;
   padding-block: var(--section-gap);
   border-top: 1px solid var(--color-line);
+  background-color: var(--color-paper);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Section Header
+───────────────────────────────────────────────────────────── */
 .header {
-  margin-bottom: var(--space-16);
-}
-
-.label {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  font-family: var(--font-body);
-  margin-bottom: var(--space-4);
-}
-
-.heading {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--color-ink);
-}
-
-.list {
-  list-style: none;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  flex-wrap: wrap;
+  gap: var(--space-4);
 }
 
-.item {
-  display: grid;
-  grid-template-columns: 10rem 1fr;
-  gap: var(--space-8);
-  padding-block: var(--space-8);
-  border-top: 1px solid var(--color-line);
-  align-items: start;
-}
-
-.item:last-child {
-  border-bottom: 1px solid var(--color-line);
-}
-
-.period {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-  letter-spacing: 0.05em;
-  padding-top: var(--space-1);
-}
-
-.info {
+.headerLeft {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.role {
-  font-size: var(--text-lg);
-  font-weight: 500;
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 4.25rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
   color: var(--color-ink);
-  line-height: 1.3;
+  line-height: 1.18;
+  margin: 0;
 }
 
-.company {
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.headerBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Interactive Chronology List & Rows
+───────────────────────────────────────────────────────────── */
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-line);
+}
+
+.item {
+  border-bottom: 1px solid var(--color-line);
+  transition:
+    opacity var(--duration-normal) var(--ease-out-expo),
+    background-color var(--duration-normal) var(--ease-out-expo);
+  will-change: opacity, background-color;
+  background-color: transparent;
+}
+
+/* Sibling dimming when hovering another role */
+.list[data-has-hovered="true"] .item:not([data-hovered="true"]) {
+  opacity: 0.35;
+}
+
+.item:hover,
+.item[data-expanded="true"] {
+  background-color: var(--color-hover-bg);
+}
+
+.rowTrigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(170px, 240px) 1fr auto;
+  align-items: flex-start;
+  gap: clamp(1.25rem, 2.5vw, 3rem);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(0.5rem, 1vw, 1.25rem);
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.rowTrigger:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+}
+
+/* ── Left Column: Period & Active Indicator ── */
+.periodCol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.activeTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.activeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  animation: pulseGreen 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.activeText {
+  color: var(--color-ink);
+}
+
+/* ── Center Column: Role & Summary ── */
+.roleCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.roleHeader {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.roleTitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.2;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+  will-change: transform;
+}
+
+.item:hover .roleTitle {
+  transform: translateX(4px);
+}
+
+.companyName {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.summaryText {
+  font-family: var(--font-body);
   font-size: var(--text-sm);
-  color: var(--color-muted);
-}
-
-.summary {
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-  line-height: 1.65;
-  margin-top: var(--space-2);
-}
-
-.placeholder {
-  font-size: var(--text-base);
-  color: var(--color-muted);
-  border: 1px dashed var(--color-line);
-  padding: var(--space-8);
-  border-radius: var(--radius-md);
   line-height: 1.6;
+  color: var(--color-muted);
+  margin: 0;
+  max-width: 68ch;
 }
 
-@media (max-width: 767px) {
-  .item {
+/* ── Right Column: Action / Expand Control ── */
+.actionCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 2px;
+}
+
+.expandButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.item:hover .expandButton,
+.item[data-expanded="true"] .expandButton {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+  background-color: var(--color-hover-bg);
+}
+
+.expandIcon {
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Expandable Architectural Drawer
+───────────────────────────────────────────────────────────── */
+.drawerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-slow) var(--ease-out-expo);
+  will-change: grid-template-rows;
+}
+
+.item[data-expanded="true"] .drawerWrapper {
+  grid-template-rows: 1fr;
+}
+
+.drawerContent {
+  overflow: hidden;
+  padding: 0 clamp(0.5rem, 1vw, 1.25rem) clamp(1.75rem, 2.5vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(170px, 240px) 1fr auto;
+  gap: clamp(1.25rem, 2.5vw, 3rem);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--duration-normal) var(--ease-out-expo),
+    transform var(--duration-normal) var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.item[data-expanded="true"] .drawerContent {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.drawerBody {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.drawerSubheading {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+/* Highlights List */
+.highlightsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.highlightsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.highlightItem {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  line-height: 1.55;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 72ch;
+}
+
+.bullet {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+/* Verified Stack Ledger */
+.techBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-line);
+}
+
+.techLedger {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.techTag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.techTag::before {
+  content: "·";
+  color: var(--color-muted);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.techTag:first-child::before {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive Design
+───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .rowTrigger {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3);
+  }
+
+  .periodCol {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .drawerContent {
+    grid-template-columns: 1fr;
+    padding-inline: clamp(0.5rem, 1vw, 1.25rem);
+  }
+
+  .drawerBody {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .rowTrigger {
     grid-template-columns: 1fr;
     gap: var(--space-3);
+  }
+
+  .actionCol {
+    justify-content: flex-start;
+  }
+
+  .roleTitle {
+    font-size: 1.2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced Motion
+───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .rowTrigger,
+  .roleTitle,
+  .expandButton,
+  .drawerWrapper,
+  .drawerContent {
+    transition: none !important;
+    transform: none !important;
+  }
+  .activeDot {
+    animation: none;
   }
 }

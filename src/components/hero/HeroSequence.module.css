@@ -117,7 +117,7 @@
 .headline {
   font-family: var(--font-display);
   font-size: clamp(4rem, 3.2rem + 5vw, 7.75rem);
-  line-height: 1.06;
+  line-height: 1.12;
   font-weight: 400;
   letter-spacing: -0.035em;
   color: var(--color-ink);
@@ -127,8 +127,8 @@
 
 .headlineWord {
   display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
+  overflow: visible;
+  padding-bottom: 0.15em;
 }
 
 .headlineInner {
@@ -403,7 +403,8 @@
   font-family: var(--font-display);
   font-size: clamp(5.5rem, 8.5vw, 8.5rem);
   font-weight: 400;
-  line-height: 0.85;
+  line-height: 1.0;
+  padding-bottom: 0.05em;
   letter-spacing: -0.04em;
   color: var(--color-ink);
   transition: color 0.35s ease;
