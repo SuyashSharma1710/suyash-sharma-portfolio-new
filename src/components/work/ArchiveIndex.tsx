@@ -53,9 +53,6 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     gsap.to(rowEl, {
       backgroundColor: activeBg,
       boxShadow: activeShadow,
-      paddingLeft: "clamp(1.25rem, 2.4vw, 2.5rem)",
-      paddingRight: "clamp(1.25rem, 2.4vw, 2.5rem)",
-      borderRadius: "6px",
       opacity: 1,
       zIndex: 2,
       duration: 0.38,
@@ -90,12 +87,11 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
       );
     }
 
-    // Shift and illuminate project title
+    // Illuminate project title
     const title = rowEl.querySelector<HTMLElement>("[data-title]");
     if (title) {
       gsap.to(title, {
         color: activeText,
-        x: 6,
         duration: 0.35,
         ease: "power3.out",
         overwrite: "auto",
@@ -164,9 +160,6 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     gsap.to(rowEl, {
       backgroundColor: "transparent",
       boxShadow: "none",
-      paddingLeft: "clamp(0.5rem, 1.2vw, 1.25rem)",
-      paddingRight: "clamp(0.5rem, 1.2vw, 1.25rem)",
-      borderRadius: "0px",
       zIndex: 1,
       duration: 0.35,
       ease: "power3.inOut",
@@ -200,7 +193,6 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     if (title) {
       gsap.to(title, {
         color: "var(--color-ink)",
-        x: 0,
         duration: 0.35,
         ease: "power3.inOut",
         overwrite: "auto",

@@ -66,7 +66,7 @@
   display: grid;
   grid-template-columns: minmax(200px, 280px) 1fr 50px;
   align-items: center;
-  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(0.5rem, 1.25vw, 1.25rem);
+  padding: clamp(0.85rem, 1.1vw, 1.15rem) clamp(0.5rem, 1.25vw, 1.25rem);
   border-bottom: 1px solid var(--color-line);
   text-decoration: none;
   color: var(--color-ink);
@@ -75,8 +75,16 @@
   outline: none;
   cursor: pointer;
   transform-origin: center center;
-  transition: border-color var(--duration-fast);
+  transition:
+    padding 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color var(--duration-fast);
   will-change: background-color, padding, transform, opacity;
+}
+
+.row:hover,
+.row:focus-visible {
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.25rem, 2.4vw, 2.5rem);
+  border-radius: 6px;
 }
 
 /* ── Left Column: Metadata ── */
@@ -138,19 +146,33 @@
   will-change: transform;
 }
 
-/* Project Title Typography (Bold High-Contrast Grotesque) */
+/* Project Title Typography: Small resting, expands on hover */
 .projectTitle {
   font-family: var(--font-body);
-  font-size: clamp(2rem, 1.6rem + 2.5vw, 3.85rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  line-height: 0.95;
+  line-height: 1.2;
   margin: 0;
   white-space: nowrap;
   color: var(--color-ink);
-  transition: color var(--duration-fast);
-  will-change: color, transform;
+  transition:
+    font-size 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    letter-spacing 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    line-height 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    color var(--duration-fast);
+  will-change: color, transform, font-size;
+}
+
+.row:hover .projectTitle,
+.row:focus-visible .projectTitle {
+  font-size: clamp(2rem, 1.6rem + 2.5vw, 3.85rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  transform: translateX(6px);
 }
 
 /* Status Badge Pill (Controlled via GSAP) */
@@ -231,7 +253,21 @@
 @media (max-width: 900px) {
   .row {
     grid-template-columns: minmax(130px, 160px) 1fr 40px;
-    padding: 1.25rem 0.75rem;
+    padding: 0.75rem 0.65rem;
+  }
+
+  .row:hover,
+  .row:focus-visible {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .projectTitle {
+    font-size: 1rem;
+  }
+
+  .row:hover .projectTitle,
+  .row:focus-visible .projectTitle {
+    font-size: clamp(1.5rem, 1.3rem + 1.2vw, 2.25rem);
   }
 
   .previewVisible {
@@ -247,8 +283,13 @@
 @media (max-width: 640px) {
   .row {
     grid-template-columns: 1fr 40px;
-    row-gap: 0.5rem;
-    padding: 1.25rem 0.5rem;
+    row-gap: 0.35rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .row:hover,
+  .row:focus-visible {
+    padding: 1rem 0.65rem;
   }
 
   .metaCol {

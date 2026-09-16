@@ -65,7 +65,7 @@ export const projects: Project[] = [
   },
   {
     slug: "syncflow",
-    title: "Syncflow Workspace Manager",
+    title: "Syncflow P.M.T.",
     category: "Productivity",
     year: "2026",
     summary:
@@ -76,7 +76,7 @@ export const projects: Project[] = [
   },
   {
     slug: "hol",
-    title: "HoL",
+    title: "Harmony of Life",
     category: "Full-Stack",
     year: "2026",
     summary: "[PROJECT DESCRIPTION REQUIRED — describe what HoL does in 1-2 sentences]",
