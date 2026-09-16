@@ -6,6 +6,7 @@ import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { CursorTracker } from "@/lib/motion/components/CursorTracker";
+import { Preloader } from "@/components/ui/Preloader";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -81,6 +82,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider>
+          <Preloader />
           <CursorTracker />
           <Nav />
           <SmoothScrollProvider>

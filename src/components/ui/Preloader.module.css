@@ -1,0 +1,202 @@
+/**
+ * Preloader.module.css
+ * Editorial Pixel Matrix & Thinning Mask Columns Curtain
+ * Governed strictly by Centralized Motion System & Zero-Box Policy
+ */
+
+.preloaderOverlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  user-select: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8-Column Vertical Mask Shutters Curtain
+───────────────────────────────────────────────────────────── */
+.columnsCurtain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.maskColumn {
+  flex: 1;
+  height: 100%;
+  background-color: var(--color-paper, #0D0D0D);
+  border-right: 1px solid var(--color-line, rgba(255, 255, 255, 0.08));
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.maskColumn:last-child {
+  border-right: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Central Interaction Stage
+───────────────────────────────────────────────────────────── */
+.centerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  width: 100%;
+  max-width: 480px;
+  padding: 0 1.5rem;
+  will-change: transform, opacity;
+  color: var(--color-ink);
+}
+
+/* ── Top Brand Telemetry ── */
+.topTelemetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background-color: var(--color-hover-bg, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--color-line, rgba(255, 255, 255, 0.12));
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.telemetryDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-ink);
+  box-shadow: 0 0 8px var(--color-ink);
+  animation: pulseDot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.85); }
+}
+
+.telemetryBrand {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* ── Pixel Matrix Logo Stage ── */
+.logoStage {
+  width: clamp(160px, 22vw, 240px);
+  height: clamp(160px, 22vw, 240px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: var(--color-hover-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--color-line, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-md, 4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.pixelSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  color: var(--color-ink);
+}
+
+.gridDot {
+  fill: var(--color-line);
+}
+
+[data-theme="dark"] .gridDot,
+:root:not([data-theme="light"]) .gridDot {
+  fill: rgba(240, 235, 224, 0.15);
+}
+
+.pixelBlock {
+  fill: var(--color-ink);
+  will-change: transform, opacity;
+}
+
+.solidLogo {
+  fill: var(--color-ink);
+  will-change: opacity;
+  filter: drop-shadow(0 0 16px rgba(240, 235, 224, 0.25));
+}
+
+[data-theme="light"] .solidLogo {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* ── Bottom Telemetry Readout & Progress ── */
+.telemetry {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.statusText {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-muted, #8A847C);
+}
+
+.percentText {
+  font-weight: 700;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-line, rgba(255, 255, 255, 0.12));
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: var(--color-ink);
+  box-shadow: 0 0 8px var(--color-ink);
+  border-radius: 999px;
+  transition: width 0.05s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloaderOverlay {
+    display: none !important;
+  }
+}
