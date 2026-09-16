@@ -201,7 +201,7 @@ export function PositioningAccordion() {
 
             {/* Right Column: Fluid 4-Pillar Editorial Accordion */}
             <div className={styles.rightCol}>
-              <div className={styles.accordion} role="tablist" aria-label="Core Engineering Pillars">
+              <div className={styles.accordion}>
                 {pillarsData.map((item, index) => {
                   const isOpen = activeIndex === index;
                   const panelId = `pillar-panel-${item.id}`;
@@ -212,35 +212,37 @@ export function PositioningAccordion() {
                       key={item.id}
                       className={`${styles.item} ${isOpen ? styles.open : styles.closed}`}
                     >
-                      <button
-                        id={triggerId}
-                        type="button"
-                        className={styles.itemHeader}
-                        onClick={() => selectIndex(index)}
-                        aria-expanded={isOpen}
-                        aria-controls={panelId}
-                      >
-                        <div className={styles.itemHeaderMain}>
-                          <span className={styles.itemNumber}>{item.number}</span>
-                          <span className={styles.itemTitle}>{item.title}</span>
-                        </div>
+                      <h3 className={styles.itemHeading}>
+                        <button
+                          id={triggerId}
+                          type="button"
+                          className={styles.itemHeader}
+                          onClick={() => selectIndex(index)}
+                          aria-expanded={isOpen}
+                          aria-controls={panelId}
+                        >
+                          <div className={styles.itemHeaderMain}>
+                            <span className={styles.itemNumber}>{item.number}</span>
+                            <span className={styles.itemTitle}>{item.title}</span>
+                          </div>
 
-                        <span className={styles.arrowIcon} aria-hidden="true">
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="17" y1="7" x2="7" y2="17" />
-                            <polyline points="17 17 7 17 7 7" />
-                          </svg>
-                        </span>
-                      </button>
+                          <span className={styles.arrowIcon} aria-hidden="true">
+                            <svg
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="17" y1="7" x2="7" y2="17" />
+                              <polyline points="17 17 7 17 7 7" />
+                            </svg>
+                          </span>
+                        </button>
+                      </h3>
 
                       <div
                         id={panelId}

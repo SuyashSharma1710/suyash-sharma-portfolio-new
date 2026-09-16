@@ -315,8 +315,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.125rem;
   flex-shrink: 0;
+  box-sizing: border-box;
   transition:
     background-color 0.35s ease,
     color 0.35s ease,
@@ -324,12 +324,25 @@
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.circleArrowSvg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  transform-origin: 8px 8px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .column:hover .circleArrow,
 .column:focus-visible .circleArrow {
   background: #ffffff;
   color: #0d0c0a;
   border-color: #ffffff;
-  transform: scale(1.08) rotate(-45deg);
+  transform: scale(1.08);
+}
+
+.column:hover .circleArrowSvg,
+.column:focus-visible .circleArrowSvg {
+  transform: rotate(-45deg);
 }
 
 /* ─────────────────────────────────────────────────────────────

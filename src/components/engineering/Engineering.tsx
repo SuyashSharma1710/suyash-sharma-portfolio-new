@@ -76,7 +76,7 @@ export function Engineering() {
         </div>
 
         {/* 4-Column Subsystem Grid Matrix (Option 2 & 3) */}
-        <div className={styles.matrixGrid} role="region" aria-label="Subsystem Architecture Grid">
+        <div className={styles.matrixGrid}>
           {engineeringSubsystems.map((subsystem) => (
             <div key={subsystem.label} className={styles.column}>
               <div className={styles.columnHeader}>

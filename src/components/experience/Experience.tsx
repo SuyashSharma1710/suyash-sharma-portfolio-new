@@ -56,8 +56,6 @@ export function Experience() {
         ) : (
           <div
             className={styles.list}
-            role="region"
-            aria-label="Professional chronology"
             data-has-hovered={hoveredIndex !== null}
             onMouseLeave={handleMouseLeave}
           >

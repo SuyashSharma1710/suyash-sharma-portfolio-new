@@ -150,6 +150,15 @@
   border-bottom: 1px solid var(--color-line);
 }
 
+.itemHeading {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: block;
+}
+
 .itemHeader {
   width: 100%;
   display: flex;
