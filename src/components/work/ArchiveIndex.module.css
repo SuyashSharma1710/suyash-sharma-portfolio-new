@@ -40,16 +40,71 @@
   line-height: 1.1;
 }
 
-.countBadge {
+.archiveCount {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-muted);
-  padding: 4px 10px;
-  background: var(--color-hover-bg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Filter Bar & Category Tabs (Zero-Box Editorial Design)
+───────────────────────────────────────────────────────────── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.filterBtn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background: transparent;
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    color var(--duration-fast),
+    background-color var(--duration-fast),
+    border-color var(--duration-fast);
+  outline: none;
+}
+
+.filterBtn:hover,
+.filterBtn:focus-visible {
+  color: var(--color-ink);
+  border-color: var(--color-muted);
+  background: var(--color-hover-bg);
+}
+
+.filterBtnActive {
+  color: var(--color-paper) !important;
+  background: var(--color-ink) !important;
+  border-color: var(--color-ink) !important;
+}
+
+[data-theme="dark"] .filterBtnActive,
+:root:not([data-theme="light"]) .filterBtnActive {
+  color: #0D0D0D !important;
+  background: #F5F0E8 !important;
+  border-color: #F5F0E8 !important;
+}
+
+.filterCount {
+  opacity: 0.7;
+  font-size: 0.6875rem;
 }
 
 /* ─────────────────────────────────────────────────────────────

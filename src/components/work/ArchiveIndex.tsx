@@ -1,22 +1,68 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { projects } from "@/content/projects";
+import { projects as appsProjects } from "@/content/projects";
+import { shopifyProjects } from "@/content/shopify-projects";
+import { wordpressProjects } from "@/content/wordpress-projects";
+import { laravelProjects } from "@/content/laravel-projects";
+import type { Project, ClientProject } from "@/content/types";
 import styles from "./ArchiveIndex.module.css";
 
 gsap.registerPlugin(useGSAP);
 
+type CategoryFilter = "all" | "apps" | "shopify" | "wordpress" | "laravel";
+
 interface ArchiveIndexProps {
   showTitle?: boolean;
   limit?: number;
+  initialFilter?: CategoryFilter;
 }
 
-export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
+export function ArchiveIndex({
+  showTitle = true,
+  limit,
+  initialFilter = "all",
+}: ArchiveIndexProps) {
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>(initialFilter);
   const containerRef = useRef<HTMLDivElement>(null);
-  const displayProjects = limit ? projects.slice(0, limit) : projects;
+
+  // Combine all 34 authentic projects into a master archive
+  const allMasterProjects = useMemo<(Project | ClientProject)[]>(() => {
+    // Return all software apps, Shopify client stores, WordPress client platforms, and Laravel
+    return [
+      ...appsProjects,
+      ...shopifyProjects,
+      ...wordpressProjects,
+      ...laravelProjects,
+    ];
+  }, []);
+
+  // Filter based on selected category
+  const filteredProjects = useMemo(() => {
+    let list: (Project | ClientProject)[] = [];
+    switch (activeCategory) {
+      case "apps":
+        list = appsProjects;
+        break;
+      case "shopify":
+        list = shopifyProjects;
+        break;
+      case "wordpress":
+        list = wordpressProjects;
+        break;
+      case "laravel":
+        list = laravelProjects;
+        break;
+      case "all":
+      default:
+        list = allMasterProjects;
+        break;
+    }
+    return limit ? list.slice(0, limit) : list;
+  }, [activeCategory, allMasterProjects, limit]);
 
   const { contextSafe } = useGSAP({ scope: containerRef });
 
@@ -69,7 +115,7 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
       overwrite: "auto",
     });
 
-    // Expand thumbnail preview smoothly
+    // Expand thumbnail preview smoothly if present
     const previewWrapper = rowEl.querySelector<HTMLElement>("[data-preview]");
     const previewImg = rowEl.querySelector<HTMLElement>("[data-preview-img]");
     if (previewWrapper) {
@@ -253,6 +299,23 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
     }
   });
 
+  const getBadgeLabel = (item: Project | ClientProject) => {
+    const p = item as ClientProject;
+    if (p.platform === "Shopify" || p.platform === "Shopify Plus") {
+      return "SHOPIFY STORE";
+    }
+    if (p.platform === "WordPress" || p.platform === "WooCommerce") {
+      return "WORDPRESS";
+    }
+    if (p.platform === "Laravel") {
+      return "LARAVEL APP";
+    }
+    if (item.liveUrl) {
+      return "LIVE APP";
+    }
+    return "GITHUB REPO";
+  };
+
   return (
     <div
       ref={containerRef}
@@ -267,19 +330,78 @@ export function ArchiveIndex({ showTitle = true, limit }: ArchiveIndexProps) {
               <h2 className={styles.archiveTitle}>All Projects &amp; Codebases</h2>
             </div>
             <div className={styles.headerRight}>
-              <span className={styles.countBadge}>
-                [ {String(projects.length).padStart(2, "0")} REPOSITORIES ]
+              <span className={styles.archiveCount}>
+                {String(filteredProjects.length).padStart(2, "0")} REPOSITORIES
               </span>
             </div>
           </div>
         )}
 
+        {/* Category Filter Controls */}
+        <div className={styles.filterBar} role="tablist" aria-label="Filter archive projects">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === "all"}
+            className={`${styles.filterBtn} ${activeCategory === "all" ? styles.filterBtnActive : ""}`}
+            onClick={() => setActiveCategory("all")}
+            id="filter-all"
+          >
+            <span>All Projects</span>
+            <span className={styles.filterCount}>({allMasterProjects.length})</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === "apps"}
+            className={`${styles.filterBtn} ${activeCategory === "apps" ? styles.filterBtnActive : ""}`}
+            onClick={() => setActiveCategory("apps")}
+            id="filter-apps"
+          >
+            <span>Systems &amp; Web Apps</span>
+            <span className={styles.filterCount}>({appsProjects.length})</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === "shopify"}
+            className={`${styles.filterBtn} ${activeCategory === "shopify" ? styles.filterBtnActive : ""}`}
+            onClick={() => setActiveCategory("shopify")}
+            id="filter-shopify"
+          >
+            <span>Shopify Stores</span>
+            <span className={styles.filterCount}>({shopifyProjects.length})</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === "wordpress"}
+            className={`${styles.filterBtn} ${activeCategory === "wordpress" ? styles.filterBtnActive : ""}`}
+            onClick={() => setActiveCategory("wordpress")}
+            id="filter-wordpress"
+          >
+            <span>WordPress / PHP</span>
+            <span className={styles.filterCount}>({wordpressProjects.length})</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === "laravel"}
+            className={`${styles.filterBtn} ${activeCategory === "laravel" ? styles.filterBtnActive : ""}`}
+            onClick={() => setActiveCategory("laravel")}
+            id="filter-laravel"
+          >
+            <span>Laravel</span>
+            <span className={styles.filterCount}>({laravelProjects.length})</span>
+          </button>
+        </div>
+
         {/* Interactive Swiss Hover Table */}
         <div className={styles.table}>
-          {displayProjects.map((project) => {
+          {filteredProjects.map((project) => {
             const dest = project.liveUrl ?? project.githubUrl ?? `/work/${project.slug}`;
             const isExternal = !dest.startsWith("/");
-            const badgeLabel = project.liveUrl ? "LIVE DEMO" : "GITHUB REPO";
+            const badgeLabel = getBadgeLabel(project);
 
             return (
               <a

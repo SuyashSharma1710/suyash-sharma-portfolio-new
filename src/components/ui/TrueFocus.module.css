@@ -1,0 +1,74 @@
+/**
+ * TrueFocus.module.css
+ * Editorial optical focus with architectural corner brackets
+ */
+.container {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  cursor: default;
+  line-height: 1.35;
+}
+
+.word {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.28em;
+  will-change: filter, opacity;
+}
+
+.word:last-of-type {
+  margin-right: 0;
+}
+
+.focusBracket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: var(--color-ink);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.topLeft {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.topRight {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.bottomLeft {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.bottomRight {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    filter: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .focusBracket {
+    display: none !important;
+  }
+}

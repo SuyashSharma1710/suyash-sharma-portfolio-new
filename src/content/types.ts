@@ -50,6 +50,29 @@ export interface Project {
   sections?: ProjectCaseStudySection[];
 }
 
+export interface ClientProject extends Project {
+  platform?: "Shopify" | "Shopify Plus" | "WordPress" | "WooCommerce" | "Laravel" | "Custom";
+  client?: string;
+  deliverables?: string[];
+}
+
+export interface ShopifyProject extends Project {
+  platform: "Shopify" | "Shopify Plus";
+  storeType?: string;
+  deliverables?: string[];
+}
+
+export interface WordPressProject extends Project {
+  platform: "WordPress" | "WooCommerce";
+  cmsType?: string;
+  deliverables?: string[];
+}
+
+export interface LaravelProject extends Project {
+  platform: "Laravel";
+  deliverables?: string[];
+}
+
 export interface ExperienceItem {
   period: string;
   role: string;
