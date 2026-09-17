@@ -3,19 +3,27 @@
 /**
  * Preloader.tsx — Editorial Pixel Matrix Logo Assembly & Column Mask Reveal
  * 
- * Concept:
- * 1. Chunky 12x12 pixel matrix assembles the brand logo block-by-block with GSAP stagger.
- * 2. Seamless fusion into the crisp solid vector brand monogram.
- * 3. 8-column vertical mask shutters slim down ("mask columns getting thin") to reveal the page.
- * 
- * Governed strictly by Centralized Motion System and gsap-react skills.
+ * Infallible, Rock-Solid & Buttery-Smooth Engineering:
+ * 1. ZERO-FLASH INITIAL STATE: Pure CSS ensures all blocks and logos start 100% invisible.
+ *    The screen starts cleanly blank with the 8 column mask shutters covering the page.
+ * 2. SEAMLESS CHOREOGRAPHY:
+ *    - Phase 1: Blank masked canvas, telemetry HUD slides in (0.35s).
+ *    - Phase 2: Pixel blocks pop in with staggered spring overshoot (0.75s).
+ *    - Phase 3: Tabular numeric counter counts synchronously from 000% to 100%.
+ *    - Phase 4: Solid vector monogram logo fuses in with glow bloom as pixel blocks dissolve.
+ *    - Phase 5: Deliberate hold (0.25s) on the resolved mark.
+ *    - Phase 6: Center stage gracefully dissolves upward (0.35s).
+ *    - Phase 7: 8 vertical columns slim down (scaleX: 1 -> 0) from center outward (0.75s) to reveal page.
+ * 3. 100% IDEMPOTENT DISMISS: Single teardown controller restores scroll, kills timeline, and cleans up.
+ * 4. FAIL-SAFE WATCHDOG: 3.5s hard timeout guarantees the page is never locked under any circumstance.
+ * 5. KEYBOARD ESCAPE & A11Y: Instant skip with ESC key or screen reader bypass.
  */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./Preloader.module.css";
 
-// Register GSAP plugins
+// Register GSAP plugins safely
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
@@ -24,6 +32,8 @@ const GRID_SIZE = 12;
 const LOGO_VIEWBOX_SIZE = 500;
 const STEP = LOGO_VIEWBOX_SIZE / GRID_SIZE;
 const BLOCK_PADDING = 3; // Gap between chunky pixel blocks
+const NUM_COLUMNS = 8;
+const MAX_WATCHDOG_TIMEOUT_MS = 3500; // Hard cutoff to prevent any stall
 
 // Generate the 12x12 binary logo mask
 function isInsideLogo(cx: number, cy: number): boolean {
@@ -71,143 +81,217 @@ for (let r = 0; r < GRID_SIZE; r++) {
   }
 }
 
-const NUM_COLUMNS = 8;
-
 export function Preloader() {
   const [isRendered, setIsRendered] = useState(true);
   const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const hasVisited = useRef(false);
+  const isDismissedRef = useRef(false);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const watchdogRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Check session storage on mount
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const alreadyLoaded = sessionStorage.getItem("suyash_preloader_seen");
-      if (alreadyLoaded) {
-        hasVisited.current = true;
-        setIsRendered(false);
-      }
+  // 100% Idempotent Dismissal Controller
+  const dismiss = useCallback(() => {
+    if (isDismissedRef.current) return;
+    isDismissedRef.current = true;
+
+    // 1. Clear safety watchdog timer
+    if (watchdogRef.current) {
+      clearTimeout(watchdogRef.current);
+      watchdogRef.current = null;
     }
+
+    // 2. Safely kill any active GSAP timeline
+    if (tlRef.current) {
+      try {
+        tlRef.current.kill();
+      } catch {
+        // Timeline kill fallback
+      }
+      tlRef.current = null;
+    }
+
+    // 3. Unconditionally restore document scroll
+    try {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    } catch {
+      // DOM access fallback
+    }
+
+    // 4. Notify downstream animations (hero, nav)
+    try {
+      window.dispatchEvent(new CustomEvent("portfolio:preloader-complete"));
+    } catch {
+      // Event dispatch fallback
+    }
+
+    // 5. Unmount cleanly
+    setIsRendered(false);
   }, []);
 
+  // Mount & Preflight Lifecycle
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      dismiss();
+      return;
+    }
+
+    // Lock scroll during preloader
+    try {
+      document.body.style.overflow = "hidden";
+    } catch {
+      // ignore
+    }
+
+    // Hard watchdog safety cutoff
+    watchdogRef.current = setTimeout(() => {
+      dismiss();
+    }, MAX_WATCHDOG_TIMEOUT_MS);
+
+    // Keyboard ESC shortcut to skip
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dismiss();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Unmount cleanup — guarantees scroll unlock
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      if (watchdogRef.current) {
+        clearTimeout(watchdogRef.current);
+      }
+      try {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      } catch {
+        // ignore
+      }
+    };
+  }, [dismiss]);
+
+  // GSAP Animation Sequence
   useGSAP(
     () => {
-      if (hasVisited.current || !containerRef.current) return;
+      if (!isRendered || isDismissedRef.current || !containerRef.current) return;
 
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      // Lock scroll while preloader is active
-      document.body.style.overflow = "hidden";
-
       if (prefersReducedMotion) {
-        document.body.style.overflow = "";
-        setIsRendered(false);
+        dismiss();
         return;
       }
 
-      const tl = gsap.timeline({
-        onComplete: () => {
-          document.body.style.overflow = "";
-          sessionStorage.setItem("suyash_preloader_seen", "true");
-          setIsRendered(false);
-        },
-      });
+      try {
+        const tl = gsap.timeline({
+          onComplete: () => {
+            dismiss();
+          },
+        });
+        tlRef.current = tl;
 
-      // 1. Initial State
-      gsap.set(`.${styles.pixelBlock}`, {
-        scale: 0,
-        opacity: 0,
-        transformOrigin: "center center",
-      });
-      gsap.set(`.${styles.solidLogo}`, { opacity: 0 });
-      gsap.set(`.${styles.maskColumn}`, { scaleX: 1 });
-      gsap.set(`.${styles.telemetry}`, { opacity: 0, y: 8 });
+        // 1. Initial State
+        gsap.set(`.${styles.pixelBlock}`, {
+          scale: 0,
+          opacity: 0,
+          transformOrigin: "center center",
+        });
+        gsap.set(`.${styles.solidLogo}`, { opacity: 0 });
+        gsap.set(`.${styles.maskColumn}`, { scaleX: 1 });
+        gsap.set(`.${styles.telemetry}`, { opacity: 0, y: 8 });
 
-      // Progress counter animation object
-      const counterObj = { val: 0 };
+        // Progress counter animation object
+        const counterObj = { val: 0 };
 
-      // 2. Entrance Sequence
-      tl.to(`.${styles.telemetry}`, {
-        opacity: 1,
-        y: 0,
-        duration: 0.35,
-        ease: "power2.out",
-      })
-        // Pixel blocks assembly with dynamic digital ripple
-        .to(
-          `.${styles.pixelBlock}`,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            ease: "back.out(1.8)",
-            stagger: {
-              amount: 0.75,
-              from: "random",
+        // 2. Entrance Sequence
+        tl.to(`.${styles.telemetry}`, {
+          opacity: 1,
+          y: 0,
+          duration: 0.35,
+          ease: "power2.out",
+        })
+          // Pixel blocks assembly with dynamic digital ripple
+          .to(
+            `.${styles.pixelBlock}`,
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.45,
+              ease: "back.out(1.8)",
+              stagger: {
+                amount: 0.75,
+                from: "random",
+              },
             },
-          },
-          "-=0.1"
-        )
-        // Numeric progress tracker (0 → 100%)
-        .to(
-          counterObj,
-          {
-            val: 100,
-            duration: 0.9,
-            ease: "power2.inOut",
-            onUpdate: () => {
-              setProgress(Math.round(counterObj.val));
+            "-=0.1"
+          )
+          // Numeric progress tracker (0 → 100%)
+          .to(
+            counterObj,
+            {
+              val: 100,
+              duration: 0.9,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                setProgress(Math.round(counterObj.val));
+              },
             },
-          },
-          "<"
-        )
-        // Solid Vector Logo fuses in with subtle bloom
-        .to(
-          `.${styles.solidLogo}`,
-          {
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          },
-          "-=0.15"
-        )
-        // Pixel blocks dissolve as solid logo takes over
-        .to(
-          `.${styles.pixelBlock}`,
-          {
-            opacity: 0,
-            duration: 0.25,
-            ease: "power2.out",
-          },
-          "<"
-        )
-        // Brief deliberate hold on the resolved mark
-        .to({}, { duration: 0.25 })
-        // Center content lifts away
-        .to(
-          `.${styles.centerContent}`,
-          {
-            opacity: 0,
-            scale: 0.96,
-            y: -12,
-            duration: 0.35,
-            ease: "power3.in",
-          }
-        )
-        // 3. Mask Columns getting thin (scaleX: 1 → 0) in center-outward ripple
-        .to(
-          `.${styles.maskColumn}`,
-          {
-            scaleX: 0,
-            duration: 0.75,
-            ease: "power3.inOut",
-            stagger: {
-              amount: 0.35,
-              from: "center",
+            "<"
+          )
+          // Solid Vector Logo fuses in with subtle bloom
+          .to(
+            `.${styles.solidLogo}`,
+            {
+              opacity: 1,
+              duration: 0.3,
+              ease: "power2.out",
             },
-          },
-          "-=0.1"
-        );
+            "-=0.15"
+          )
+          // Pixel blocks dissolve as solid logo takes over
+          .to(
+            `.${styles.pixelBlock}`,
+            {
+              opacity: 0,
+              duration: 0.25,
+              ease: "power2.out",
+            },
+            "<"
+          )
+          // Brief deliberate hold on the resolved mark
+          .to({}, { duration: 0.25 })
+          // Center content lifts away
+          .to(
+            `.${styles.centerContent}`,
+            {
+              opacity: 0,
+              scale: 0.96,
+              y: -12,
+              duration: 0.35,
+              ease: "power3.in",
+            }
+          )
+          // 3. Mask Columns getting thin (scaleX: 1 → 0) in center-outward ripple
+          .to(
+            `.${styles.maskColumn}`,
+            {
+              scaleX: 0,
+              duration: 0.75,
+              ease: "power3.inOut",
+              stagger: {
+                amount: 0.35,
+                from: "center",
+              },
+            },
+            "-=0.1"
+          );
+      } catch (err) {
+        console.warn("Preloader animation fallback activated:", err);
+        dismiss();
+      }
     },
     { scope: containerRef }
   );
