@@ -49,6 +49,17 @@ export function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+    }
+
+    // Reset scroll event listener for page transitions
+    const handleResetScroll = () => {
+      lenis.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("portfolio:reset-scroll", handleResetScroll);
 
     // Synchronize scroll events with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -62,9 +73,13 @@ export function SmoothScrollProvider({
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      window.removeEventListener("portfolio:reset-scroll", handleResetScroll);
       gsap.ticker.remove(updateRaf);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== "undefined") {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis;
+      }
     };
   }, []);
 

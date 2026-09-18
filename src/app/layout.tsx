@@ -7,6 +7,7 @@ import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { CursorTracker } from "@/lib/motion/components/CursorTracker";
 import { Preloader } from "@/components/ui/Preloader";
+import { PageTransitionProvider } from "@/components/transitions/PageTransitionProvider";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -84,16 +85,18 @@ export default function RootLayout({
         <ThemeProvider>
           <Preloader />
           <CursorTracker />
-          <Nav />
-          <SmoothScrollProvider>
-            <ScrollRevealProvider>
-              <div id="root-container">
-                <main id="main-content" tabIndex={-1}>
-                  {children}
-                </main>
-              </div>
-            </ScrollRevealProvider>
-          </SmoothScrollProvider>
+          <PageTransitionProvider>
+            <Nav />
+            <SmoothScrollProvider>
+              <ScrollRevealProvider>
+                <div id="root-container">
+                  <main id="main-content" tabIndex={-1}>
+                    {children}
+                  </main>
+                </div>
+              </ScrollRevealProvider>
+            </SmoothScrollProvider>
+          </PageTransitionProvider>
         </ThemeProvider>
       </body>
     </html>
