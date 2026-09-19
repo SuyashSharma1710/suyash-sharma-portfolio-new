@@ -29,7 +29,7 @@ export function useScrollReveal() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
+              entry.target.setAttribute("data-visible", "true");
               observer?.unobserve(entry.target);
             }
           });
@@ -39,7 +39,7 @@ export function useScrollReveal() {
 
       const elements = document.querySelectorAll<HTMLElement>(".reveal, .reveal-fade");
       elements.forEach((el) => {
-        if (!el.classList.contains("is-visible")) {
+        if (!el.getAttribute("data-visible")) {
           observer?.observe(el);
         }
       });

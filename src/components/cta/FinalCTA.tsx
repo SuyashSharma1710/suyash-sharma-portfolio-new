@@ -33,7 +33,7 @@ export function FinalCTA() {
       />
 
       <div className={`container ${styles.containerRel}`}>
-        <div className={`${styles.inner} reveal`}>
+        <div className={`${styles.inner} reveal`} suppressHydrationWarning>
           <div className={styles.eyebrow}>
             <span className={styles.statusDot} aria-hidden="true" />
             <span className={styles.eyebrowText}>INITIATE COLLABORATION</span>

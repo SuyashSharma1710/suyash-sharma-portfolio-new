@@ -36,7 +36,7 @@ export function Lab() {
             const dest = item.githubUrl ?? item.href ?? `/lab/${item.slug}`;
             const isExternal = !dest.startsWith("/");
             return (
-              <li key={item.slug} className="reveal">
+              <li key={item.slug} className="reveal" suppressHydrationWarning>
                 <Link
                   href={dest}
                   className={styles.item}
