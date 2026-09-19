@@ -77,6 +77,7 @@ export interface ExperienceItem {
   period: string;
   role: string;
   company: string;
+  companyLogo?: string;
   summary: string;
   highlights?: string[];
   technologies: string[];

@@ -6,6 +6,7 @@
  * Governed strictly by RULES.md Rule 2 (Zero-Invention) and Rule 10.1 (Zero-Box Policy)
  */
 import { useState } from "react";
+import Image from "next/image";
 import { experience } from "@/content/experience";
 import { DecryptedText } from "@/components/ui/DecryptedText";
 import { ShinyText } from "@/components/ui/ShinyText";
@@ -81,7 +82,7 @@ export function Experience() {
                     aria-controls={`exp-drawer-${idx}`}
                     id={`exp-header-${idx}`}
                   >
-                    {/* Left: Period & Status */}
+                    {/* Left: Period, Status & 1:1 Company Logo */}
                     <div className={styles.periodCol}>
                       <span className={styles.period}>{item.period}</span>
                       {isPresent && (
@@ -91,6 +92,17 @@ export function Experience() {
                             ACTIVE ROLE
                           </ShinyText>
                         </span>
+                      )}
+                      {item.companyLogo && (
+                        <div className={styles.companyLogoWrapper} aria-hidden="true">
+                          <Image
+                            src={item.companyLogo}
+                            alt={`${item.company} logo`}
+                            width={44}
+                            height={44}
+                            className={styles.companyLogoImg}
+                          />
+                        </div>
                       )}
                     </div>
 

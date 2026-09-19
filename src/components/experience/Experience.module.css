@@ -159,6 +159,40 @@
   color: var(--color-ink);
 }
 
+/* ── 1:1 Company Logo ── */
+.companyLogoWrapper {
+  margin-top: 6px;
+  width: 44px;
+  height: 44px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  background-color: var(--color-hover-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.item:hover .companyLogoWrapper,
+.item[data-expanded="true"] .companyLogoWrapper {
+  border-color: var(--color-ink);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.companyLogoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* ── Center Column: Role & Summary ── */
 .roleCol {
   display: flex;

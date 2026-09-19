@@ -5,6 +5,7 @@ export const experience: ExperienceItem[] = [
     period: "March 2025 – Present",
     role: "Senior Web Developer",
     company: "Cliqk Media",
+    companyLogo: "/images/experience/cliqk-media.svg",
     summary:
       "Engineered and delivered 25+ client web projects, developing responsive web applications and landing pages with React, Next.js, and Node.js, alongside custom WordPress and Shopify platforms.",
     highlights: [
@@ -18,6 +19,7 @@ export const experience: ExperienceItem[] = [
     period: "2024 – Present",
     role: "Freelance & Contract Full-Stack Developer",
     company: "Freelance, agency, and contract engagements",
+    companyLogo: "/images/experience/freelance.svg",
     summary:
       "Delivered 10+ paid full-stack web applications and custom systems across diverse client engagements, utilizing React, Next.js, Node.js, Laravel, Django, Python, Supabase, PostgreSQL, and TypeScript.",
     highlights: [
@@ -31,6 +33,7 @@ export const experience: ExperienceItem[] = [
     period: "December 2024 – February 2025",
     role: "Software Development Intern",
     company: "The Coding Cult Pvt. Ltd.",
+    companyLogo: "/images/experience/coding-cult.svg",
     summary:
       "Developed a modular team and task-management application with multi-level RBAC and workflow automation.",
     highlights: [
@@ -44,6 +47,7 @@ export const experience: ExperienceItem[] = [
     period: "September 2023 – October 2023",
     role: "Web Development Intern",
     company: "Sync Intern",
+    companyLogo: "/images/experience/sync-intern.svg",
     summary:
       "Developed four full-stack Django/Python applications, implementing relational database models and server-side routing.",
     highlights: [
