@@ -6,10 +6,12 @@
  */
 import { useEffect, useState } from "react";
 import { toggleTheme } from "./ThemeProvider";
+import { useSound } from "../sound/SoundProvider";
 import styles from "../nav/Nav.module.css";
 
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
+  const { play } = useSound();
 
   useEffect(() => {
     const theme = document.documentElement.getAttribute("data-theme");
@@ -25,6 +27,7 @@ export function ThemeToggle() {
   }, []);
 
   const handleToggle = () => {
+    play("toggle");
     toggleTheme();
   };
 
@@ -33,6 +36,7 @@ export function ThemeToggle() {
       id="theme-toggle"
       className={styles.themeToggle}
       onClick={handleToggle}
+      data-sound="none"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Light mode" : "Dark mode"}
     >

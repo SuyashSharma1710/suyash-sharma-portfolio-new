@@ -30,6 +30,8 @@ CHECK AVAILABLE SKILLS
 ↓
 IF A RELEVANT SKILL EXISTS → READ / USE IT
 ↓
+CHECK FOR EXISTING / STANDARD LIBRARIES (STRICT: DO NOT HARDCODE)
+↓
 CHECK PROJECT CONSTRAINTS
 ↓
 CHECK EXISTING IMPLEMENTATION
@@ -100,6 +102,23 @@ RULES.md
 ↓
 Master Plan
 ```
+
+---
+
+## Step 2.5 — Mandatory Library Pre-Check (STRICT: DO NOT HARDCODE)
+
+> **STATUS: MANDATORY & STRICT**
+>
+> Before building or coding **ANY** feature, capability, or technical subsystem:
+> 
+> 1. **MANDATORY LIBRARY RESEARCH**: The agent **MUST** check whether an established, industry-standard, well-maintained library exists for that task in the modern React / Next.js / TypeScript ecosystem (e.g. `tone` for sound synthesis/effects, `howler`/`use-sound` for audio playback, `gsap` for complex timeline animations, `lenis` for smooth scrolling, `lucide-react` for icons, etc.).
+> 2. **STRICT ENFORCEMENT — USE THE LIBRARY**: If a reputable, standard library exists for the required feature, **YOU MUST USE THE LIBRARY**.
+> 3. **DO NOT HARDCODE / REINVENT**: Hardcoding complex technical mechanisms from scratch (e.g., writing manual Web Audio oscillator graphs, custom physics spring integrators, custom gesture decoders, etc.) instead of utilizing standard libraries is **STRICTLY FORBIDDEN**.
+> 4. **RATIONALE**: Hardcoding complex subsystems leads to regressions, browser incompatibilities, edge-case failures, and unnecessary maintenance burdens. Standard libraries provide battle-tested reliability, performance optimizations, and clean maintainability.
+> 5. **EXCEPTIONS**: Custom code is ONLY permitted if:
+>    - No maintained, compatible library exists for the specific requirement.
+>    - The task is a trivial 1-line native browser API call with zero state/lifecycle management.
+>    - The user explicitly instructs to avoid third-party libraries for that specific feature.
 
 ---
 
@@ -209,21 +228,15 @@ I recommend adding it to the plan before implementation.
 
 Only after completing the checks above may implementation begin.
 
-Use the simplest approved solution.
-
-Prefer:
+When implementing features:
 
 ```text
-existing code
-→ browser API
-→ CSS
-→ React
-→ Next.js
-→ approved library
-→ additional dependency
+1. Standard, industry-tested library (per Step 2.5: DO NOT hardcode complex subsystems)
+2. Existing codebase patterns & approved components
+3. Standard React / Next.js / CSS idioms
 ```
 
-Do not jump directly to a library.
+Always prefer reputable, maintained packages over fragile hand-rolled implementations.
 
 ---
 

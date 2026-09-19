@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useEffect } from "react";
 import { submitContactForm, type ContactFormState } from "@/app/contact/actions";
+import { useSound } from "@/components/sound/SoundProvider";
 import styles from "./ContactForm.module.css";
 
 const initialState: ContactFormState = {};
@@ -9,6 +10,13 @@ const initialState: ContactFormState = {};
 export function ContactForm() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
   const [hasReset, setHasReset] = useState(false);
+  const { play } = useSound();
+
+  useEffect(() => {
+    if (state.success && !hasReset) {
+      play("success");
+    }
+  }, [state.success, hasReset, play]);
 
   if (state.success && !hasReset) {
     return (

@@ -26,6 +26,7 @@ import React, {
 import { usePathname, useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { soundEngine } from "@/lib/sound/soundEngine";
 import styles from "./PageTransition.module.css";
 
 const NUM_COLUMNS = 5;
@@ -236,6 +237,9 @@ export function PageTransitionProvider({
         router.push(href);
         return;
       }
+
+      // Play aerodynamic transition whoosh
+      soundEngine.play("whoosh");
 
       gsap.set(containerRef.current, { visibility: "visible" });
       gsap.set(validSlats, {

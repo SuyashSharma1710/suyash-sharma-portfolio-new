@@ -342,6 +342,7 @@ export function ArchiveIndex({
           <button
             type="button"
             role="tab"
+            data-sound="tab"
             aria-selected={activeCategory === "all"}
             className={`${styles.filterBtn} ${activeCategory === "all" ? styles.filterBtnActive : ""}`}
             onClick={() => setActiveCategory("all")}
@@ -353,6 +354,7 @@ export function ArchiveIndex({
           <button
             type="button"
             role="tab"
+            data-sound="tab"
             aria-selected={activeCategory === "apps"}
             className={`${styles.filterBtn} ${activeCategory === "apps" ? styles.filterBtnActive : ""}`}
             onClick={() => setActiveCategory("apps")}
@@ -364,6 +366,7 @@ export function ArchiveIndex({
           <button
             type="button"
             role="tab"
+            data-sound="tab"
             aria-selected={activeCategory === "shopify"}
             className={`${styles.filterBtn} ${activeCategory === "shopify" ? styles.filterBtnActive : ""}`}
             onClick={() => setActiveCategory("shopify")}
@@ -375,6 +378,7 @@ export function ArchiveIndex({
           <button
             type="button"
             role="tab"
+            data-sound="tab"
             aria-selected={activeCategory === "wordpress"}
             className={`${styles.filterBtn} ${activeCategory === "wordpress" ? styles.filterBtnActive : ""}`}
             onClick={() => setActiveCategory("wordpress")}
@@ -386,6 +390,7 @@ export function ArchiveIndex({
           <button
             type="button"
             role="tab"
+            data-sound="tab"
             aria-selected={activeCategory === "laravel"}
             className={`${styles.filterBtn} ${activeCategory === "laravel" ? styles.filterBtnActive : ""}`}
             onClick={() => setActiveCategory("laravel")}

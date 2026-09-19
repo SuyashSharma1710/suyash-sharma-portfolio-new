@@ -1,0 +1,37 @@
+.soundToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  transition:
+    color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.soundToggle:hover {
+  color: var(--color-ink);
+  background: var(--color-hover-bg);
+  border-color: var(--color-line);
+}
+
+.soundToggle:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.iconSvg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.activeBar {
+  transform-origin: bottom center;
+}

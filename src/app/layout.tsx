@@ -3,6 +3,7 @@ import { Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav/Nav";
 import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
+import { SoundProvider } from "@/components/sound/SoundProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { CursorTracker } from "@/lib/motion/components/CursorTracker";
@@ -83,20 +84,22 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider>
-          <Preloader />
-          <CursorTracker />
-          <PageTransitionProvider>
-            <Nav />
-            <SmoothScrollProvider>
-              <ScrollRevealProvider>
-                <div id="root-container">
-                  <main id="main-content" tabIndex={-1}>
-                    {children}
-                  </main>
-                </div>
-              </ScrollRevealProvider>
-            </SmoothScrollProvider>
-          </PageTransitionProvider>
+          <SoundProvider>
+            <Preloader />
+            <CursorTracker />
+            <PageTransitionProvider>
+              <Nav />
+              <SmoothScrollProvider>
+                <ScrollRevealProvider>
+                  <div id="root-container">
+                    <main id="main-content" tabIndex={-1}>
+                      {children}
+                    </main>
+                  </div>
+                </ScrollRevealProvider>
+              </SmoothScrollProvider>
+            </PageTransitionProvider>
+          </SoundProvider>
         </ThemeProvider>
       </body>
     </html>

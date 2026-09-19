@@ -5,6 +5,7 @@ import { LogoPrimary } from "./LogoPrimary";
 import { LogoConvergence } from "./LogoConvergence";
 import { LogoAperture } from "./LogoAperture";
 import { LogoMonolith } from "./LogoMonolith";
+import { useSound } from "@/components/sound/SoundProvider";
 import styles from "./LogoShowcase.module.css";
 
 interface ConceptItem {
@@ -102,9 +103,11 @@ export function LogoShowcase() {
   const [stageTheme, setStageTheme] = useState<"auto" | "light" | "dark">("auto");
   const [showTelemetry, setShowTelemetry] = useState<boolean>(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const { play } = useSound();
 
   const handleCopySvg = (id: string, rawSvg: string) => {
     navigator.clipboard.writeText(rawSvg);
+    play("success");
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };

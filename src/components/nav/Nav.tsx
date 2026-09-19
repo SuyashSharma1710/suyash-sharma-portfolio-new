@@ -12,6 +12,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../theme/ThemeToggle";
+import { SoundToggle } from "../sound/SoundToggle";
 import { LogoPrimary } from "../logo/LogoPrimary";
 import { siteConfig } from "@/content/site";
 import styles from "./Nav.module.css";
@@ -227,8 +228,9 @@ export function Nav() {
               </ul>
             </nav>
 
-            {/* Actions: theme toggle + mobile trigger */}
+            {/* Actions: sound toggle + theme toggle + mobile trigger */}
             <div className={styles.navActions}>
+              <SoundToggle />
               <ThemeToggle />
               <button
                 ref={triggerRef}
@@ -285,7 +287,10 @@ export function Nav() {
           <span className={styles.mobileEmail}>
             {siteConfig.social.email}
           </span>
-          <ThemeToggle />
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <SoundToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </>
