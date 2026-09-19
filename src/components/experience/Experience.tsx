@@ -98,8 +98,8 @@ export function Experience() {
                           <Image
                             src={item.companyLogo}
                             alt={`${item.company} logo`}
-                            width={44}
-                            height={44}
+                            width={140}
+                            height={140}
                             className={styles.companyLogoImg}
                           />
                         </div>

@@ -161,7 +161,7 @@
 
 /* ── 1:1 Company Logo ── */
 .companyLogoWrapper {
-  margin-top: 6px;
+  margin-top: 8px;
   width: 44px;
   height: 44px;
   aspect-ratio: 1 / 1;
@@ -174,16 +174,26 @@
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition:
+    width 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 420ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color var(--duration-normal) var(--ease-out),
-    transform var(--duration-normal) var(--ease-out-expo),
-    box-shadow var(--duration-normal) var(--ease-out);
+    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.item:hover .companyLogoWrapper,
-.item[data-expanded="true"] .companyLogoWrapper {
+.item:hover .companyLogoWrapper {
   border-color: var(--color-ink);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Enlarge 1:1 company emblem when drawer is open */
+.item[data-expanded="true"] .companyLogoWrapper {
+  width: 120px;
+  height: 120px;
+  margin-top: 14px;
+  border-radius: 10px;
+  border-color: var(--color-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .companyLogoImg {
@@ -191,6 +201,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item[data-expanded="true"] .companyLogoImg {
+  transform: scale(1);
 }
 
 /* ── Center Column: Role & Summary ── */
@@ -418,7 +433,14 @@
     grid-column: 1 / -1;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--space-3);
+  }
+
+  .item[data-expanded="true"] .companyLogoWrapper {
+    width: 80px;
+    height: 80px;
+    margin-top: 6px;
   }
 
   .drawerContent {
