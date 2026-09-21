@@ -52,6 +52,8 @@ export const siteConfig: SiteConfig = {
   social: {
     github:    "https://github.com/SuyashSharma1710",
     linkedin:  "https://www.linkedin.com/in/suyash-sharma-756375196",
+    twitter:   "https://x.com/SuyashSHARMA170",
+    facebook:  "https://www.facebook.com/share/1CAau7erM6/",
     instagram: "https://www.instagram.com/yashbhardwaj56/",
     email:     "suyashsharma171001@gmail.com",
   },

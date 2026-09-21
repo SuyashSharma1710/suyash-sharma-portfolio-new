@@ -102,6 +102,36 @@ export default function ContactPage() {
                   </span>
                 </a>
 
+                {siteConfig.social.twitter && (
+                  <a
+                    href={siteConfig.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.networkLink}
+                  >
+                    <span className={styles.linkLabel}>X (Twitter)</span>
+                    <span className={styles.linkMeta}>
+                      <span>@SuyashSHARMA170</span>
+                      <span aria-hidden="true">↗</span>
+                    </span>
+                  </a>
+                )}
+
+                {siteConfig.social.facebook && (
+                  <a
+                    href={siteConfig.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.networkLink}
+                  >
+                    <span className={styles.linkLabel}>Facebook</span>
+                    <span className={styles.linkMeta}>
+                      <span>Page</span>
+                      <span aria-hidden="true">↗</span>
+                    </span>
+                  </a>
+                )}
+
                 {siteConfig.social.instagram && (
                   <a
                     href={siteConfig.social.instagram}

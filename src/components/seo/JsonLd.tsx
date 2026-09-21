@@ -25,6 +25,8 @@ export function RootJsonLd() {
     sameAs: [
       siteConfig.social.github,
       siteConfig.social.linkedin,
+      ...(siteConfig.social.twitter ? [siteConfig.social.twitter] : []),
+      ...(siteConfig.social.facebook ? [siteConfig.social.facebook] : []),
       ...(siteConfig.social.instagram ? [siteConfig.social.instagram] : []),
     ],
     knowsAbout: [

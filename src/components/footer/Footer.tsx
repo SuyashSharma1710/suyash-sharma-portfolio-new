@@ -15,6 +15,8 @@ import styles from "./Footer.module.css";
 const socials = [
   { label: "GitHub",    href: siteConfig.social.github,    external: true },
   { label: "LinkedIn",  href: siteConfig.social.linkedin,  external: true },
+  ...(siteConfig.social.twitter ? [{ label: "X (Twitter)", href: siteConfig.social.twitter, external: true }] : []),
+  ...(siteConfig.social.facebook ? [{ label: "Facebook", href: siteConfig.social.facebook, external: true }] : []),
   ...(siteConfig.social.instagram ? [{ label: "Instagram", href: siteConfig.social.instagram, external: true }] : []),
   { label: "Email",     href: `mailto:${siteConfig.social.email}`, external: false },
 ] as const;
