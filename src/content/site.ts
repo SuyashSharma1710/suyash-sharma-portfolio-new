@@ -1,17 +1,27 @@
 /**
- * Site Configuration
+ * Site Configuration & Central Domain Management
  * Governed by RULES.md Rule 2 — Zero-Invention Policy
  * All data is real and confirmed by the user.
+ *
+ * CENTRAL DOMAIN CONFIGURATION:
+ * Update SITE_DOMAIN below (or provide NEXT_PUBLIC_SITE_URL in environment variables).
+ * All metadataBase, canonical URLs, OpenGraph/Twitter cards, dynamic preview images,
+ * JSON-LD Schemas, sitemap.xml, and robots.txt will update from this single source of truth.
  */
 import type { SiteConfig } from "./types";
 
+export const SITE_DOMAIN = "suyash-sharma-portfolio-new.vercel.app";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE_DOMAIN}`;
+
 export const siteConfig: SiteConfig = {
   name: "Suyash Sharma",
+  domain: SITE_DOMAIN,
   jobTitle: "Full-Stack Engineer & Systems Architect",
   title: "Suyash Sharma — Full-Stack Engineer & Systems Architect",
   description:
     "Full-Stack Engineer building high-performance web platforms, offline AI search systems, and production web applications where architectural rigor, design precision, and intelligent compute converge. Based in Delhi, India.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://suyashsharma.dev",
+  url: SITE_URL,
   locale: "en_IN",
   keywords: [
     "Suyash Sharma",

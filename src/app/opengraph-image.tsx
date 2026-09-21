@@ -175,7 +175,7 @@ export default async function Image() {
               textTransform: "uppercase",
             }}
           >
-            suyashsharma.dev · Delhi, India
+            {`${siteConfig.domain || siteConfig.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} · ${siteConfig.location}`}
           </span>
         </div>
       </div>

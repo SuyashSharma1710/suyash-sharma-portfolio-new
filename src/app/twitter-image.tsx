@@ -174,7 +174,7 @@ export default async function TwitterImage() {
               textTransform: "uppercase",
             }}
           >
-            suyashsharma.dev · Delhi, India
+            {`${siteConfig.domain || siteConfig.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} · ${siteConfig.location}`}
           </span>
         </div>
       </div>

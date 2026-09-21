@@ -11,6 +11,7 @@ export interface NavItem {
 
 export interface SiteConfig {
   name: string;
+  domain?: string;
   jobTitle?: string;
   title: string;
   description: string;
