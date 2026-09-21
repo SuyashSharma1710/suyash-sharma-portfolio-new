@@ -59,6 +59,92 @@ export function RootJsonLd() {
     inLanguage: "en-US",
   };
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "@id": `${baseUrl}/#localbusiness`,
+    name: "Suyash Sharma — Full-Stack Engineering & Web Development",
+    alternateName: "Suyash Sharma Technical Consulting",
+    description: siteConfig.description,
+    url: baseUrl,
+    image: `${baseUrl}/images/suyash-editorial.jpg`,
+    email: `mailto:${siteConfig.social.email}`,
+    priceRange: "$$$",
+    telephone: "",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Delhi",
+      addressRegion: "Delhi",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 28.6139,
+      longitude: 77.209,
+    },
+    areaServed: [
+      {
+        "@type": "Country",
+        name: "India",
+      },
+      {
+        "@type": "Country",
+        name: "Worldwide",
+      },
+    ],
+    founder: {
+      "@id": `${baseUrl}/#person`,
+    },
+    sameAs: [
+      siteConfig.social.github,
+      siteConfig.social.linkedin,
+      ...(siteConfig.social.twitter ? [siteConfig.social.twitter] : []),
+      ...(siteConfig.social.facebook ? [siteConfig.social.facebook] : []),
+      ...(siteConfig.social.instagram ? [siteConfig.social.instagram] : []),
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+        ],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Engineering & Development Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Full-Stack Web Development (Next.js, React, TypeScript)",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Local AI & Systems Engineering (Rust, Tauri, ONNX)",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "CMS & E-Commerce Engineering (WordPress, Shopify)",
+          },
+        },
+      ],
+    },
+  };
+
   return (
     <>
       <script
@@ -68,6 +154,10 @@ export function RootJsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
     </>
   );
