@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
+import "@/styles/tokens.css";
+import "@/styles/typography.css";
+import "@/styles/utilities.css";
+import "@/styles/motion.css";
 import "./globals.css";
 import { Nav } from "@/components/nav/Nav";
 import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
@@ -17,18 +21,24 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-instrument-serif",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono-code",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 export const viewport: Viewport = {
