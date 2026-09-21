@@ -8,14 +8,14 @@ import styles from "./ContactPage.module.css";
 export const metadata: Metadata = {
   title: "Contact & Inquiries",
   description:
-    "Direct communication channels and project availability for Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
+    "Direct communication channels, consulting inquiries, and project availability for Suyash Sharma — Full-Stack Engineer in Delhi, India.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
     title: "Contact & Inquiries — Suyash Sharma",
     description:
-      "Direct communication channels and project availability for Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
+      "Direct communication channels, consulting inquiries, and project availability for Suyash Sharma — Full-Stack Engineer in Delhi, India.",
     url: `${siteConfig.url}/contact`,
   },
 };

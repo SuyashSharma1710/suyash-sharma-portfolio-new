@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
   jobTitle: "Full-Stack Engineer & Systems Architect",
   title: "Suyash Sharma — Full-Stack Engineer & Systems Architect",
   description:
-    "Full-Stack Engineer building high-performance web platforms, offline AI search systems, and production web applications where architectural rigor, design precision, and intelligent compute converge. Based in Delhi, India.",
+    "Full-Stack Engineer building high-performance web applications, offline AI search systems, and scalable digital platforms in Delhi, India.",
   url: SITE_URL,
   locale: "en_IN",
   keywords: [

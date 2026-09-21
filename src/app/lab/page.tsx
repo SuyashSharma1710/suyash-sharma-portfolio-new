@@ -8,14 +8,14 @@ import styles from "./LabPage.module.css";
 export const metadata: Metadata = {
   title: "Lab & Experiments",
   description:
-    "Experimental software artifacts, offline AI tools, and system prototypes engineered by Suyash Sharma.",
+    "Interactive software artifacts, offline AI experiments, and systems engineering prototypes developed by Suyash Sharma in Delhi, India.",
   alternates: {
     canonical: "/lab",
   },
   openGraph: {
     title: "Lab & Experiments — Suyash Sharma",
     description:
-      "Experimental software artifacts, offline AI tools, and system prototypes engineered by Suyash Sharma.",
+      "Interactive software artifacts, offline AI experiments, and systems engineering prototypes developed by Suyash Sharma in Delhi, India.",
     url: `${siteConfig.url}/lab`,
   },
 };
