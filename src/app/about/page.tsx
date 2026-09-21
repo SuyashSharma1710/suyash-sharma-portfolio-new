@@ -4,20 +4,28 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { siteConfig } from "@/content/site";
 import { experience } from "@/content/experience";
 import { LogoShowcase } from "@/components/logo/LogoShowcase";
+import { AboutJsonLd } from "@/components/seo/JsonLd";
 import styles from "./AboutPage.module.css";
 
 export const metadata: Metadata = {
   title: "About & Engineering Philosophy",
   description:
-    "Background, technical approach, and engineering experience of Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
+    "Background, technical approach, and verified engineering experience of Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: "About & Engineering Philosophy — Suyash Sharma",
+    description:
+      "Background, technical approach, and engineering experience of Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
+    url: `${siteConfig.url}/about`,
   },
 };
 
 export default function AboutPage() {
   return (
     <div className={styles.pageWrapper}>
+      <AboutJsonLd />
       <div className="container">
         <div className={styles.topBar}>
           <Link href="/" className={styles.backLink}>

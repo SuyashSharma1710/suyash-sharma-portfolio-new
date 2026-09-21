@@ -227,7 +227,7 @@ export function Capabilities() {
             {cap.image && (
               <Image
                 src={cap.image}
-                alt={cap.title}
+                alt={`${cap.title} — ${cap.tagline} architectural visualization`}
                 fill
                 priority
                 sizes="100vw"

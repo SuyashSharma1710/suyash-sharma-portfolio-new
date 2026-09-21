@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { labItems } from "@/content/lab";
 import { PixelBlast } from "@/components/ui/PixelBlast";
+import { siteConfig } from "@/content/site";
 import styles from "./LabPage.module.css";
 
 export const metadata: Metadata = {
@@ -10,6 +11,12 @@ export const metadata: Metadata = {
     "Experimental software artifacts, offline AI tools, and system prototypes engineered by Suyash Sharma.",
   alternates: {
     canonical: "/lab",
+  },
+  openGraph: {
+    title: "Lab & Experiments — Suyash Sharma",
+    description:
+      "Experimental software artifacts, offline AI tools, and system prototypes engineered by Suyash Sharma.",
+    url: `${siteConfig.url}/lab`,
   },
 };
 

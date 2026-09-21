@@ -25,7 +25,7 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
       }}
       role="alert"
     >
-      <h2>Something went wrong</h2>
+      <h1>Something went wrong</h1>
       <p style={{ color: "var(--color-muted)" }}>
         An unexpected error occurred.
       </p>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArchiveIndex } from "@/components/work/ArchiveIndex";
+import { WorkJsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/content/site";
 import styles from "./WorkPage.module.css";
 
 export const metadata: Metadata = {
@@ -10,11 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/work",
   },
+  openGraph: {
+    title: "Work & Project Archive — Suyash Sharma",
+    description:
+      "Complete index of production systems, developer tools, open-source repositories, and digital experiments engineered by Suyash Sharma.",
+    url: `${siteConfig.url}/work`,
+  },
 };
 
 export default function WorkPage() {
   return (
     <div className={styles.pageWrapper}>
+      <WorkJsonLd />
       <div className="container">
         <div className={styles.topBar}>
           <Link href="/" className={styles.backLink}>

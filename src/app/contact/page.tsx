@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/content/site";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactJsonLd } from "@/components/seo/JsonLd";
 import styles from "./ContactPage.module.css";
 
 export const metadata: Metadata = {
@@ -11,11 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
   },
+  openGraph: {
+    title: "Contact & Inquiries — Suyash Sharma",
+    description:
+      "Direct communication channels and project availability for Suyash Sharma — Full-Stack Engineer based in Delhi, India.",
+    url: `${siteConfig.url}/contact`,
+  },
 };
 
 export default function ContactPage() {
   return (
     <div className={styles.pageWrapper}>
+      <ContactJsonLd />
       <div className="container">
         <div className={styles.topBar}>
           <Link href="/" className={styles.backLink}>

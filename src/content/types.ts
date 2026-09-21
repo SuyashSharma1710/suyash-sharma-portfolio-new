@@ -11,9 +11,12 @@ export interface NavItem {
 
 export interface SiteConfig {
   name: string;
+  jobTitle?: string;
   title: string;
   description: string;
   url: string;
+  keywords?: string[];
+  locale?: string;
   availability: {
     status: "available" | "limited" | "unavailable";
     label: string;

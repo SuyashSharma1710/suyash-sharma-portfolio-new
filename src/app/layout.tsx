@@ -9,6 +9,7 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { CursorTracker } from "@/lib/motion/components/CursorTracker";
 import { Preloader } from "@/components/ui/Preloader";
 import { PageTransitionProvider } from "@/components/transitions/PageTransitionProvider";
+import { RootJsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -39,16 +40,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
-    template: `%s — Suyash Sharma`,
+    template: `%s — Suyash Sharma | Full-Stack Engineer`,
   },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    locale: "en_IN",
-    siteName: "Suyash Sharma",
+    locale: siteConfig.locale || "en_IN",
+    siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
     url: siteConfig.url,
@@ -57,10 +61,21 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
+    creator: "@yashbhardwaj56",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "eN202awJpSwdDL2JMo77-bXvOug-4yMtPPZP74huKO4",
   },
 };
 
@@ -78,6 +93,8 @@ export default function RootLayout({
       <head>
         {/* Inline script prevents flash of wrong theme before hydration */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Structured Schema.org JSON-LD */}
+        <RootJsonLd />
       </head>
       <body suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
