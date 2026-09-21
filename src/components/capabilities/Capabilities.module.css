@@ -52,23 +52,29 @@
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  filter: contrast(1.1) brightness(0.98);
 }
 
 .bgOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(8, 8, 8, 0.45) 0%,
-    rgba(8, 8, 8, 0.88) 75%,
-    rgba(8, 8, 8, 0.96) 100%
-  ),
-  linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.92) 0%,
-    rgba(8, 8, 8, 0.35) 45%,
-    rgba(8, 8, 8, 0.95) 100%
-  );
+  background:
+    /* Deeper cinematic lens vignette */
+    radial-gradient(
+      ellipse 80% 70% at 50% 50%,
+      transparent 0%,
+      rgba(3, 3, 5, 0.22) 38%,
+      rgba(3, 3, 5, 0.68) 72%,
+      rgba(3, 3, 5, 0.94) 100%
+    ),
+    /* Soft top & bottom section seam feathering */
+    linear-gradient(
+      to bottom,
+      rgba(3, 3, 5, 0.78) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(3, 3, 5, 0.85) 100%
+    );
   pointer-events: none;
   transform: translate3d(0, 0, 0);
 }
@@ -165,6 +171,7 @@
   transition:
     opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.45s ease,
     border-color 0.4s ease;
 }
 
@@ -203,6 +210,10 @@
   border-color: rgba(255, 255, 255, 0.16);
 }
 
+.section[data-has-active="true"] .item:not([data-active="true"]) {
+  background: transparent;
+}
+
 .section[data-has-active="true"] .item:not([data-active="true"]) .itemTitle {
   color: rgba(255, 255, 255, 0.6);
 }
@@ -228,6 +239,15 @@
 .item[data-active="true"] {
   opacity: 1 !important;
   transform: translateX(4px);
+  background: radial-gradient(
+    ellipse 95% 85% at center,
+    rgba(6, 6, 8, 0.52) 0%,
+    rgba(6, 6, 8, 0.28) 55%,
+    rgba(6, 6, 8, 0) 100%
+  ) !important;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  z-index: 2;
 }
 
 /* Top Row: Number, Tagline, Corner Arrow */
@@ -335,6 +355,7 @@
 
 .item[data-active="true"] .itemTitle {
   color: #ffffff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
   transform: translateX(4px);
 }
 
@@ -349,7 +370,8 @@
 }
 
 .item[data-active="true"] .itemDescription {
-  color: #e5e0d8;
+  color: #ede9e1;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* Bottom Row: Tech Spec Pills */

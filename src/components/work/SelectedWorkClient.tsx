@@ -96,7 +96,7 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
           {projects.map((project, index) => {
             const dest = project.liveUrl ?? project.githubUrl ?? `/work/${project.slug}`;
             const isExternal = !dest.startsWith("/");
-            const coverImg = project.coverImage || `/images/previews/${project.slug}.jpg`;
+            const coverImg = project.coverImage || `/images/previews/${project.slug}.png`;
             const stackOffset = index * 16;
 
             return (

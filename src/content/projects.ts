@@ -18,7 +18,7 @@ export const projects: Project[] = [
     featured: true,
     technologies: ["TypeScript", "Rust", "Tauri", "ONNX", "React", "RAG", "Vector Search", "BM25"],
     githubUrl: "https://github.com/SuyashSharma1710/glint",
-    coverImage: "/images/previews/glint.jpg",
+    coverImage: "/images/previews/glint.png",
     role: "Solo Engineer",
   },
   {
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     featured: true,
     technologies: ["Electron", "React", "JavaScript", "C++", "Sharp", "WebP", "AVIF"],
     githubUrl: "https://github.com/SuyashSharma1710/PixelSpace",
-    coverImage: "/images/previews/pixelspace.jpg",
+    coverImage: "/images/previews/pixelspace.png",
     role: "Solo Engineer",
   },
   {
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     technologies: ["Next.js 15", "React 19", "TypeScript", "Neon PostgreSQL", "Drizzle ORM", "Zod", "Tailwind CSS"],
     githubUrl: "https://github.com/SuyashSharma1710/pitchery",
     liveUrl: "https://pitchery.vercel.app/",
-    coverImage: "/images/previews/pitchery.jpg",
+    coverImage: "/images/previews/pitchery.png",
     role: "Full-Stack Engineer",
   },
   {
@@ -65,6 +65,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Zustand", "Tailwind CSS"],
     githubUrl: "https://github.com/SuyashSharma1710/syncflow_pmt",
     liveUrl: "https://syncflow-pmt.vercel.app/",
+    coverImage: "/images/previews/Syncflow.png",
     role: "Full-Stack Engineer",
   },
   {
@@ -123,7 +124,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "TypeScript", "WebSockets", "Node.js", "JavaScript"],
     githubUrl: "https://github.com/SuyashSharma1710/fanout",
     liveUrl: "https://fanout-nu.vercel.app/",
-    coverImage: "/images/previews/fanout.jpg",
+    coverImage: "/images/previews/fanout.png",
     role: "Systems / Backend Engineer",
   },
   {
