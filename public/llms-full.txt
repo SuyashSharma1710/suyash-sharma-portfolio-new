@@ -1,0 +1,118 @@
+# Suyash Sharma — Full Technical Documentation & Context
+
+> Full-Stack Engineer building high-performance web applications, offline AI search systems, and scalable digital platforms in Delhi, India.
+
+- **Canonical URL**: https://suyash-sharma-portfolio-new.vercel.app
+- **Location**: Delhi, India
+- **GitHub**: https://github.com/SuyashSharma1710
+- **LinkedIn**: https://www.linkedin.com/in/suyash-sharma-756375196
+- **Instagram**: https://www.instagram.com/yashbhardwaj56/
+- **Email**: suyashsharma171001@gmail.com
+- **Status**: Available for select engineering contracts, full-stack projects, and technical collaborations.
+
+---
+
+## 1. Professional Summary & Architectural Philosophy
+Suyash Sharma is a Full-Stack Engineer and Systems Architect based in Delhi, India. His work centers on high-performance web applications, local-first computing, offline AI search engines, and scalable backend platforms. 
+
+Core principles:
+- **Zero-Cloud / Privacy-First Compute**: Building offline-capable AI search tools and image processing engines that execute entirely on the user's hardware without leaking data to cloud endpoints.
+- **Performance & Precision**: Handcrafted responsive UIs with sub-100ms interaction latencies, clean CSS architecture, semantic HTML5, and strict WCAG accessibility.
+- **Architectural Rigor**: Scalable database modeling, strict TypeScript typing, deterministic state machines, and resilient API contracts.
+
+---
+
+## 2. Core Technical Competencies
+
+### Frontend & Web Architecture
+- **Frameworks**: Next.js 15 (App Router, Server Components, Route Handlers, Streaming SSR), React 19, React Router
+- **Languages**: TypeScript, JavaScript (ESNext), HTML5, CSS3 / Modern Vanilla CSS
+- **Animation & Graphics**: GSAP (GreenSock Animation Platform), ScrollTrigger, Canvas API
+- **State & Data Fetching**: Zustand, React Query / TanStack Query, Server Actions
+
+### Backend & Database Systems
+- **Runtimes & Frameworks**: Node.js, Express, Laravel (PHP), Django (Python)
+- **Databases**: PostgreSQL, Supabase, Neon Serverless Postgres, SQLite
+- **ORMs & Query Builders**: Drizzle ORM, Prisma, Django ORM, Eloquent
+- **Security & Auth**: Supabase Auth, Row-Level Security (RLS), RBAC, JWT, CSRF protection
+
+### Systems Engineering & AI
+- **Languages**: Rust, C++, Python
+- **Desktop & Native Platforms**: Tauri, Electron
+- **Machine Learning & Search**: ONNX Runtime, BM25 Keyword Search, Vector Embeddings, Reciprocal Rank Fusion (RRF), Local Retrieval-Augmented Generation (RAG)
+- **Media Processing**: Sharp C++ Engine, libvips, WebP/AVIF compression
+
+### CMS & eCommerce Platforms
+- **WordPress**: Custom theme development from scratch, PHP template hierarchy, custom post types (CPT), ACF, REST API integrations, performance tuning.
+- **Shopify**: Custom Liquid themes, Shopify Plus, Storefront API, app integrations.
+
+---
+
+## 3. Production Projects & Case Studies
+
+### 1. Glint (2026) — AI / Hybrid Search Engine
+- **Role**: Solo Engineer
+- **Tech Stack**: TypeScript, Rust, Tauri, ONNX, React, RAG, Vector Search, BM25
+- **Source**: https://github.com/SuyashSharma1710/glint
+- **Overview**: Ultra-fast private hybrid search engine & Raycast-grade spotlight for codebases. Combines BM25 keyword search with ONNX vector embeddings using Reciprocal Rank Fusion, running entirely locally without sending data to external cloud APIs.
+
+### 2. PixelSpace (2026) — Local Desktop Image Processor
+- **Role**: Solo Engineer
+- **Tech Stack**: Electron, React, JavaScript, C++, Sharp, WebP, AVIF
+- **Source**: https://github.com/SuyashSharma1710/PixelSpace
+- **Overview**: High-performance local-first Electron desktop application that optimizes heavy images into modern WebP and AVIF formats using an embedded C++ processing engine via Sharp.
+
+### 3. Pitchery (2026) — Startup Discovery & Pitch Platform
+- **Role**: Full-Stack Engineer
+- **Tech Stack**: Next.js 15, React 19, TypeScript, Neon PostgreSQL, Drizzle ORM, Zod, Tailwind CSS
+- **Live URL**: https://pitchery.vercel.app/
+- **Source**: https://github.com/SuyashSharma1710/pitchery
+- **Overview**: Full-stack SaaS platform for startup pitch decks, founder profiles, discovery filtering, and direct investor outreach with server-side validation and relational data modeling.
+
+### 4. Syncflow P.M.T. (2026) — Project Management Suite
+- **Role**: Full-Stack Engineer
+- **Tech Stack**: Next.js, React, TypeScript, Supabase, PostgreSQL, Zustand, Tailwind CSS
+- **Live URL**: https://syncflow-pmt.vercel.app/
+- **Source**: https://github.com/SuyashSharma1710/syncflow_pmt
+- **Overview**: Workspace and task management platform featuring nested projects, drag-and-drop Kanban boards, timeline tracking, full-text search, and optimistic UI updates with automatic error rollback.
+
+### 5. FanOut (2025) — High-Concurrency Notification Pipeline
+- **Role**: Full-Stack Engineer
+- **Tech Stack**: Next.js, TypeScript, PostgreSQL, Upstash Redis, Tailwind CSS
+- **Live URL**: https://fanout-nu.vercel.app/
+- **Source**: https://github.com/SuyashSharma1710/fanout
+- **Overview**: High-throughput notification fan-out engine simulating concurrent message broadcast across SMS, email, and push queues with rate-limiting and dead-letter queues.
+
+---
+
+## 4. Verified Work History & Experience
+
+### Senior Web Developer — Cliqk Media (March 2025 – Present)
+- Engineered and shipped 25+ production client web projects spanning Next.js, React, Node.js, custom WordPress themes, and Shopify stores.
+- Delivered high-conversion responsive landing pages with sub-second initial load times and high Core Web Vitals scores.
+- Managed client requirements, cross-browser compatibility, and automated deployment pipelines on Vercel and agency hosting infrastructure.
+
+### Freelance & Contract Full-Stack Developer (2024 – Present)
+- Shipped 10+ custom full-stack web applications and systems for commercial clients using React, Next.js, Node.js, Laravel, Django, Python, Supabase, and PostgreSQL.
+- Implemented Supabase Row-Level Security (RLS) and complex relational database architectures.
+- Managed end-to-end delivery: architectural design, schema migrations, CI/CD pipelines (Vercel, Railway), and performance auditing.
+
+### Software Development Intern — The Coding Cult Pvt. Ltd. (December 2024 – February 2025)
+- Developed modular team and task-management tools with multi-level RBAC (Role-Based Access Control) and workflow automation.
+- Containerized application services with Docker, reducing setup time by 50%.
+- Performed rigorous REST API testing and validation with Postman.
+
+### Web Development Intern — Sync Intern (September 2023 – October 2023)
+- Engineered four full-stack Django/Python applications with relational models and server-side template routing.
+- Optimized query execution plans and database indexes, improving response times by 50%.
+
+---
+
+## 5. Contact & Links
+- **Portfolio Home**: https://suyash-sharma-portfolio-new.vercel.app/
+- **Work Directory**: https://suyash-sharma-portfolio-new.vercel.app/work
+- **Lab & Prototypes**: https://suyash-sharma-portfolio-new.vercel.app/lab
+- **About & Philosophy**: https://suyash-sharma-portfolio-new.vercel.app/about
+- **Contact**: https://suyash-sharma-portfolio-new.vercel.app/contact
+- **GitHub Profile**: https://github.com/SuyashSharma1710
+- **LinkedIn Profile**: https://www.linkedin.com/in/suyash-sharma-756375196

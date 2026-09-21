@@ -1,0 +1,32 @@
+# Suyash Sharma
+
+> Full-Stack Engineer building high-performance web applications, offline AI search systems, and scalable digital platforms in Delhi, India.
+
+- **Canonical URL**: https://suyash-sharma-portfolio-new.vercel.app
+- **Location**: Delhi, India
+- **GitHub**: https://github.com/SuyashSharma1710
+- **LinkedIn**: https://www.linkedin.com/in/suyash-sharma-756375196
+- **Email**: suyashsharma171001@gmail.com
+- **Status**: Available for select engineering contracts, full-stack projects, and technical collaborations.
+
+## Core Specializations
+- **Frontend & Web Systems**: Next.js (App Router, Server Components), React 19, TypeScript, Vanilla CSS Architecture, GSAP Animations, Web Performance & Core Web Vitals.
+- **Backend & Database Architecture**: Node.js, REST APIs, PostgreSQL, Supabase (Row-Level Security, Auth), Drizzle ORM, Prisma, Laravel, Django, Python.
+- **Local AI & Systems Engineering**: Rust, Tauri, ONNX Runtime, BM25 Keyword Search, Vector Embeddings, Reciprocal Rank Fusion, Local RAG, Electron, C++ Sharp Engine.
+- **CMS & Headless Commerce**: WordPress Custom Themes, Shopify & Shopify Plus, Performance & Speed Optimization.
+
+## Key Projects
+- [Glint](https://github.com/SuyashSharma1710/glint): Ultra-fast private hybrid search engine & Raycast-grade spotlight for codebases using BM25 + ONNX vector embeddings + Reciprocal Rank Fusion in Rust and Tauri.
+- [PixelSpace](https://github.com/SuyashSharma1710/PixelSpace): Local Electron desktop image processor powered by a C++ processing engine via Sharp to compress to WebP/AVIF.
+- [Pitchery](https://pitchery.vercel.app/): Startup discovery and pitch platform built with Next.js 15, React 19, TypeScript, Neon PostgreSQL, Drizzle ORM, and Zod.
+- [Syncflow P.M.T.](https://syncflow-pmt.vercel.app/): Agile project and task management platform featuring drag-and-drop Kanban, timeline tracking, and Supabase real-time synchronization.
+
+## Pages & Routes
+- [Home](https://suyash-sharma-portfolio-new.vercel.app/): Architectural overview, featured case studies, and engineering disciplines.
+- [Work Archive](https://suyash-sharma-portfolio-new.vercel.app/work): Complete directory of systems, client projects, and open-source tools.
+- [Lab & Experiments](https://suyash-sharma-portfolio-new.vercel.app/lab): Interactive software artifacts, prototypes, and offline AI experiments.
+- [About](https://suyash-sharma-portfolio-new.vercel.app/about): Background, engineering philosophy, and verified work history.
+- [Contact](https://suyash-sharma-portfolio-new.vercel.app/contact): Direct communication channels and inquiry forms.
+
+## Full Context
+For comprehensive technical documentation, full project case studies, and verified career history, see [llms-full.txt](https://suyash-sharma-portfolio-new.vercel.app/llms-full.txt).
