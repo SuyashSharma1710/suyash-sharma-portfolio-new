@@ -20,6 +20,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "ACF Pro", "MySQL"],
     liveUrl: "https://gwshospitalsolutions.com/",
+    coverImage: "/images/previews/gws.png",
     deliverables: [
       "Medical Catalog Architecture",
       "Institutional Inquiry Forms",
@@ -40,6 +41,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://srianjaneyamtrust.org/",
+    coverImage: "/images/previews/sri-anjaneyam.png",
     deliverables: [
       "Online Donation & Payment Flow",
       "Event Calendaring & News Modules",
@@ -60,6 +62,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WooCommerce Developer",
     technologies: ["WordPress", "WooCommerce", "PHP", "MySQL", "JavaScript", "CSS3"],
     liveUrl: "https://boldayurveda.store/",
+    coverImage: "/images/previews/bold-ayurveda.png",
     deliverables: [
       "Men's Vitality Formulation & Product Matrix",
       "Private Consultation & Inquiry Workflow",
@@ -80,6 +83,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "WooCommerce", "PHP", "JavaScript", "MySQL", "CSS3"],
     liveUrl: "https://thenatureleaf.com/",
+    coverImage: "/images/previews/natureleaf.png",
     deliverables: [
       "Nutraceutical Catalog & Dosage Specification Modules",
       "Clinical Ingredient Breakdown & Lab Certification Tabs",
@@ -100,6 +104,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://www.drmongaopticians.com/",
+    coverImage: "/images/previews/drmonga.png",
     deliverables: [
       "Appointment Booking System",
       "Eyewear Catalog Showcase",
@@ -120,6 +125,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WooCommerce Developer",
     technologies: ["WordPress", "WooCommerce", "PHP", "JavaScript", "MySQL", "CSS3"],
     liveUrl: "https://www.aaosakhi.com/",
+    coverImage: "/images/previews/aaosakhi.png",
     deliverables: [
       "Ethnic Saree Catalog & Fabric Filters",
       "High-Resolution Drape & Lookbook Gallery",
@@ -140,6 +146,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WooCommerce Developer",
     technologies: ["WordPress", "WooCommerce", "PHP", "MySQL", "JavaScript"],
     liveUrl: "https://swadeshistore.itescs.com/",
+    coverImage: "/images/previews/swadeshi-store.png",
     deliverables: [
       "Regional Shipping & Tax Configuration",
       "Optimized Checkout & Cart Drawer",
@@ -160,6 +167,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://itescs.com/",
+    coverImage: "/images/previews/itescs.png",
     deliverables: [
       "Fire & Safety Course Matrix & Curriculum",
       "Student Admission & Inquiry Flow",
@@ -180,6 +188,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "Full-Stack PHP / WP Developer",
     technologies: ["PHP", "WordPress", "MySQL", "REST API", "JavaScript", "CSS3"],
     liveUrl: "https://intellus.in/",
+    coverImage: "/images/previews/intellus.png",
     deliverables: [
       "College Directory Database & Custom PHP Query Engine",
       "Faceted Stream, Fee & Location Search",
@@ -200,6 +209,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://www.truepower.in/",
+    coverImage: "/images/previews/truepower.png",
     deliverables: [
       "Industrial Product Catalog & Specs",
       "Dealer Locator & Inquiry Workflows",
@@ -220,6 +230,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "CSS3"],
     liveUrl: "https://orchardatsarai.com/",
+    coverImage: "/images/previews/orchard.png",
     deliverables: [
       "Hospitality Gallery & Visual Layouts",
       "Room Reservation Inquiry Flow",
@@ -240,6 +251,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "ACF Pro", "MySQL"],
     liveUrl: "https://glamourrealtors.co/",
+    coverImage: "/images/previews/glamour-realtors.png",
     deliverables: [
       "Custom Property Listing Architecture",
       "Amenity Filter & Search Module",
@@ -260,6 +272,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "WordPress Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://electrosenze.com/",
+    coverImage: "/images/previews/electrosenze.png",
     deliverables: [
       "Industrial Plant & Factory Testing Service Matrix",
       "High/Low Voltage Diagnostic & Audit Dispatch",
@@ -280,6 +293,7 @@ export const wordpressProjects: WordPressProject[] = [
     role: "Senior Web Developer",
     technologies: ["WordPress", "PHP", "JavaScript", "Tailwind CSS", "MySQL"],
     liveUrl: "https://cliqkmedia.com/",
+    coverImage: "/images/previews/cliqkmedia.png",
     deliverables: [
       "Agency Case Study Layouts",
       "Service Capability Matrix",

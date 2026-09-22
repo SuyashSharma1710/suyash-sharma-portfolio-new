@@ -20,6 +20,7 @@ export const laravelProjects: LaravelProject[] = [
     role: "Laravel Developer",
     technologies: ["Laravel", "PHP", "MySQL", "Blade", "JavaScript", "Tailwind CSS"],
     liveUrl: "https://www.himalayancrafts.org/",
+    coverImage: "/images/previews/himalyancraft.png",
     deliverables: [
       "Custom Laravel Backend & Models",
       "Relational Inventory Management",

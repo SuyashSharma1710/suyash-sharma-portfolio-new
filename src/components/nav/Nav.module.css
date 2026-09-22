@@ -135,7 +135,7 @@
 .wordmarkSup {
   font-size: 0.5em;
   vertical-align: super;
-  opacity: 0.6;
+  color: var(--color-muted);
 }
 
 /* ── Desktop Navigation Links with Sliding Square Indicator ── */

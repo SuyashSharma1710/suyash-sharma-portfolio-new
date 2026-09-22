@@ -19,15 +19,29 @@ interface ArchiveIndexProps {
   showTitle?: boolean;
   limit?: number;
   initialFilter?: CategoryFilter;
+  controlledCategory?: CategoryFilter;
+  onCategoryChange?: (category: CategoryFilter) => void;
+  hideFilterBar?: boolean;
 }
 
 export function ArchiveIndex({
   showTitle = true,
   limit,
   initialFilter = "all",
+  controlledCategory,
+  onCategoryChange,
+  hideFilterBar = false,
 }: ArchiveIndexProps) {
-  const [activeCategory, setActiveCategory] = useState<CategoryFilter>(initialFilter);
+  const [internalCategory, setInternalCategory] = useState<CategoryFilter>(initialFilter);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const activeCategory = controlledCategory !== undefined ? controlledCategory : internalCategory;
+  const setCategory = (cat: CategoryFilter) => {
+    if (onCategoryChange) {
+      onCategoryChange(cat);
+    }
+    setInternalCategory(cat);
+  };
 
   // Combine all 34 authentic projects into a master archive
   const allMasterProjects = useMemo<(Project | ClientProject)[]>(() => {
@@ -338,74 +352,76 @@ export function ArchiveIndex({
         )}
 
         {/* Category Filter Controls */}
-        <div className={styles.filterBar} role="tablist" aria-label="Filter archive projects">
-          <button
-            type="button"
-            role="tab"
-            data-sound="tab"
-            aria-selected={activeCategory === "all"}
-            className={`${styles.filterBtn} ${activeCategory === "all" ? styles.filterBtnActive : ""}`}
-            onClick={() => setActiveCategory("all")}
-            id="filter-all"
-          >
-            <span>All Projects</span>
-            <span className={styles.filterCount}>({allMasterProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            data-sound="tab"
-            aria-selected={activeCategory === "apps"}
-            className={`${styles.filterBtn} ${activeCategory === "apps" ? styles.filterBtnActive : ""}`}
-            onClick={() => setActiveCategory("apps")}
-            id="filter-apps"
-          >
-            <span>Systems &amp; Web Apps</span>
-            <span className={styles.filterCount}>({appsProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            data-sound="tab"
-            aria-selected={activeCategory === "shopify"}
-            className={`${styles.filterBtn} ${activeCategory === "shopify" ? styles.filterBtnActive : ""}`}
-            onClick={() => setActiveCategory("shopify")}
-            id="filter-shopify"
-          >
-            <span>Shopify Stores</span>
-            <span className={styles.filterCount}>({shopifyProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            data-sound="tab"
-            aria-selected={activeCategory === "wordpress"}
-            className={`${styles.filterBtn} ${activeCategory === "wordpress" ? styles.filterBtnActive : ""}`}
-            onClick={() => setActiveCategory("wordpress")}
-            id="filter-wordpress"
-          >
-            <span>WordPress / PHP</span>
-            <span className={styles.filterCount}>({wordpressProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            data-sound="tab"
-            aria-selected={activeCategory === "laravel"}
-            className={`${styles.filterBtn} ${activeCategory === "laravel" ? styles.filterBtnActive : ""}`}
-            onClick={() => setActiveCategory("laravel")}
-            id="filter-laravel"
-          >
-            <span>Laravel</span>
-            <span className={styles.filterCount}>({laravelProjects.length})</span>
-          </button>
-        </div>
+        {!hideFilterBar && (
+          <div className={styles.filterBar} role="tablist" aria-label="Filter archive projects">
+            <button
+              type="button"
+              role="tab"
+              data-sound="tab"
+              aria-selected={activeCategory === "all"}
+              className={`${styles.filterBtn} ${activeCategory === "all" ? styles.filterBtnActive : ""}`}
+              onClick={() => setCategory("all")}
+              id="filter-all"
+            >
+              <span>All Projects</span>
+              <span className={styles.filterCount}>({allMasterProjects.length})</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-sound="tab"
+              aria-selected={activeCategory === "apps"}
+              className={`${styles.filterBtn} ${activeCategory === "apps" ? styles.filterBtnActive : ""}`}
+              onClick={() => setCategory("apps")}
+              id="filter-apps"
+            >
+              <span>Systems &amp; Web Apps</span>
+              <span className={styles.filterCount}>({appsProjects.length})</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-sound="tab"
+              aria-selected={activeCategory === "shopify"}
+              className={`${styles.filterBtn} ${activeCategory === "shopify" ? styles.filterBtnActive : ""}`}
+              onClick={() => setCategory("shopify")}
+              id="filter-shopify"
+            >
+              <span>Shopify Stores</span>
+              <span className={styles.filterCount}>({shopifyProjects.length})</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-sound="tab"
+              aria-selected={activeCategory === "wordpress"}
+              className={`${styles.filterBtn} ${activeCategory === "wordpress" ? styles.filterBtnActive : ""}`}
+              onClick={() => setCategory("wordpress")}
+              id="filter-wordpress"
+            >
+              <span>WordPress / PHP</span>
+              <span className={styles.filterCount}>({wordpressProjects.length})</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-sound="tab"
+              aria-selected={activeCategory === "laravel"}
+              className={`${styles.filterBtn} ${activeCategory === "laravel" ? styles.filterBtnActive : ""}`}
+              onClick={() => setCategory("laravel")}
+              id="filter-laravel"
+            >
+              <span>Laravel</span>
+              <span className={styles.filterCount}>({laravelProjects.length})</span>
+            </button>
+          </div>
+        )}
 
         {/* Interactive Swiss Hover Table */}
         <div className={styles.table}>
           {filteredProjects.map((project) => {
-            const dest = project.liveUrl ?? project.githubUrl ?? `/work/${project.slug}`;
-            const isExternal = !dest.startsWith("/");
+            const dest = project.liveUrl ?? project.githubUrl ?? "#";
+            const isExternal = dest.startsWith("http");
             const badgeLabel = getBadgeLabel(project);
 
             return (

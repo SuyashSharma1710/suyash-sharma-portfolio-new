@@ -94,8 +94,8 @@ export function SelectedWorkClient({ projects }: SelectedWorkClientProps) {
         {/* Stacking Open Broadside Panels */}
         <div className={styles.stackContainer}>
           {projects.map((project, index) => {
-            const dest = project.liveUrl ?? project.githubUrl ?? `/work/${project.slug}`;
-            const isExternal = !dest.startsWith("/");
+            const dest = project.liveUrl ?? project.githubUrl ?? "#";
+            const isExternal = dest.startsWith("http");
             const coverImg = project.coverImage || `/images/previews/${project.slug}.png`;
             const stackOffset = index * 16;
 

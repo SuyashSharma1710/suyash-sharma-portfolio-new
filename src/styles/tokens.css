@@ -17,7 +17,7 @@
   /* Semantic Color Palette */
   --color-paper:         #F5F0E8;
   --color-ink:           #111111;
-  --color-muted:         #6B6560;
+  --color-muted:         #57534E;
   --color-line:          rgba(0, 0, 0, 0.08);
   --color-accent:        #111111;
   --color-surface-light: #EDE8DC;
@@ -41,7 +41,7 @@
 
     --color-paper:         #0D0D0D;
     --color-ink:           #F0EBE0;
-    --color-muted:         #8A847C;
+    --color-muted:         #A8A29E;
     --color-line:          rgba(255, 255, 255, 0.12);
     --color-accent:        #F0EBE0;
     --color-surface-light: #161412;
@@ -59,7 +59,7 @@
 
   --color-paper:         #0D0D0D;
   --color-ink:           #F0EBE0;
-  --color-muted:         #8A847C;
+  --color-muted:         #A8A29E;
   --color-line:          rgba(255, 255, 255, 0.12);
   --color-accent:        #F0EBE0;
   --color-surface-light: #161412;

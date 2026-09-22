@@ -13,13 +13,13 @@
   overflow: hidden;
 }
 
-/* ─────────────────────────────────────────────────────────────
+/*/* ─────────────────────────────────────────────────────────────
    Pinned Viewport (100vh on Desktop)
 ───────────────────────────────────────────────────────────── */
 .viewport {
   width: 100%;
-  height: 100vh;
-  min-height: 680px;
+  height: 100dvh;
+  min-height: 520px;
   max-height: 1080px;
   position: relative;
   overflow: hidden;
@@ -38,7 +38,8 @@
 .heroPanel {
   width: 100vw;
   height: 100%;
-  padding-top: 0;
+  padding-top: var(--nav-height, 4rem);
+  padding-bottom: clamp(0.75rem, 1.8vh, 1.5rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,12 +50,13 @@
 
 .heroContainer {
   width: 100%;
-  max-width: 1720px;
+  max-width: 1600px;
   height: 100%;
-  padding: 0 clamp(2rem, 5vw, 6rem);
+  padding: 0 clamp(2rem, 4.5vw, 5.5rem);
   margin: 0 auto;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .heroContent {
@@ -66,8 +68,8 @@
 
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
-  gap: clamp(2.5rem, 5.5vw, 7rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 6rem);
   align-items: center;
   width: 100%;
 }
@@ -82,7 +84,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: clamp(1rem, 1.8vw, 1.75rem);
+  margin-bottom: clamp(0.75rem, 1.8vh, 1.5rem);
 }
 
 .availabilityDot {
@@ -116,19 +118,19 @@
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 3.2rem + 5vw, 7.75rem);
-  line-height: 1.12;
+  font-size: clamp(4.25rem, 3.2rem + 4.8vw, 8.25rem);
+  line-height: 1.04;
   font-weight: 400;
   letter-spacing: -0.035em;
   color: var(--color-ink);
-  margin: 0 0 clamp(1.5rem, 2.5vw, 2.5rem) 0;
-  max-width: 14ch;
+  margin: 0 0 clamp(1.25rem, 2.2vh, 2.25rem) 0;
+  max-width: 13ch;
 }
 
 .headlineWord {
   display: block;
   overflow: visible;
-  padding-bottom: 0.15em;
+  padding-bottom: 0.12em;
 }
 
 .headlineInner {
@@ -137,11 +139,11 @@
 }
 
 .supporting {
-  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
-  line-height: 1.65;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.25rem);
+  line-height: 1.62;
   color: var(--color-muted);
-  max-width: 46ch;
-  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+  max-width: 48ch;
+  margin-bottom: clamp(1.75rem, 3vh, 2.75rem);
   font-weight: 400;
   letter-spacing: -0.01em;
 }
@@ -157,7 +159,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  padding: 0.875rem 1.75rem;
+  padding: 0.95rem 1.85rem;
   background-color: var(--color-ink);
   color: var(--color-paper);
   font-size: var(--text-xs);
@@ -227,17 +229,20 @@
 .heroImageFrame {
   position: relative;
   width: 100%;
-  max-width: clamp(420px, 32vw, 540px);
+  max-width: clamp(380px, 32vw, 560px);
+  max-height: calc(100dvh - var(--nav-height, 4rem) - clamp(1.5rem, 3vh, 3.5rem));
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background: transparent;
 }
 
 .heroPortrait {
   width: 100%;
+  max-width: 100%;
   height: auto;
-  max-height: calc(100vh - clamp(3.5rem, 5vw, 5.5rem));
-  aspect-ratio: 3.6 / 4.6;
+  max-height: calc(100dvh - var(--nav-height, 4rem) - clamp(3.25rem, 6vh, 5.5rem));
+  aspect-ratio: 3.8 / 4.8;
   object-fit: cover;
   display: block;
   filter: contrast(1.05) brightness(0.98);
@@ -247,9 +252,9 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.75rem 0 0 0;
+  padding: clamp(0.35rem, 0.8vh, 0.6rem) 0 0 0;
   border-top: 1px solid var(--color-line);
-  margin-top: 0.5rem;
+  margin-top: clamp(0.35rem, 0.6vh, 0.5rem);
 }
 
 .heroCaptionDot {
@@ -262,7 +267,7 @@
 
 .heroCaptionText {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: clamp(0.6rem, 0.55rem + 0.1vw, 0.6875rem);
   letter-spacing: 0.08em;
   color: var(--color-muted);
   text-transform: uppercase;
@@ -273,9 +278,11 @@
 ───────────────────────────────────────────────────────────── */
 .archPanel {
   position: relative;
-  width: clamp(750px, 56vw, 1040px);
+  width: clamp(700px, 52vw, 980px);
   height: 100%;
-  padding: clamp(2rem, 3.5vw, 4rem) clamp(2.5rem, 4vw, 4.5rem);
+  padding: clamp(1.25rem, 2.5vw, 3.5rem) clamp(1.75rem, 3vw, 4rem);
+  padding-top: calc(var(--nav-height, 4rem) + clamp(0.5rem, 1.5vh, 1.5rem));
+  padding-bottom: clamp(0.75rem, 1.5vh, 2rem);
   border-left: 1px solid var(--color-line);
   border-right: 1px solid var(--color-line);
   display: flex;
@@ -302,7 +309,7 @@
 .columnsWrapper {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: clamp(340px, 26vw, 440px);
+  grid-auto-columns: clamp(320px, 25vw, 440px);
   grid-template-rows: 1fr auto auto;
   height: 100%;
   flex-shrink: 0;
@@ -312,11 +319,13 @@
   position: relative;
   grid-row: 1 / -1;
   display: grid;
-  grid-template-rows: 1fr minmax(5.5rem, auto) minmax(6.5rem, auto);
+  grid-template-rows: 1fr minmax(clamp(4rem, 7vh, 5.5rem), auto) minmax(clamp(4.5rem, 8vh, 6.5rem), auto);
   width: 100%;
   height: 100%;
   border-right: 1px solid var(--color-line);
-  padding: clamp(2.5rem, 4vw, 4.5rem) clamp(1.75rem, 2.5vw, 2.75rem);
+  padding: clamp(1.5rem, 2.5vw, 4rem) clamp(1.5rem, 2.2vw, 2.75rem);
+  padding-top: calc(var(--nav-height, 4rem) + clamp(0.5rem, 1.5vh, 2rem));
+  padding-bottom: clamp(1rem, 2vh, 2.5rem);
   text-decoration: none;
   color: var(--color-ink);
   overflow: hidden;
@@ -379,7 +388,7 @@
   z-index: 2;
   grid-row: 1 / -1;
   display: grid;
-  grid-template-rows: 1fr minmax(5.5rem, auto) minmax(6.5rem, auto);
+  grid-template-rows: 1fr minmax(clamp(4rem, 7vh, 5.5rem), auto) minmax(clamp(4.5rem, 8vh, 6.5rem), auto);
   height: 100%;
   pointer-events: none;
 }
@@ -396,14 +405,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .giantNumber {
   font-family: var(--font-display);
-  font-size: clamp(5.5rem, 8.5vw, 8.5rem);
+  font-size: clamp(4.25rem, 6.5vw, 7.5rem);
   font-weight: 400;
-  line-height: 1.0;
+  line-height: 0.95;
   padding-bottom: 0.05em;
   letter-spacing: -0.04em;
   color: var(--color-ink);
@@ -418,7 +427,7 @@
 
 .colEyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: clamp(0.65rem, 0.6rem + 0.1vw, 0.75rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -436,13 +445,13 @@
   grid-row: 2;
   display: flex;
   align-items: flex-end;
-  padding-bottom: var(--space-5);
+  padding-bottom: clamp(0.5rem, 1.2vh, 1.25rem);
   margin: 0;
 }
 
 .colTitle {
   font-family: var(--font-body);
-  font-size: clamp(1.75rem, 2.4vw, 2.6rem);
+  font-size: clamp(1.35rem, 1.8vw, 2.25rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -463,7 +472,7 @@
   grid-template-columns: 1fr auto;
   align-items: start;
   gap: var(--space-4);
-  padding-top: var(--space-5);
+  padding-top: clamp(0.5rem, 1.2vh, 1.25rem);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   transition: border-color 0.35s ease;
   margin: 0;
@@ -479,8 +488,8 @@
 }
 
 .colDescription {
-  font-size: var(--text-xs);
-  line-height: 1.65;
+  font-size: clamp(0.7rem, 0.65rem + 0.12vw, 0.78125rem);
+  line-height: 1.55;
   color: var(--color-muted);
   margin: 0;
   max-width: 32ch;
@@ -494,8 +503,8 @@
 
 /* Circular Arrow Button */
 .circleArrow {
-  width: 48px;
-  height: 48px;
+  width: clamp(38px, 4.5vh, 48px);
+  height: clamp(38px, 4.5vh, 48px);
   border-radius: 50%;
   border: 1px solid var(--color-line);
   background: var(--color-paper);
@@ -513,10 +522,10 @@
 }
 
 .circleArrowSvg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   display: block;
-  transform-origin: 8px 8px;
+  transform-origin: 7.5px 7.5px;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -534,7 +543,143 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Responsive Design
+   Height-Aware Desktop Queries (Shorter Viewport Adaptation)
+───────────────────────────────────────────────────────────── */
+@media (min-width: 900px) and (max-height: 740px) {
+  .headline {
+    font-size: clamp(3.5rem, 2.8rem + 3.8vw, 6rem);
+    line-height: 1.04;
+    margin-bottom: 0.85rem;
+  }
+
+  .supporting {
+    font-size: clamp(0.95rem, 0.88rem + 0.2vw, 1.1rem);
+    line-height: 1.52;
+    margin-bottom: 1.35rem;
+    max-width: 46ch;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+
+  .heroImageFrame {
+    max-width: clamp(320px, 28vw, 460px);
+    max-height: calc(100dvh - var(--nav-height, 4rem) - 2rem);
+  }
+
+  .heroPortrait {
+    max-height: calc(100dvh - var(--nav-height, 4rem) - 3.2rem);
+  }
+
+  .archPanel {
+    width: clamp(680px, 50vw, 900px);
+    padding: 1.25rem 2rem;
+    padding-top: calc(var(--nav-height, 4rem) + 0.75rem);
+  }
+
+  .columnsWrapper {
+    grid-auto-columns: clamp(290px, 24vw, 380px);
+  }
+
+  .column {
+    padding: 1.25rem 1.75rem;
+    padding-top: calc(var(--nav-height, 4rem) + 0.75rem);
+  }
+
+  .giantNumber {
+    font-size: clamp(3.75rem, 5.5vw, 5.5rem);
+  }
+
+  .colTitle {
+    font-size: clamp(1.25rem, 1.6vw, 1.75rem);
+  }
+
+  .colDescription {
+    font-size: 0.75rem;
+    line-height: 1.48;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 620px) {
+  .heroPanel {
+    padding-top: calc(var(--nav-height, 4rem) - 0.5rem);
+    padding-bottom: 0.5rem;
+  }
+
+  .headline {
+    font-size: clamp(2.75rem, 2.2rem + 2.5vw, 4.5rem);
+    line-height: 1.02;
+    margin-bottom: 0.5rem;
+  }
+
+  .supporting {
+    font-size: 0.875rem;
+    line-height: 1.42;
+    margin-bottom: 0.85rem;
+    max-width: 42ch;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.4rem;
+  }
+
+  .ctaPrimary {
+    padding: 0.65rem 1.35rem;
+    font-size: 0.6875rem;
+  }
+
+  .ctaSecondary {
+    padding: 0.65rem 0;
+    font-size: 0.6875rem;
+  }
+
+  .heroImageFrame {
+    max-width: clamp(240px, 22vw, 340px);
+    max-height: calc(100dvh - var(--nav-height, 4rem) - 1.5rem);
+  }
+
+  .heroPortrait {
+    max-height: calc(100dvh - var(--nav-height, 4rem) - 2.5rem);
+  }
+
+  .archPanel {
+    width: clamp(580px, 48vw, 760px);
+    padding: 0.85rem 1.25rem;
+    padding-top: calc(var(--nav-height, 4rem) + 0.35rem);
+  }
+
+  .columnsWrapper {
+    grid-auto-columns: clamp(250px, 21vw, 320px);
+  }
+
+  .column {
+    padding: 0.85rem 1.25rem;
+    padding-top: calc(var(--nav-height, 4rem) + 0.35rem);
+  }
+
+  .giantNumber {
+    font-size: clamp(2.75rem, 4vw, 3.75rem);
+  }
+
+  .colTitle {
+    font-size: 1.15rem;
+  }
+
+  .colDescription {
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    max-width: 26ch;
+  }
+
+  .circleArrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive Design (Mobile / Tablet)
 ───────────────────────────────────────────────────────────── */
 @media (max-width: 899px) {
   .viewport {

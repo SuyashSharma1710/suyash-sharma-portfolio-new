@@ -80,7 +80,7 @@ export const projects: Project[] = [
       "Developed an immersive, tranquil lifestyle platform with dynamic audio streaming players, retreat booking workflows, and responsive editorial layout typography.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js"],
     liveUrl: "https://theharmonyoflife.com/",
-    githubUrl: "https://github.com/SuyashSharma1710/HoL",
+    coverImage: "/images/previews/hol.png",
     role: "Full-Stack Engineer",
   },
   {
@@ -95,6 +95,7 @@ export const projects: Project[] = [
       "Engineered an enterprise claims management platform supporting customer warranty registrations, serial number validation engines, and administrative resolution pipelines.",
     technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Tailwind CSS", "REST API"],
     liveUrl: "https://warrentysystem.vercel.app/",
+    coverImage: "/images/previews/warrenty-sync.png",
     role: "Full-Stack Engineer",
   },
   {
@@ -109,6 +110,7 @@ export const projects: Project[] = [
       "Created a focused personal productivity application featuring keyboard-driven task orchestration, prioritized queues, and localized state persistence.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://osho-task.vercel.app/",
+    coverImage: "/images/previews/osho-event-lander.png",
     role: "Frontend Engineer",
   },
   {
@@ -139,6 +141,7 @@ export const projects: Project[] = [
       "Developed a multi-page web application featuring responsive event discovery, interactive venue maps, community discussions, and RSVP booking flows.",
     technologies: ["React", "React Router", "TypeScript", "Tailwind CSS", "Vite"],
     liveUrl: "https://communion-react-router-multipage.vercel.app/",
+    coverImage: "/images/previews/communion-event-listing.png",
     role: "Frontend Engineer",
   },
 ];

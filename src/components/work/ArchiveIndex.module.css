@@ -70,7 +70,7 @@
   background: transparent;
   border: 1px solid var(--color-line);
   padding: 6px 14px;
-  border-radius: var(--radius-full, 9999px);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -290,7 +290,7 @@
 
 [data-theme="dark"] .metaCol,
 :root:not([data-theme="light"]) .metaCol {
-  color: rgba(240, 235, 224, 0.55);
+  color: var(--color-muted);
 }
 
 [data-theme="dark"] .projectTitle,
@@ -300,7 +300,7 @@
 
 [data-theme="dark"] .rowArrow,
 :root:not([data-theme="light"]) .rowArrow {
-  color: rgba(240, 235, 224, 0.45);
+  color: var(--color-muted);
 }
 
 /* ─────────────────────────────────────────────────────────────

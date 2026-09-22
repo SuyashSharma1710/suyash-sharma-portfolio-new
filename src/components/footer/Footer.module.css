@@ -36,7 +36,7 @@
 .wordmarkSup {
   font-size: 0.5em;
   vertical-align: super;
-  opacity: 0.5;
+  color: var(--color-muted);
 }
 
 .descriptor {
@@ -86,7 +86,7 @@
 }
 
 .externalIcon {
-  opacity: 0.5;
+  color: var(--color-muted);
   font-size: 0.75em;
 }
 

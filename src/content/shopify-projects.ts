@@ -20,6 +20,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "Tailwind CSS", "Storefront API"],
     liveUrl: "https://essenoir.com/",
+    coverImage: "/images/previews/essenoir.png",
     deliverables: [
       "Custom 2.0 Theme Architecture",
       "Variant Swatches & Bundle Upsells",
@@ -40,6 +41,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "HTML5", "CSS3"],
     liveUrl: "https://bluephoenixnatural.com/",
+    coverImage: "/images/previews/blue-phoenix-natural.png",
     deliverables: [
       "Responsive Product Detail Layouts",
       "Collection Filtering & Search",
@@ -60,6 +62,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "Custom Apps"],
     liveUrl: "https://www.cakeinzy.com/",
+    coverImage: "/images/previews/cakeinzy.png",
     deliverables: [
       "Delivery Slot Picker & Order Flow",
       "Product Add-ons & Dynamic Upsells",
@@ -80,6 +83,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "Tailwind CSS"],
     liveUrl: "https://dabasstore.com/",
+    coverImage: "/images/previews/dabas.png",
     deliverables: [
       "Material-Based Catalog Filtration (Marble, Metal, Wood, Fiber)",
       "High-Detail Texture Zoom & Artisan Story Showcases",
@@ -100,6 +104,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "Tailwind CSS"],
     liveUrl: "https://ekafab.com/",
+    coverImage: "/images/previews/ekafab.png",
     deliverables: [
       "Custom Yardage & Metric Calculator",
       "High-Resolution Texture Zoom",
@@ -120,6 +125,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "CSS3"],
     liveUrl: "https://rayzcosmetics.com/",
+    coverImage: "/images/previews/rayz.png",
     deliverables: [
       "Color Shade Selector Module",
       "Dynamic Bundle Builder",
@@ -140,6 +146,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "HTML5"],
     liveUrl: "https://growgreenery.in/",
+    coverImage: "/images/previews/grow-greenery.png",
     deliverables: [
       "Pincode Serviceability Checker",
       "Plant Care Specification Tabs",
@@ -160,6 +167,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "CSS3"],
     liveUrl: "https://truenorthdrip.com/",
+    coverImage: "/images/previews/true-north-drip.png",
     deliverables: [
       "Limited Drop Countdown Engine",
       "Custom Lookbook Carousel",
@@ -168,7 +176,7 @@ export const shopifyProjects: ShopifyProject[] = [
   },
   {
     slug: "house-of-bns",
-    title: "House of BNS",
+    title: "House of B&S",
     platform: "Shopify",
     category: "E-Commerce / Fashion",
     year: "2025",
@@ -180,6 +188,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "Tailwind CSS"],
     liveUrl: "https://houseofbns.com/",
+    coverImage: "/images/previews/house-of-b&s.png",
     deliverables: [
       "Editorial Fashion Grid Layouts",
       "Multi-currency & Global Shipping Setup",
@@ -200,6 +209,7 @@ export const shopifyProjects: ShopifyProject[] = [
     role: "Shopify Developer",
     technologies: ["Shopify", "Liquid", "JavaScript", "CSS3"],
     liveUrl: "https://nykclothing.com/",
+    coverImage: "/images/previews/nyk.png",
     deliverables: [
       "Visual Size Guide Overlays",
       "Fast Collection Sorting & Filtering",

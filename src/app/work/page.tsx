@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArchiveIndex } from "@/components/work/ArchiveIndex";
+import { WorkViewManager } from "@/components/work/WorkViewManager";
 import { WorkJsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/content/site";
 import styles from "./WorkPage.module.css";
@@ -41,7 +41,7 @@ export default function WorkPage() {
         </header>
       </div>
 
-      <ArchiveIndex showTitle={false} />
+      <WorkViewManager />
     </div>
   );
 }
