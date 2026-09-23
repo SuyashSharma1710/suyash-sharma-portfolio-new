@@ -3,12 +3,13 @@
 > Full-Stack Engineer building high-performance web applications, offline AI search systems, and scalable digital platforms in Delhi, India.
 
 - **Canonical URL**: https://suyash-sharma-portfolio-new.vercel.app
-- **Location**: Delhi, India
+- **Location**: Delhi 110065, India
 - **GitHub**: https://github.com/SuyashSharma1710
 - **LinkedIn**: https://www.linkedin.com/in/suyash-sharma-756375196
 - **X (Twitter)**: https://x.com/SuyashSHARMA170
 - **Facebook**: https://www.facebook.com/share/1CAau7erM6/
 - **Email**: suyashsharma171001@gmail.com
+- **Phone**: +91 87550 63079
 - **Status**: Available for select engineering contracts, full-stack projects, and technical collaborations.
 
 ## Core Specializations

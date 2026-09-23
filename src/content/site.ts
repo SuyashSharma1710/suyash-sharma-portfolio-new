@@ -56,7 +56,10 @@ export const siteConfig: SiteConfig = {
     facebook:  "https://www.facebook.com/share/1CAau7erM6/",
     instagram: "https://www.instagram.com/yashbhardwaj56/",
     email:     "suyashsharma171001@gmail.com",
+    phone:     "+91 87550 63079",
   },
+  phone: "+91 87550 63079",
+  postalCode: "110065",
   resume: "/resume/resume.pdf",
   location: "Delhi, India",
 };
