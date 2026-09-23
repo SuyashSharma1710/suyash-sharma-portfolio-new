@@ -322,6 +322,8 @@
   color: var(--color-muted);
   letter-spacing: 0.05em;
   font-weight: 500;
+  min-height: 1.25rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .telemetryPulse {

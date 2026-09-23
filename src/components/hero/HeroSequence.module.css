@@ -242,7 +242,7 @@
   max-width: 100%;
   height: auto;
   max-height: calc(100dvh - var(--nav-height, 4rem) - clamp(3.25rem, 6vh, 5.5rem));
-  aspect-ratio: 3.8 / 4.8;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   display: block;
   filter: contrast(1.05) brightness(0.98);
