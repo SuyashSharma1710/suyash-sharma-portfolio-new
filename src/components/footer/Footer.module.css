@@ -365,11 +365,42 @@
   padding-top: var(--space-6);
 }
 
+.legalGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 .copyright {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-muted);
   letter-spacing: 0.04em;
+}
+
+.legalDivider {
+  color: var(--color-line);
+  font-size: var(--text-xs);
+}
+
+.cookiePrefsBtn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast, 0.2s ease);
+}
+
+.cookiePrefsBtn:hover,
+.cookiePrefsBtn:focus-visible {
+  color: var(--color-ink);
 }
 
 .originStatement {

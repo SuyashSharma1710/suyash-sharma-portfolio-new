@@ -1,0 +1,273 @@
+.bannerContainer {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: var(--z-modal, 9999);
+  max-width: 440px;
+  width: calc(100vw - 3rem);
+  pointer-events: auto;
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bannerCard {
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 1.25rem 1.35rem;
+  color: var(--color-ink);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.protocolBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  display: inline-block;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  transition: color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  color: var(--color-ink);
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin: 0 0 1rem 0;
+}
+
+/* ── Granular Preferences Drawer ── */
+.preferencesDrawer {
+  margin: 0.75rem 0 1rem 0;
+  padding: 0.75rem;
+  background: var(--color-surface-dark);
+  border: 1px solid var(--color-line);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.preferenceItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.preferenceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.preferenceLabel {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.preferenceSub {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.alwaysActiveTag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 18px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-line);
+  transition: 0.2s;
+  border-radius: 18px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--color-ink);
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--color-accent);
+}
+
+input:checked + .slider:before {
+  background-color: var(--color-paper);
+  transform: translateX(16px);
+}
+
+/* ── Actions Footer ── */
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btnEssential,
+.btnCustomize,
+.btnAccept {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.85rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btnEssential {
+  background: transparent;
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+}
+
+.btnEssential:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.btnCustomize {
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.5rem 0.5rem;
+}
+
+.btnCustomize:hover {
+  color: var(--color-ink);
+}
+
+.btnAccept {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 1px solid var(--color-ink);
+  font-weight: 500;
+}
+
+.btnAccept:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+  .bannerContainer {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnAccept,
+  .btnEssential,
+  .btnCustomize {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

@@ -16,6 +16,7 @@ import { PageTransitionProvider } from "@/components/transitions/PageTransitionP
 import { Footer } from "@/components/footer/Footer";
 import { RootJsonLd } from "@/components/seo/JsonLd";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -131,6 +132,7 @@ export default function RootLayout({
                 </ScrollRevealProvider>
               </SmoothScrollProvider>
             </PageTransitionProvider>
+            <ConsentBanner />
           </SoundProvider>
         </ThemeProvider>
       </body>

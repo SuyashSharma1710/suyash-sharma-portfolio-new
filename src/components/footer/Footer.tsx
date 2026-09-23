@@ -17,6 +17,7 @@ import { FooterTime } from "./FooterTime";
 import { DecryptedText } from "../ui/DecryptedText";
 import { Magnetic } from "@/lib/motion/components/Magnetic";
 import { SocialIcon, SocialPlatform } from "../icons/SocialIcons";
+import { openConsentSettings } from "@/lib/consent";
 import styles from "./Footer.module.css";
 
 interface ChannelItem {
@@ -157,9 +158,21 @@ export function Footer() {
 
         {/* ── Bottom Legal & Back to Top Bar ── */}
         <div className={styles.bottomBar}>
-          <span className={styles.copyright}>
-            © {year} Suyash Sharma · All Rights Reserved
-          </span>
+          <div className={styles.legalGroup}>
+            <span className={styles.copyright}>
+              © {year} Suyash Sharma · All Rights Reserved
+            </span>
+            <span className={styles.legalDivider} aria-hidden="true">·</span>
+            <button
+              type="button"
+              onClick={openConsentSettings}
+              className={styles.cookiePrefsBtn}
+              id="footer-cookie-settings"
+              aria-label="Manage Privacy and Cookie Preferences"
+            >
+              Privacy &amp; Cookies
+            </button>
+          </div>
 
           <span className={styles.originStatement}>
             <DecryptedText
