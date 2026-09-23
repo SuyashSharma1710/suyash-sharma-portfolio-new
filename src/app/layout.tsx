@@ -15,6 +15,7 @@ import { Preloader } from "@/components/ui/Preloader";
 import { PageTransitionProvider } from "@/components/transitions/PageTransitionProvider";
 import { Footer } from "@/components/footer/Footer";
 import { RootJsonLd } from "@/components/seo/JsonLd";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { siteConfig } from "@/content/site";
 
 const instrumentSerif = Instrument_Serif({
@@ -104,6 +105,8 @@ export default function RootLayout({
       <head>
         {/* Inline script prevents flash of wrong theme before hydration */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Google Analytics 4 */}
+        <GoogleAnalytics />
         {/* Structured Schema.org JSON-LD */}
         <RootJsonLd />
       </head>

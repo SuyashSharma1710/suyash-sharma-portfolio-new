@@ -65,6 +65,7 @@ export const siteConfig: SiteConfig = {
     { name: "Chandigarh University", type: "CollegeOrUniversity" },
     { name: "Scaler (IIT Roorkee)", type: "EducationalOrganization" },
   ],
+  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "G-H80QF4E239",
   resume: "/resume/resume.pdf",
   location: "Delhi, India",
 };

@@ -36,6 +36,7 @@ export interface SiteConfig {
   postalCode?: string;
   streetAddress?: string;
   alumniOf?: Array<{ name: string; type?: string } | string>;
+  googleAnalyticsId?: string;
   resume?: string;
   location: string;
 };
