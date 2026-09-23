@@ -57,7 +57,11 @@ export function LegalPageLayout({ document }: LegalPageLayoutProps) {
     <div ref={containerRef} className={`container ${styles.legalContainer}`}>
       <div className={styles.broadsheetGrid}>
         {/* Left Sticky Colophon & Table of Contents */}
-        <aside className={styles.colophonSidebar} aria-label="Policy Colophon & Index">
+        <aside
+          className={styles.colophonSidebar}
+          data-lenis-prevent
+          aria-label="Policy Colophon & Index"
+        >
           <div className={styles.ledgerHeader}>
             <span className={styles.ledgerCode}>LEGAL SPEC // {document.slug.toUpperCase()}</span>
             <div className={styles.ledgerStatus}>
