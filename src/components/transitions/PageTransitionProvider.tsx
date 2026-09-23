@@ -31,7 +31,7 @@ import { soundEngine } from "@/lib/sound/soundEngine";
 import styles from "./PageTransition.module.css";
 
 const NUM_COLUMNS = 5;
-const SAFETY_TIMEOUT_MS = 1600;
+const SAFETY_TIMEOUT_MS = 8000;
 
 // Register ScrollTrigger safely
 if (typeof window !== "undefined") {
