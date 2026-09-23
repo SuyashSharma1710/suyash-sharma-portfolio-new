@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { getStoredConsent, updateConsentState } from "@/lib/consent";
 import styles from "./ConsentBanner.module.css";
 
@@ -92,7 +93,15 @@ export function ConsentBanner() {
 
         <h2 className={styles.title}>Privacy &amp; Analytics Choices</h2>
         <p className={styles.description}>
-          This portfolio uses telemetry (Google Analytics 4 with Consent Mode v2) to measure performance and diagnostic signals. You can configure your preferences below.
+          This portfolio uses telemetry (Google Analytics 4 with Consent Mode v2) to measure performance and diagnostic signals. Read our{" "}
+          <Link href="/privacy" className={styles.policyInlineLink} onClick={() => setIsOpen(false)}>
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/cookies" className={styles.policyInlineLink} onClick={() => setIsOpen(false)}>
+            Cookie Policy
+          </Link>
+          , or customize your preferences below.
         </p>
 
         {showPreferences && (

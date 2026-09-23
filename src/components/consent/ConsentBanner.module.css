@@ -95,6 +95,18 @@
   margin: 0 0 1rem 0;
 }
 
+.policyInlineLink {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
+}
+
+.policyInlineLink:hover {
+  opacity: 0.8;
+}
+
 /* ── Granular Preferences Drawer ── */
 .preferencesDrawer {
   margin: 0.75rem 0 1rem 0;

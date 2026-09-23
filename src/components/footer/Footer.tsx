@@ -163,6 +163,14 @@ export function Footer() {
               © {year} Suyash Sharma · All Rights Reserved
             </span>
             <span className={styles.legalDivider} aria-hidden="true">·</span>
+            <Link href="/privacy" className={styles.legalLink}>Privacy</Link>
+            <span className={styles.legalDivider} aria-hidden="true">·</span>
+            <Link href="/terms" className={styles.legalLink}>Terms</Link>
+            <span className={styles.legalDivider} aria-hidden="true">·</span>
+            <Link href="/cookies" className={styles.legalLink}>Cookies</Link>
+            <span className={styles.legalDivider} aria-hidden="true">·</span>
+            <Link href="/disclaimer" className={styles.legalLink}>Disclaimer</Link>
+            <span className={styles.legalDivider} aria-hidden="true">·</span>
             <button
               type="button"
               onClick={openConsentSettings}
@@ -170,7 +178,7 @@ export function Footer() {
               id="footer-cookie-settings"
               aria-label="Manage Privacy and Cookie Preferences"
             >
-              Privacy &amp; Cookies
+              Consent Settings
             </button>
           </div>
 
