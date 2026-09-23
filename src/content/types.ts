@@ -33,6 +33,8 @@ export interface SiteConfig {
     phone?: string;
   };
   phone?: string;
+  postalCode?: string;
+  streetAddress?: string;
   resume?: string;
   location: string;
 }

@@ -24,6 +24,8 @@ export function RootJsonLd() {
       "@type": "PostalAddress",
       addressLocality: "Delhi",
       addressCountry: "IN",
+      ...(siteConfig.postalCode ? { postalCode: siteConfig.postalCode } : {}),
+      ...(siteConfig.streetAddress ? { streetAddress: siteConfig.streetAddress } : {}),
     },
     sameAs: [
       siteConfig.social.github,
@@ -81,6 +83,8 @@ export function RootJsonLd() {
       addressLocality: "Delhi",
       addressRegion: "Delhi",
       addressCountry: "IN",
+      ...(siteConfig.postalCode ? { postalCode: siteConfig.postalCode } : {}),
+      ...(siteConfig.streetAddress ? { streetAddress: siteConfig.streetAddress } : {}),
     },
     geo: {
       "@type": "GeoCoordinates",
