@@ -327,6 +327,34 @@ export function PageTransitionProvider({
     [clearWatchdog, forceUnlock, pathname, router]
   );
 
+  // Initial entrance reveal on subpages, direct URL hits, and refreshes
+  useEffect(() => {
+    const isHomepage = pathname === "/";
+    let hasSeenPreloader = false;
+    try {
+      hasSeenPreloader = sessionStorage.getItem("portfolio_preloader_seen") === "true";
+    } catch {
+      // storage fallback
+    }
+
+    if (!isHomepage || hasSeenPreloader) {
+      const title = getRouteTitle(pathname);
+      setDestinationTitle(title);
+      setIsActive(true);
+
+      const validSlats = slatsRef.current.filter(Boolean);
+      if (validSlats.length > 0 && containerRef.current) {
+        gsap.set(containerRef.current, { visibility: "visible" });
+        gsap.set(validSlats, { transformOrigin: "top center", scaleY: 1 });
+        if (telemetryRef.current) {
+          gsap.set(telemetryRef.current, { opacity: 1, y: 0 });
+        }
+        playEnterAnimation();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Watch for Next.js route change completion
   useEffect(() => {
     if (prevPathnameRef.current !== pathname) {

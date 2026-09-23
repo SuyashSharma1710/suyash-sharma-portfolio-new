@@ -133,10 +133,24 @@ export function Preloader() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const isHomepage = window.location.pathname === "/";
+    let hasSeenPreloader = false;
+    try {
+      hasSeenPreloader = sessionStorage.getItem("portfolio_preloader_seen") === "true";
+    } catch {
+      // storage fallback
+    }
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !isHomepage || hasSeenPreloader) {
       dismiss();
       return;
+    }
+
+    try {
+      sessionStorage.setItem("portfolio_preloader_seen", "true");
+    } catch {
+      // ignore
     }
 
     // Lock scroll during preloader
