@@ -35,9 +35,10 @@ export interface SiteConfig {
   phone?: string;
   postalCode?: string;
   streetAddress?: string;
+  alumniOf?: Array<{ name: string; type?: string } | string>;
   resume?: string;
   location: string;
-}
+};
 
 export interface ProjectCaseStudySection {
   title: string;

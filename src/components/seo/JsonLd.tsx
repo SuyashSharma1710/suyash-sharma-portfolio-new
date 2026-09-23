@@ -49,6 +49,15 @@ export function RootJsonLd() {
       "Systems Architecture",
       "E-Commerce Architecture",
     ],
+    ...(siteConfig.alumniOf && siteConfig.alumniOf.length > 0
+      ? {
+          alumniOf: siteConfig.alumniOf.map((inst) =>
+            typeof inst === "string"
+              ? { "@type": "EducationalOrganization", name: inst }
+              : { "@type": inst.type || "EducationalOrganization", name: inst.name }
+          ),
+        }
+      : {}),
   };
 
   const webSiteSchema = {

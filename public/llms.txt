@@ -11,6 +11,7 @@
 - **Email**: suyashsharma171001@gmail.com
 - **Phone**: +91 87550 63079
 - **Status**: Available for select engineering contracts, full-stack projects, and technical collaborations.
+- **Education**: College of Engineering Roorkee, Chandigarh University, Scaler (IIT Roorkee).
 
 ## Core Specializations
 - **Frontend & Web Systems**: Next.js (App Router, Server Components), React 19, TypeScript, Vanilla CSS Architecture, GSAP Animations, Web Performance & Core Web Vitals.

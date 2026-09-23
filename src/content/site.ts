@@ -60,6 +60,11 @@ export const siteConfig: SiteConfig = {
   },
   phone: "+91 87550 63079",
   postalCode: "110065",
+  alumniOf: [
+    { name: "College of Engineering Roorkee", type: "CollegeOrUniversity" },
+    { name: "Chandigarh University", type: "CollegeOrUniversity" },
+    { name: "Scaler (IIT Roorkee)", type: "EducationalOrganization" },
+  ],
   resume: "/resume/resume.pdf",
   location: "Delhi, India",
 };
