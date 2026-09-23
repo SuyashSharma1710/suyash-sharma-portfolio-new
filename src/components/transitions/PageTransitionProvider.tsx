@@ -44,6 +44,10 @@ function getRouteTitle(pathname: string): string {
   if (pathname.startsWith("/about")) return "About & Philosophy";
   if (pathname.startsWith("/contact")) return "Direct Inquiries";
   if (pathname.startsWith("/lab")) return "Lab & Experiments";
+  if (pathname.startsWith("/privacy")) return "Privacy Policy";
+  if (pathname.startsWith("/terms")) return "Terms of Use";
+  if (pathname.startsWith("/cookies")) return "Cookie Policy";
+  if (pathname.startsWith("/disclaimer")) return "Professional Disclaimer";
 
   // Dynamic route fallback
   const segments = pathname.split("/").filter(Boolean);

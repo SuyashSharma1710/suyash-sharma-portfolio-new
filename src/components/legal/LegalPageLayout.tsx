@@ -1,6 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { LegalDocument } from "@/content/legal";
 import { openConsentSettings } from "@/lib/consent";
 import styles from "./LegalPageLayout.module.css";
@@ -17,8 +20,41 @@ const directory = [
 ];
 
 export function LegalPageLayout({ document }: LegalPageLayoutProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const prefersReduced =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReduced || !containerRef.current) return;
+
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(
+        `.${styles.colophonSidebar}`,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      )
+      .fromTo(
+        `.${styles.headerBlock}`,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.35"
+      )
+      .fromTo(
+        `.${styles.sectionBlock}`,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 },
+        "-=0.3"
+      );
+    },
+    { scope: containerRef, dependencies: [document.slug] }
+  );
+
   return (
-    <div className={`container ${styles.legalContainer}`}>
+    <div ref={containerRef} className={`container ${styles.legalContainer}`}>
       <div className={styles.broadsheetGrid}>
         {/* Left Sticky Colophon & Table of Contents */}
         <aside className={styles.colophonSidebar} aria-label="Policy Colophon & Index">
