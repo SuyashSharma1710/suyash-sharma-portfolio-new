@@ -4,15 +4,15 @@
  * PageTransitionProvider.tsx — Swiss Architectural Editorial Page Transitions
  * 
  * Infallible, Rock-Solid & Buttery-Smooth:
- * 1. ZERO-INVENTION & ZERO-BOX POLICY: 5-column architectural slat curtain with 1px hairline dividers.
+ * 1. ZERO-INVENTION & ZERO-BOX POLICY: 5-column architectural slat curtain with hairline dividers.
  * 2. SEAMLESS CHOREOGRAPHY:
- *    - Exit Phase (0.38s): Slats rise up from bottom with staggered wave (`power3.inOut`) + route destination telemetry.
- *    - Routing Handshake: `router.push()` + scroll reset to top `(0, 0)` on Lenis and window.
- *    - Enter Phase (0.42s): Slats seamlessly retract to top with reverse stagger + new page content reveal.
- * 3. GLOBAL ROUTE INTERCEPTION: Seamlessly enhances all internal Next.js `<Link>` and `<a>` navigations.
+ *    - Exit Phase (0.35s): Slats rise up from bottom with staggered wave (`power3.inOut`) + route destination telemetry.
+ *    - Routing Handshake: React 19 startTransition + router.push() + scroll reset to top (0, 0).
+ *    - Enter Phase (0.40s): Slats seamlessly retract to top with reverse stagger + new page reveal.
+ * 3. GLOBAL ROUTE INTERCEPTION: Seamlessly enhances all internal Next.js <Link> and <a> navigations.
  * 4. BROWSER HISTORY SUPPORT: Handles back / forward browser navigation gracefully without getting stuck.
- * 5. 100% ACCESSIBILITY & REDUCED MOTION: Instant routing bypass when `prefers-reduced-motion` is enabled.
- * 6. FAIL-SAFE WATCHDOG: 2.0s hard timeout guarantees the screen is never locked.
+ * 5. 100% ACCESSIBILITY & REDUCED MOTION: Instant routing bypass when prefers-reduced-motion is enabled.
+ * 6. FAIL-SAFE WATCHDOG: Self-healing timeout guarantees the screen is never locked.
  */
 
 import React, {
@@ -22,6 +22,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  startTransition,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import gsap from "gsap";
@@ -30,14 +31,14 @@ import { soundEngine } from "@/lib/sound/soundEngine";
 import styles from "./PageTransition.module.css";
 
 const NUM_COLUMNS = 5;
-const SAFETY_TIMEOUT_MS = 2000;
+const SAFETY_TIMEOUT_MS = 1600;
 
 // Register ScrollTrigger safely
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Clean semantic route titles (NO numbered prefixes per RULES.md Rule 10.2)
+// Clean semantic route titles
 function getRouteTitle(pathname: string): string {
   if (!pathname || pathname === "/") return "Overview";
   if (pathname.startsWith("/work")) return "Work & Archive";
@@ -92,6 +93,7 @@ export function PageTransitionProvider({
   const pendingHrefRef = useRef<string | null>(null);
   const prevPathnameRef = useRef<string>(pathname);
   const watchdogTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const activeTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
   // Clear watchdog
   const clearWatchdog = useCallback(() => {
@@ -104,6 +106,10 @@ export function PageTransitionProvider({
   // Force unlock fail-safe
   const forceUnlock = useCallback(() => {
     clearWatchdog();
+    if (activeTimelineRef.current) {
+      activeTimelineRef.current.kill();
+      activeTimelineRef.current = null;
+    }
     isTransitioningRef.current = false;
     pendingHrefRef.current = null;
     setIsActive(false);
@@ -138,11 +144,16 @@ export function PageTransitionProvider({
       // scroll fallback
     }
 
+    if (activeTimelineRef.current) {
+      activeTimelineRef.current.kill();
+    }
+
     const tl = gsap.timeline({
       onComplete: () => {
         setIsActive(false);
         isTransitioningRef.current = false;
         pendingHrefRef.current = null;
+        activeTimelineRef.current = null;
         if (containerRef.current) {
           gsap.set(containerRef.current, { visibility: "hidden" });
         }
@@ -157,6 +168,8 @@ export function PageTransitionProvider({
       },
     });
 
+    activeTimelineRef.current = tl;
+
     // Telemetry fades out upwards
     if (telemetryRef.current) {
       tl.to(
@@ -164,7 +177,7 @@ export function PageTransitionProvider({
         {
           opacity: 0,
           y: -10,
-          duration: 0.22,
+          duration: 0.2,
           ease: "power2.in",
         },
         0
@@ -177,14 +190,14 @@ export function PageTransitionProvider({
       validSlats,
       {
         scaleY: 0,
-        duration: 0.42,
+        duration: 0.4,
         ease: "power3.inOut",
         stagger: {
-          amount: 0.14,
+          amount: 0.12,
           from: "end",
         },
       },
-      "-=0.08"
+      "-=0.06"
     );
   }, [clearWatchdog, forceUnlock]);
 
@@ -203,11 +216,13 @@ export function PageTransitionProvider({
         } catch {
           // ignore
         }
-        router.push(href);
+        startTransition(() => {
+          router.push(href);
+        });
         return;
       }
 
-      // 2. Prevent redundant transitions if already transitioning or navigating to same route
+      // 2. Prevent redundant transitions if navigating to exact same route without hash
       const cleanTarget = (href.split("?")[0] || "").split("#")[0] || "";
       const cleanCurrent = (pathname.split("?")[0] || "").split("#")[0] || "";
 
@@ -222,7 +237,16 @@ export function PageTransitionProvider({
         return;
       }
 
-      if (isTransitioningRef.current) return;
+      // If already transitioning to the same pending href, avoid double trigger
+      if (isTransitioningRef.current && pendingHrefRef.current === href) {
+        return;
+      }
+
+      // Clear any prior running timeline
+      if (activeTimelineRef.current) {
+        activeTimelineRef.current.kill();
+      }
+
       isTransitioningRef.current = true;
       pendingHrefRef.current = href;
 
@@ -230,7 +254,7 @@ export function PageTransitionProvider({
       setDestinationTitle(title);
       setIsActive(true);
 
-      // Start safety watchdog
+      // Start safety watchdog to prevent stuck state
       clearWatchdog();
       watchdogTimerRef.current = setTimeout(() => {
         forceUnlock();
@@ -238,12 +262,18 @@ export function PageTransitionProvider({
 
       const validSlats = slatsRef.current.filter(Boolean);
       if (validSlats.length === 0 || !containerRef.current) {
-        router.push(href);
+        startTransition(() => {
+          router.push(href);
+        });
         return;
       }
 
-      // Play aerodynamic transition whoosh
-      soundEngine.play("whoosh");
+      // Play aerodynamic transition sound
+      try {
+        soundEngine.play("whoosh");
+      } catch {
+        // sound fallback
+      }
 
       gsap.set(containerRef.current, { visibility: "visible" });
       gsap.set(validSlats, {
@@ -260,18 +290,22 @@ export function PageTransitionProvider({
 
       const tl = gsap.timeline({
         onComplete: () => {
-          // Trigger actual Next.js navigation
-          router.push(href);
+          // Trigger Next.js navigation inside startTransition for instant, concurrent routing
+          startTransition(() => {
+            router.push(href);
+          });
         },
       });
+
+      activeTimelineRef.current = tl;
 
       // Slats rise from bottom
       tl.to(validSlats, {
         scaleY: 1,
-        duration: 0.38,
+        duration: 0.35,
         ease: "power3.inOut",
         stagger: {
-          amount: 0.14,
+          amount: 0.12,
           from: "start",
         },
       });
@@ -283,10 +317,10 @@ export function PageTransitionProvider({
           {
             opacity: 1,
             y: 0,
-            duration: 0.25,
+            duration: 0.22,
             ease: "power2.out",
           },
-          "-=0.15"
+          "-=0.12"
         );
       }
     },
@@ -302,7 +336,7 @@ export function PageTransitionProvider({
         // Route change happened via programmatic transition -> play enter reveal
         playEnterAnimation();
       } else {
-        // Route change happened via browser Back/Forward or direct link -> smooth scroll reset
+        // Route change happened via browser Back/Forward or direct navigation
         try {
           window.dispatchEvent(new CustomEvent("portfolio:reset-scroll"));
           window.scrollTo(0, 0);
