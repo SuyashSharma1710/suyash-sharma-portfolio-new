@@ -38,7 +38,39 @@ export function EditorialWorkView({ projects }: EditorialWorkViewProps) {
     setSelectedIndex(0);
   }, [projects]);
 
-  const { contextSafe } = useGSAP({ scope: containerRef });
+  // GSAP quickTo references for buttery-smooth 60fps 3D mouse tilt
+  const rotXTo = useRef<gsap.QuickToFunc | null>(null);
+  const rotYTo = useRef<gsap.QuickToFunc | null>(null);
+  const scaleTo = useRef<gsap.QuickToFunc | null>(null);
+
+  const { contextSafe } = useGSAP(
+    () => {
+      if (previewCardRef.current) {
+        // Initial architectural 3D floating perspective orientation
+        gsap.set(previewCardRef.current, {
+          transformPerspective: 1200,
+          transformStyle: "preserve-3d",
+          rotationY: -3,
+          rotationX: 1.5,
+          scale: 1,
+        });
+
+        rotXTo.current = gsap.quickTo(previewCardRef.current, "rotationX", {
+          duration: 0.35,
+          ease: "power2.out",
+        });
+        rotYTo.current = gsap.quickTo(previewCardRef.current, "rotationY", {
+          duration: 0.35,
+          ease: "power2.out",
+        });
+        scaleTo.current = gsap.quickTo(previewCardRef.current, "scale", {
+          duration: 0.35,
+          ease: "power2.out",
+        });
+      }
+    },
+    { scope: containerRef }
+  );
 
   // Smooth project transition effect on change
   const handleSelectProject = contextSafe((index: number) => {
@@ -113,22 +145,28 @@ export function EditorialWorkView({ projects }: EditorialWorkViewProps) {
 
   // Interactive 3D mouse parallax tilt over preview container
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!previewCardRef.current) return;
+    if (!previewCardRef.current || !rotXTo.current || !rotYTo.current) return;
     const rect = previewCardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -5;
-    const rotateY = ((x - centerX) / centerX) * 7;
+    // Fluid responsive tilt angles: -7deg to +7deg for X, -9deg to +9deg for Y
+    const rotateX = ((y - centerY) / centerY) * -7;
+    const rotateY = ((x - centerX) / centerX) * 9;
 
-    previewCardRef.current.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+    rotXTo.current(rotateX);
+    rotYTo.current(rotateY);
+    scaleTo.current?.(1.015);
   };
 
   const handleMouseLeave = () => {
-    if (!previewCardRef.current) return;
-    previewCardRef.current.style.transform = `perspective(1200px) rotateY(-4deg) rotateX(2deg) scale(1)`;
+    if (!rotXTo.current || !rotYTo.current) return;
+    // Return smoothly to architectural rest orientation
+    rotXTo.current(1.5);
+    rotYTo.current(-3);
+    scaleTo.current?.(1);
   };
 
   if (!activeProject) return null;
@@ -245,48 +283,23 @@ export function EditorialWorkView({ projects }: EditorialWorkViewProps) {
             </h2>
           </div>
 
-          {/* 3D Floating Perspective Artwork Card */}
+          {/* Floating 3D Perspective Artwork Card */}
           <div
             className={styles.previewPerspectiveContainer}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             <div ref={previewCardRef} className={styles.previewFrameWrapper}>
-              {isExternal ? (
-                <a
-                  href={primaryDest}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.previewImageLink}
-                  aria-label={`Open ${activeProject.title} live in new tab`}
-                >
-                  <Image
-                    src={coverImg}
-                    alt={`${activeProject.title} — ${activeProject.category}`}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className={styles.previewImage}
-                  />
-                  <div className={styles.previewHoverOverlay} aria-hidden="true">
-                    <span>EXPLORE ↗</span>
-                  </div>
-                </a>
-              ) : (
-                <div
-                  className={styles.previewImageLink}
-                  aria-label={`${activeProject.title} project preview`}
-                >
-                  <Image
-                    src={coverImg}
-                    alt={`${activeProject.title} — ${activeProject.category}`}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className={styles.previewImage}
-                  />
-                </div>
-              )}
+              <div className={styles.previewImageContainer}>
+                <Image
+                  src={coverImg}
+                  alt={`${activeProject.title} — ${activeProject.category}`}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className={styles.previewImage}
+                />
+              </div>
             </div>
           </div>
 

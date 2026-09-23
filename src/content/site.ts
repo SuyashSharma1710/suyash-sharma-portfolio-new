@@ -57,5 +57,6 @@ export const siteConfig: SiteConfig = {
     instagram: "https://www.instagram.com/yashbhardwaj56/",
     email:     "suyashsharma171001@gmail.com",
   },
+  resume: "/resume/resume.pdf",
   location: "Delhi, India",
 };

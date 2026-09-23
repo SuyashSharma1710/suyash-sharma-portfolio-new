@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../theme/ThemeToggle";
 import { SoundToggle } from "../sound/SoundToggle";
 import { LogoPrimary } from "../logo/LogoPrimary";
+import { SocialIcon } from "../icons/SocialIcons";
 import { siteConfig } from "@/content/site";
 import styles from "./Nav.module.css";
 
@@ -228,8 +229,32 @@ export function Nav() {
               </ul>
             </nav>
 
-            {/* Actions: sound toggle + theme toggle + mobile trigger */}
+            {/* Actions: socials + sound toggle + theme toggle + mobile trigger */}
             <div className={styles.navActions}>
+              <a
+                href={siteConfig.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialNavAction}
+                id="nav-github-action"
+                aria-label="GitHub Profile (opens in new tab)"
+                title="GitHub"
+              >
+                <SocialIcon name="github" size={16} />
+              </a>
+
+              <a
+                href={siteConfig.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialNavAction}
+                id="nav-linkedin-action"
+                aria-label="LinkedIn Profile (opens in new tab)"
+                title="LinkedIn"
+              >
+                <SocialIcon name="linkedin" size={16} />
+              </a>
+
               <SoundToggle />
               <ThemeToggle />
               <button
@@ -283,6 +308,62 @@ export function Nav() {
             })}
           </ul>
         </nav>
+
+        {/* Quick mobile social connections */}
+        <div className={styles.mobileSocials}>
+          <a
+            href={siteConfig.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.mobileSocialLink}
+            aria-label="GitHub"
+          >
+            <SocialIcon name="github" size={18} />
+          </a>
+          <a
+            href={siteConfig.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.mobileSocialLink}
+            aria-label="LinkedIn"
+          >
+            <SocialIcon name="linkedin" size={18} />
+          </a>
+          {siteConfig.social.twitter && (
+            <a
+              href={siteConfig.social.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mobileSocialLink}
+              aria-label="X (Twitter)"
+            >
+              <SocialIcon name="twitter" size={18} />
+            </a>
+          )}
+          {siteConfig.social.facebook && (
+            <a
+              href={siteConfig.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mobileSocialLink}
+              aria-label="Facebook"
+            >
+              <SocialIcon name="facebook" size={18} />
+            </a>
+          )}
+          {siteConfig.social.instagram && (
+            <a
+              href={siteConfig.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mobileSocialLink}
+              aria-label="Instagram"
+            >
+              <SocialIcon name="instagram" size={18} />
+            </a>
+          )}
+        </div>
+
         <div className={styles.mobileFooter}>
           <span className={styles.mobileEmail}>
             {siteConfig.social.email}

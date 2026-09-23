@@ -13,6 +13,7 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { CursorTracker } from "@/lib/motion/components/CursorTracker";
 import { Preloader } from "@/components/ui/Preloader";
 import { PageTransitionProvider } from "@/components/transitions/PageTransitionProvider";
+import { Footer } from "@/components/footer/Footer";
 import { RootJsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/content/site";
 
@@ -122,6 +123,7 @@ export default function RootLayout({
                     <main id="main-content" tabIndex={-1}>
                       {children}
                     </main>
+                    <Footer />
                   </div>
                 </ScrollRevealProvider>
               </SmoothScrollProvider>

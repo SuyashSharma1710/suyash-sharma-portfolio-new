@@ -3,6 +3,7 @@ import Link from "next/link";
 import { siteConfig } from "@/content/site";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactJsonLd } from "@/components/seo/JsonLd";
+import { SocialIcon } from "@/components/icons/SocialIcons";
 import styles from "./ContactPage.module.css";
 
 export const metadata: Metadata = {
@@ -19,6 +20,51 @@ export const metadata: Metadata = {
     url: `${siteConfig.url}/contact`,
   },
 };
+
+const externalNetworks = [
+  {
+    name: "GitHub",
+    platform: "github",
+    href: siteConfig.social.github,
+    meta: "Repositories",
+  },
+  {
+    name: "LinkedIn",
+    platform: "linkedin",
+    href: siteConfig.social.linkedin,
+    meta: "Profile",
+  },
+  ...(siteConfig.social.twitter
+    ? [
+        {
+          name: "X (Twitter)",
+          platform: "twitter",
+          href: siteConfig.social.twitter,
+          meta: "@SuyashSHARMA170",
+        },
+      ]
+    : []),
+  ...(siteConfig.social.facebook
+    ? [
+        {
+          name: "Facebook",
+          platform: "facebook",
+          href: siteConfig.social.facebook,
+          meta: "Page",
+        },
+      ]
+    : []),
+  ...(siteConfig.social.instagram
+    ? [
+        {
+          name: "Instagram",
+          platform: "instagram",
+          href: siteConfig.social.instagram,
+          meta: "@yashbhardwaj56",
+        },
+      ]
+    : []),
+];
 
 export default function ContactPage() {
   return (
@@ -53,7 +99,8 @@ export default function ContactPage() {
               <h2 className={styles.subHeading}>PRIMARY DISPATCH</h2>
               
               <a href={`mailto:${siteConfig.social.email}`} className={styles.primaryEmailLink}>
-                {siteConfig.social.email}
+                <SocialIcon name="email" size={20} className={styles.emailIcon} />
+                <span>{siteConfig.social.email}</span>
               </a>
 
               <div className={styles.statusLedger}>
@@ -76,76 +123,26 @@ export default function ContactPage() {
               <h2 className={styles.subHeading}>EXTERNAL REGISTRIES</h2>
 
               <div className={styles.linksList}>
-                <a
-                  href={siteConfig.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.networkLink}
-                >
-                  <span className={styles.linkLabel}>GitHub</span>
-                  <span className={styles.linkMeta}>
-                    <span>Repositories</span>
-                    <span aria-hidden="true">↗</span>
-                  </span>
-                </a>
-
-                <a
-                  href={siteConfig.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.networkLink}
-                >
-                  <span className={styles.linkLabel}>LinkedIn</span>
-                  <span className={styles.linkMeta}>
-                    <span>Profile</span>
-                    <span aria-hidden="true">↗</span>
-                  </span>
-                </a>
-
-                {siteConfig.social.twitter && (
+                {externalNetworks.map((net) => (
                   <a
-                    href={siteConfig.social.twitter}
+                    key={net.name}
+                    href={net.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.networkLink}
+                    id={`contact-network-${net.platform}`}
+                    aria-label={`${net.name} (${net.meta}) - opens in new tab`}
                   >
-                    <span className={styles.linkLabel}>X (Twitter)</span>
+                    <div className={styles.linkTitleGroup}>
+                      <SocialIcon name={net.platform} size={20} className={styles.networkIcon} />
+                      <span className={styles.linkLabel}>{net.name}</span>
+                    </div>
                     <span className={styles.linkMeta}>
-                      <span>@SuyashSHARMA170</span>
+                      <span>{net.meta}</span>
                       <span aria-hidden="true">↗</span>
                     </span>
                   </a>
-                )}
-
-                {siteConfig.social.facebook && (
-                  <a
-                    href={siteConfig.social.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.networkLink}
-                  >
-                    <span className={styles.linkLabel}>Facebook</span>
-                    <span className={styles.linkMeta}>
-                      <span>Page</span>
-                      <span aria-hidden="true">↗</span>
-                    </span>
-                  </a>
-                )}
-
-                {siteConfig.social.instagram && (
-                  <a
-                    href={siteConfig.social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.networkLink}
-                  >
-                    <span className={styles.linkLabel}>Instagram</span>
-                    <span className={styles.linkMeta}>
-                      <span>@yashbhardwaj56</span>
-                      <span aria-hidden="true">↗</span>
-                    </span>
-                  </a>
-                )}
+                ))}
               </div>
             </section>
           </div>

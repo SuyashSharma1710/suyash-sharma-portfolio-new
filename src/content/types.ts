@@ -30,7 +30,10 @@ export interface SiteConfig {
     facebook?: string;
     instagram?: string;
     email: string;
+    phone?: string;
   };
+  phone?: string;
+  resume?: string;
   location: string;
 }
 

@@ -5,6 +5,7 @@ import { siteConfig } from "@/content/site";
 import { experience } from "@/content/experience";
 import { LogoShowcase } from "@/components/logo/LogoShowcase";
 import { AboutJsonLd } from "@/components/seo/JsonLd";
+import { SocialIcon } from "@/components/icons/SocialIcons";
 import styles from "./AboutPage.module.css";
 
 export const metadata: Metadata = {
@@ -81,6 +82,69 @@ export default function AboutPage() {
               <div className={styles.specRow}>
                 <span className={styles.specLabel}>Direct Email</span>
                 <span className={styles.specValue}>{siteConfig.social.email}</span>
+              </div>
+            </div>
+
+            {/* Verified External Channels */}
+            <div className={styles.networkLedger}>
+              <span className={styles.specLabel}>VERIFIED CHANNELS</span>
+              <div className={styles.networkIconsRow} role="list" aria-label="Social and code channels">
+                <a
+                  href={siteConfig.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.networkIconLink}
+                  aria-label="GitHub Profile"
+                  id="about-github"
+                >
+                  <SocialIcon name="github" size={16} />
+                </a>
+                <a
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.networkIconLink}
+                  aria-label="LinkedIn Profile"
+                  id="about-linkedin"
+                >
+                  <SocialIcon name="linkedin" size={16} />
+                </a>
+                {siteConfig.social.twitter && (
+                  <a
+                    href={siteConfig.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.networkIconLink}
+                    aria-label="X (Twitter) Profile"
+                    id="about-twitter"
+                  >
+                    <SocialIcon name="twitter" size={16} />
+                  </a>
+                )}
+                {siteConfig.social.facebook && (
+                  <a
+                    href={siteConfig.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.networkIconLink}
+                    aria-label="Facebook Page"
+                    id="about-facebook"
+                  >
+                    <SocialIcon name="facebook" size={16} />
+                  </a>
+                )}
+                {siteConfig.social.instagram && (
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.networkIconLink}
+                    aria-label="Instagram Profile"
+                    id="about-instagram"
+                  >
+                    <SocialIcon name="instagram" size={16} />
+                  </a>
+                )}
               </div>
             </div>
           </aside>

@@ -1,10 +1,10 @@
 "use client";
 
 /**
- * SoundToggle.tsx — Minimal Tactile Sound Controller Button
+ * SoundToggle.tsx — Animated Equalizer (EQ) Sound Controller Button
  * 
- * Sits alongside ThemeToggle in the editorial navigation dock.
- * Provides instant visual state feedback and accessible control.
+ * Sits alongside ThemeToggle, GitHub, and LinkedIn in the editorial navigation dock.
+ * Displays live dancing audio equalizer bars when sound is ON, settling flat when muted.
  */
 
 import React from "react";
@@ -22,42 +22,48 @@ export function SoundToggle() {
       onClick={toggleSound}
       data-sound="none"
       aria-label={soundEnabled ? "Mute interactive sounds" : "Enable interactive sounds"}
-      title={soundEnabled ? "Sound effects: ON" : "Sound effects: MUTED"}
+      title={soundEnabled ? "Sound effects: ON (Equalizer Active)" : "Sound effects: MUTED"}
       aria-pressed={soundEnabled}
     >
-      {soundEnabled ? (
-        /* Audio Waves Active Icon */
-        <svg
-          className={styles.iconSvg}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-        </svg>
-      ) : (
-        /* Muted / Slashed Audio Icon */
-        <svg
-          className={styles.iconSvg}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-          <line x1="23" y1="9" x2="17" y2="15" />
-          <line x1="17" y1="9" x2="23" y2="15" />
-        </svg>
-      )}
+      <svg
+        className={styles.eqSvg}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <rect
+          className={`${styles.eqBar} ${styles.eqBar1}${soundEnabled ? ` ${styles.active}` : ""}`}
+          x="3.5"
+          y="3"
+          width="2.8"
+          height="18"
+          rx="1.4"
+        />
+        <rect
+          className={`${styles.eqBar} ${styles.eqBar2}${soundEnabled ? ` ${styles.active}` : ""}`}
+          x="8.8"
+          y="3"
+          width="2.8"
+          height="18"
+          rx="1.4"
+        />
+        <rect
+          className={`${styles.eqBar} ${styles.eqBar3}${soundEnabled ? ` ${styles.active}` : ""}`}
+          x="14.1"
+          y="3"
+          width="2.8"
+          height="18"
+          rx="1.4"
+        />
+        <rect
+          className={`${styles.eqBar} ${styles.eqBar4}${soundEnabled ? ` ${styles.active}` : ""}`}
+          x="19.4"
+          y="3"
+          width="2.8"
+          height="18"
+          rx="1.4"
+        />
+      </svg>
     </button>
   );
 }

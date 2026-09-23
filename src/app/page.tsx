@@ -13,7 +13,6 @@ import { Engineering }    from "@/components/engineering/Engineering";
 import { Experience }     from "@/components/experience/Experience";
 import { About }          from "@/components/about/About";
 import { FinalCTA }       from "@/components/cta/FinalCTA";
-import { Footer }         from "@/components/footer/Footer";
 import { siteConfig }     from "@/content/site";
 
 export const metadata: Metadata = {
@@ -35,7 +34,6 @@ export default function HomePage() {
       <Experience />
       <About />
       <FinalCTA />
-      <Footer />
     </>
   );
 }

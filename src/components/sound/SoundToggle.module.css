@@ -4,7 +4,7 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-sm, 4px);
   color: var(--color-muted);
   cursor: pointer;
   border: 1px solid transparent;
@@ -12,7 +12,8 @@
   transition:
     color 300ms cubic-bezier(0.16, 1, 0.3, 1),
     background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .soundToggle:hover {
@@ -26,12 +27,67 @@
   outline-offset: var(--focus-offset);
 }
 
-.iconSvg {
+.eqSvg {
   display: block;
-  width: 1rem;
-  height: 1rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  overflow: visible;
 }
 
-.activeBar {
-  transform-origin: bottom center;
+.eqBar {
+  transform-origin: 50% 100%;
+  transform: scaleY(0.22);
+  opacity: 0.45;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease;
+}
+
+.eqBar.active {
+  opacity: 1;
+}
+
+.eqBar1.active {
+  animation: eqBounce1 1.05s ease-in-out infinite alternate;
+}
+
+.eqBar2.active {
+  animation: eqBounce2 0.78s ease-in-out infinite alternate 0.12s;
+}
+
+.eqBar3.active {
+  animation: eqBounce3 1.2s ease-in-out infinite alternate 0.25s;
+}
+
+.eqBar4.active {
+  animation: eqBounce4 0.9s ease-in-out infinite alternate 0.08s;
+}
+
+@keyframes eqBounce1 {
+  0% { transform: scaleY(0.28); }
+  50% { transform: scaleY(0.95); }
+  100% { transform: scaleY(0.42); }
+}
+
+@keyframes eqBounce2 {
+  0% { transform: scaleY(0.85); }
+  50% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes eqBounce3 {
+  0% { transform: scaleY(0.38); }
+  50% { transform: scaleY(0.98); }
+  100% { transform: scaleY(0.55); }
+}
+
+@keyframes eqBounce4 {
+  0% { transform: scaleY(0.9); }
+  50% { transform: scaleY(0.25); }
+  100% { transform: scaleY(0.78); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqBar.active {
+    animation: none;
+    transform: scaleY(0.7);
+  }
 }

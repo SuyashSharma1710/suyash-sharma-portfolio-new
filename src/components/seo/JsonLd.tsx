@@ -17,6 +17,9 @@ export function RootJsonLd() {
     url: baseUrl,
     image: `${baseUrl}/images/suyash-editorial.jpg`,
     email: `mailto:${siteConfig.social.email}`,
+    ...(siteConfig.social.phone || siteConfig.phone
+      ? { telephone: siteConfig.social.phone || siteConfig.phone }
+      : {}),
     address: {
       "@type": "PostalAddress",
       addressLocality: "Delhi",
@@ -69,8 +72,10 @@ export function RootJsonLd() {
     url: baseUrl,
     image: `${baseUrl}/images/suyash-editorial.jpg`,
     email: `mailto:${siteConfig.social.email}`,
+    ...(siteConfig.social.phone || siteConfig.phone
+      ? { telephone: siteConfig.social.phone || siteConfig.phone }
+      : {}),
     priceRange: "$$$",
-    telephone: "",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Delhi",
